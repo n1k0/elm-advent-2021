@@ -519,11 +519,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.P.D === region.U.D)
+	if (region.S.F === region.X.F)
 	{
-		return 'on line ' + region.P.D;
+		return 'on line ' + region.S.F;
 	}
-	return 'on lines ' + region.P.D + ' through ' + region.U.D;
+	return 'on lines ' + region.S.F + ' through ' + region.X.F;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ay,
+		impl.aB,
+		impl.aO,
 		impl.aL,
-		impl.aI,
 		function() { return function() {} }
 	);
 });
@@ -2704,9 +2704,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		q: func(record.q),
-		Q: record.Q,
-		N: record.N
+		r: func(record.r),
+		T: record.T,
+		Q: record.Q
 	}
 });
 
@@ -2974,11 +2974,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.q;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.Q;
+		var message = !tag ? value : tag < 3 ? value.a : value.r;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.T;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.N) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.Q) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3928,11 +3928,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ay,
+		impl.aB,
+		impl.aO,
 		impl.aL,
-		impl.aI,
 		function(sendToApp, initialModel) {
-			var view = impl.aM;
+			var view = impl.aP;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3964,12 +3964,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ay,
+		impl.aB,
+		impl.aO,
 		impl.aL,
-		impl.aI,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.O && impl.O(sendToApp)
-			var view = impl.aM;
+			var divertHrefToApp = impl.R && impl.R(sendToApp)
+			var view = impl.aP;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3977,12 +3977,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.S);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.V);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.ai) && (_VirtualDom_doc.title = title = doc.ai);
+				(title !== doc.al) && (_VirtualDom_doc.title = title = doc.al);
 			});
 		}
 	);
@@ -4038,12 +4038,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.aA;
-	var onUrlRequest = impl.aB;
+	var onUrlChange = impl.aD;
+	var onUrlRequest = impl.aE;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		O: function(sendToApp)
+		R: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4059,9 +4059,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.aG === next.aG
-							&& curr.aw === next.aw
-							&& curr.aE.a === next.aE.a
+							&& curr.aJ === next.aJ
+							&& curr.az === next.az
+							&& curr.aH.a === next.aH.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4069,13 +4069,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		ay: function(flags)
+		aB: function(flags)
 		{
-			return A3(impl.ay, flags, _Browser_getUrl(), key);
+			return A3(impl.aB, flags, _Browser_getUrl(), key);
 		},
-		aM: impl.aM,
-		aL: impl.aL,
-		aI: impl.aI
+		aP: impl.aP,
+		aO: impl.aO,
+		aL: impl.aL
 	});
 }
 
@@ -4141,17 +4141,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { av: 'hidden', ao: 'visibilitychange' }
+		? { ay: 'hidden', ar: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { av: 'mozHidden', ao: 'mozvisibilitychange' }
+		? { ay: 'mozHidden', ar: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { av: 'msHidden', ao: 'msvisibilitychange' }
+		? { ay: 'msHidden', ar: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { av: 'webkitHidden', ao: 'webkitvisibilitychange' }
-		: { av: 'hidden', ao: 'visibilitychange' };
+		? { ay: 'webkitHidden', ar: 'webkitvisibilitychange' }
+		: { ay: 'hidden', ar: 'visibilitychange' };
 }
 
 
@@ -4232,12 +4232,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		af: _Browser_getScene(),
-		aj: {
-			I: _Browser_window.pageXOffset,
-			A: _Browser_window.pageYOffset,
-			ak: _Browser_doc.documentElement.clientWidth,
-			W: _Browser_doc.documentElement.clientHeight
+		ai: _Browser_getScene(),
+		am: {
+			y: _Browser_window.pageXOffset,
+			p: _Browser_window.pageYOffset,
+			an: _Browser_doc.documentElement.clientWidth,
+			Z: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4247,8 +4247,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		ak: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		W: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		an: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		Z: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4271,15 +4271,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			af: {
-				ak: node.scrollWidth,
-				W: node.scrollHeight
+			ai: {
+				an: node.scrollWidth,
+				Z: node.scrollHeight
 			},
-			aj: {
-				I: node.scrollLeft,
-				A: node.scrollTop,
-				ak: node.clientWidth,
-				W: node.clientHeight
+			am: {
+				y: node.scrollLeft,
+				p: node.scrollTop,
+				an: node.clientWidth,
+				Z: node.clientHeight
 			}
 		};
 	});
@@ -4309,18 +4309,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			af: _Browser_getScene(),
-			aj: {
-				I: x,
-				A: y,
-				ak: _Browser_doc.documentElement.clientWidth,
-				W: _Browser_doc.documentElement.clientHeight
+			ai: _Browser_getScene(),
+			am: {
+				y: x,
+				p: y,
+				an: _Browser_doc.documentElement.clientWidth,
+				Z: _Browser_doc.documentElement.clientHeight
 			},
-			ar: {
-				I: x + rect.left,
-				A: y + rect.top,
-				ak: rect.width,
-				W: rect.height
+			au: {
+				y: x + rect.left,
+				p: y + rect.top,
+				an: rect.width,
+				Z: rect.height
 			}
 		};
 	});
@@ -4355,6 +4355,43 @@ function _Browser_load(url)
 		}
 	}));
 }
+
+
+
+var _Bitwise_and = F2(function(a, b)
+{
+	return a & b;
+});
+
+var _Bitwise_or = F2(function(a, b)
+{
+	return a | b;
+});
+
+var _Bitwise_xor = F2(function(a, b)
+{
+	return a ^ b;
+});
+
+function _Bitwise_complement(a)
+{
+	return ~a;
+};
+
+var _Bitwise_shiftLeftBy = F2(function(offset, a)
+{
+	return a << offset;
+});
+
+var _Bitwise_shiftRightBy = F2(function(offset, a)
+{
+	return a >> offset;
+});
+
+var _Bitwise_shiftRightZfBy = F2(function(offset, a)
+{
+	return a >>> offset;
+});
 
 
 function _Url_percentEncode(string)
@@ -4913,7 +4950,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {au: fragment, aw: host, Z: path, aE: port_, aG: protocol, ac: query};
+		return {ax: fragment, az: host, ab: path, aH: port_, aJ: protocol, af: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5322,7 +5359,7 @@ var $elm$url$Url$addPrefixed = F3(
 	});
 var $elm$url$Url$toString = function (url) {
 	var http = function () {
-		var _v0 = url.aG;
+		var _v0 = url.aJ;
 		if (!_v0) {
 			return 'http://';
 		} else {
@@ -5332,17 +5369,17 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.au,
+		url.ax,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
-			url.ac,
+			url.af,
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.aE,
-					_Utils_ap(http, url.aw)),
-				url.Z)));
+					url.aH,
+					_Utils_ap(http, url.az)),
+				url.ab)));
 };
 var $orus_io$elm_spa$Spa$addPage = F4(
 	function (_v0, matchRoute, page, builder) {
@@ -5358,10 +5395,10 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 					var _v24 = matchRoute(core.m);
 					if (!_v24.$) {
 						var pageFlags = _v24.a;
-						var _v25 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
+						var _v25 = A3($orus_io$elm_spa$Spa$setupPage, builder.aw, core.j, page);
 						if (!_v25.$) {
 							var setup = _v25.a;
-							var _v26 = setup.ay(pageFlags);
+							var _v26 = setup.aB(pageFlags);
 							var newCurrentPage = _v26.a;
 							var newCurrentPageEffect = _v26.b;
 							return _Utils_Tuple2(
@@ -5377,8 +5414,8 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								$orus_io$elm_spa$Spa$NoPage,
 								A2(
 									$elm$browser$Browser$Navigation$replaceUrl,
-									core.K,
-									builder.aF(core.m)));
+									core.N,
+									builder.aI(core.m)));
 						}
 					} else {
 						return _Utils_Tuple2($orus_io$elm_spa$Spa$NoPage, $elm$core$Platform$Cmd$none);
@@ -5402,14 +5439,14 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 						])));
 		};
 		return {
-			at: builder.at,
-			ay: F3(
+			aw: builder.aw,
+			aB: F3(
 				function (flags, url, key) {
 					return setupCurrentPage(
-						A3(builder.ay, flags, url, key));
+						A3(builder.aB, flags, url, key));
 				}),
-			aF: builder.aF,
-			aI: function (_v1) {
+			aI: builder.aI,
+			aL: function (_v1) {
 				var core = _v1.a;
 				var currentPage = _v1.b;
 				return $elm$core$Platform$Sub$batch(
@@ -5418,13 +5455,13 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							function () {
 							if (currentPage.$ === 1) {
 								var current = currentPage.a;
-								var _v3 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
+								var _v3 = A3($orus_io$elm_spa$Spa$setupPage, builder.aw, core.j, page);
 								if (!_v3.$) {
 									var setup = _v3.a;
 									return A2(
 										$elm$core$Platform$Sub$map,
 										A2($elm$core$Basics$composeR, $orus_io$elm_spa$Spa$CurrentMsg, $orus_io$elm_spa$Spa$PageMsg),
-										setup.aI(current));
+										setup.aL(current));
 								} else {
 									return $elm$core$Platform$Sub$none;
 								}
@@ -5435,13 +5472,13 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							A2(
 							$elm$core$Platform$Sub$map,
 							$orus_io$elm_spa$Spa$mapPreviousMsg,
-							builder.aI(
+							builder.aL(
 								$orus_io$elm_spa$Spa$modelPrevious(
 									_Utils_Tuple2(core, currentPage))))
 						]));
 			},
-			aK: builder.aK,
-			aL: F2(
+			aN: builder.aN,
+			aO: F2(
 				function (msg, _v4) {
 					var core = _v4.a;
 					var currentPage = _v4.b;
@@ -5452,10 +5489,10 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								var _v6 = $orus_io$elm_spa$Spa$currentPageModel(currentPage);
 								if (!_v6.$) {
 									var pageModel = _v6.a;
-									var _v7 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
+									var _v7 = A3($orus_io$elm_spa$Spa$setupPage, builder.aw, core.j, page);
 									if (!_v7.$) {
 										var setup = _v7.a;
-										var _v8 = A2(setup.aL, pageMsg, pageModel);
+										var _v8 = A2(setup.aO, pageMsg, pageModel);
 										var pageModelNew = _v8.a;
 										var pageEffect = _v8.b;
 										return _Utils_Tuple2(
@@ -5473,8 +5510,8 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 											_Utils_Tuple2(core, $orus_io$elm_spa$Spa$NoPage),
 											A2(
 												$elm$browser$Browser$Navigation$replaceUrl,
-												core.K,
-												builder.aF(core.m)));
+												core.N,
+												builder.aI(core.m)));
 									}
 								} else {
 									return _Utils_Tuple2(
@@ -5484,7 +5521,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							} else {
 								var pageMsg = msg.a.a;
 								var _v9 = A2(
-									builder.aL,
+									builder.aO,
 									$orus_io$elm_spa$Spa$PageMsg(pageMsg),
 									$orus_io$elm_spa$Spa$modelPrevious(
 										_Utils_Tuple2(core, currentPage)));
@@ -5501,7 +5538,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 						case 0:
 							var sharedMsg = msg.a;
 							var _v11 = A2(
-								builder.aL,
+								builder.aO,
 								$orus_io$elm_spa$Spa$SharedMsg(sharedMsg),
 								$orus_io$elm_spa$Spa$modelPrevious(
 									_Utils_Tuple2(core, currentPage)));
@@ -5514,7 +5551,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								if (!_v14.a.$) {
 									if (_v14.b.$ === 1) {
 										var _v15 = _v14.a;
-										var _v16 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, previousCore.j, page);
+										var _v16 = A3($orus_io$elm_spa$Spa$setupPage, builder.aw, previousCore.j, page);
 										if (!_v16.$) {
 											var setup = _v16.a;
 											return _Utils_Tuple2(currentPage, $elm$core$Platform$Cmd$none);
@@ -5523,8 +5560,8 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 												$orus_io$elm_spa$Spa$NoPage,
 												A2(
 													$elm$browser$Browser$Navigation$replaceUrl,
-													core.K,
-													builder.aF(core.m)));
+													core.N,
+													builder.aI(core.m)));
 										}
 									} else {
 										var _v17 = _v14.a;
@@ -5562,7 +5599,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 									_Utils_Tuple2(core, currentPage),
 									A2(
 										$elm$browser$Browser$Navigation$pushUrl,
-										core.K,
+										core.N,
 										$elm$url$Url$toString(url)));
 							} else {
 								var url = urlRequest.a;
@@ -5574,29 +5611,29 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							var url = msg.a;
 							return setupCurrentPage(
 								A2(
-									builder.aL,
+									builder.aO,
 									$orus_io$elm_spa$Spa$UrlChange(url),
 									$orus_io$elm_spa$Spa$modelPrevious(
 										_Utils_Tuple2(core, currentPage))));
 					}
 				}),
-			aM: function (_v19) {
+			aP: function (_v19) {
 				var core = _v19.a;
 				var currentPage = _v19.b;
 				if (currentPage.$ === 1) {
 					var pageModel = currentPage.a;
-					var _v21 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
+					var _v21 = A3($orus_io$elm_spa$Spa$setupPage, builder.aw, core.j, page);
 					if (!_v21.$) {
 						var setup = _v21.a;
 						return A2(
 							viewMap1,
 							A2($elm$core$Basics$composeR, $orus_io$elm_spa$Spa$CurrentMsg, $orus_io$elm_spa$Spa$PageMsg),
-							setup.aM(pageModel));
+							setup.aP(pageModel));
 					} else {
 						return A2(
 							viewMap2,
 							$orus_io$elm_spa$Spa$mapPreviousMsg,
-							builder.aM(
+							builder.aP(
 								$orus_io$elm_spa$Spa$modelPrevious(
 									_Utils_Tuple2(core, currentPage))));
 					}
@@ -5604,7 +5641,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 					return A2(
 						viewMap2,
 						$orus_io$elm_spa$Spa$mapPreviousMsg,
-						builder.aM(
+						builder.aP(
 							$orus_io$elm_spa$Spa$modelPrevious(
 								_Utils_Tuple2(core, currentPage))));
 				}
@@ -5630,40 +5667,40 @@ var $orus_io$elm_spa$Spa$modelShared = function (_v0) {
 };
 var $orus_io$elm_spa$Spa$application = F2(
 	function (_v0, builder) {
-		var toDocument = _v0.aJ;
+		var toDocument = _v0.aM;
 		return {
-			ay: builder.ay,
-			aA: $orus_io$elm_spa$Spa$UrlChange,
-			aB: $orus_io$elm_spa$Spa$UrlRequest,
-			aI: builder.aI,
+			aB: builder.aB,
+			aD: $orus_io$elm_spa$Spa$UrlChange,
+			aE: $orus_io$elm_spa$Spa$UrlRequest,
 			aL: builder.aL,
-			aM: function (model) {
+			aO: builder.aO,
+			aP: function (model) {
 				return A2(
 					toDocument,
 					$orus_io$elm_spa$Spa$modelShared(model),
-					builder.aM(model));
+					builder.aP(model));
 			}
 		};
 	});
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$View$defaultView = {
-	S: _List_fromArray(
+	V: _List_fromArray(
 		[
 			$elm$html$Html$text('You should not see this page unless you forgot to add pages to your application')
 		]),
-	ai: 'No page'
+	al: 'No page'
 };
 var $author$project$Shared$init = F2(
 	function (_v0, key) {
 		return _Utils_Tuple2(
-			{C: $elm$core$Maybe$Nothing, K: key},
+			{E: $elm$core$Maybe$Nothing, N: key},
 			$elm$core$Platform$Cmd$none);
 	});
 var $orus_io$elm_spa$Spa$initModel = F3(
 	function (route, key, shared) {
 		return _Utils_Tuple2(
-			{m: route, K: key, j: shared},
+			{m: route, N: key, j: shared},
 			$orus_io$elm_spa$Spa$NoPage);
 	});
 var $orus_io$elm_spa$Spa$builderInit = F5(
@@ -5715,19 +5752,19 @@ var $orus_io$elm_spa$Spa$builderRootUpdate = F4(
 	});
 var $orus_io$elm_spa$Spa$init = function (shared) {
 	return {
-		at: shared.at,
-		ay: A2($orus_io$elm_spa$Spa$builderInit, shared.aK, shared.ay),
-		aF: shared.aF,
-		aI: function (_v0) {
+		aw: shared.aw,
+		aB: A2($orus_io$elm_spa$Spa$builderInit, shared.aN, shared.aB),
+		aI: shared.aI,
+		aL: function (_v0) {
 			var core = _v0.a;
 			return A2(
 				$elm$core$Platform$Sub$map,
 				$orus_io$elm_spa$Spa$SharedMsg,
-				shared.aI(core.j));
+				shared.aL(core.j));
 		},
-		aK: shared.aK,
-		aL: A2($orus_io$elm_spa$Spa$builderRootUpdate, shared.aK, shared.aL),
-		aM: $elm$core$Basics$always(shared.ap)
+		aN: shared.aN,
+		aO: A2($orus_io$elm_spa$Spa$builderRootUpdate, shared.aN, shared.aO),
+		aP: $elm$core$Basics$always(shared.as)
 	};
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -5745,7 +5782,7 @@ var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
 var $author$project$View$map = F2(
 	function (tomsg, view) {
 		return {
-			S: _List_fromArray(
+			V: _List_fromArray(
 				[
 					A2(
 					$elm$html$Html$div,
@@ -5756,9 +5793,9 @@ var $author$project$View$map = F2(
 					A2(
 						$elm$core$List$map,
 						$elm$html$Html$map(tomsg),
-						view.S))
+						view.V))
 				]),
-			ai: view.ai
+			al: view.al
 		};
 	});
 var $author$project$Main$mappers = _Utils_Tuple2($author$project$View$map, $author$project$View$map);
@@ -5785,18 +5822,18 @@ var $orus_io$elm_spa$Effect$withNone = function (model) {
 	return _Utils_Tuple2(model, $orus_io$elm_spa$Effect$none);
 };
 var $orus_io$elm_spa$Spa$Page$sandbox = function (_v0) {
-	var init = _v0.ay;
-	var update = _v0.aL;
-	var view = _v0.aM;
+	var init = _v0.aB;
+	var update = _v0.aO;
+	var view = _v0.aP;
 	return {
-		ay: A2($elm$core$Basics$composeR, init, $orus_io$elm_spa$Effect$withNone),
-		aI: $elm$core$Basics$always($elm$core$Platform$Sub$none),
-		aL: F2(
+		aB: A2($elm$core$Basics$composeR, init, $orus_io$elm_spa$Effect$withNone),
+		aL: $elm$core$Basics$always($elm$core$Platform$Sub$none),
+		aO: F2(
 			function (msg, model) {
 				return $orus_io$elm_spa$Effect$withNone(
 					A2(update, msg, model));
 			}),
-		aM: view
+		aP: view
 	};
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
@@ -5944,8 +5981,50 @@ var $author$project$Days$Day1$answer = A2(
 	_List_fromArray(
 		['Part1: ' + $author$project$Days$Day1$part1, 'Part2: ' + $author$project$Days$Day1$part2]));
 var $author$project$Days$Day1$pitch = '\n--- Day 1: Sonar Sweep ---\n\nYou\'re minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!\n\nBefore you know it, you\'re inside a submarine the Elves keep ready for situations like this. It\'s covered in Christmas lights (because of course it is), and it even has an experimental antenna that should be able to track the keys if you can boost its signal strength high enough; there\'s a little meter that indicates the antenna\'s signal strength by displaying 0-50 stars.\n\nYour instincts tell you that in order to save Christmas, you\'ll need to get all fifty stars by December 25th.\n\nCollect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!\n\nAs the submarine drops below the surface of the ocean, it automatically performs a sonar sweep of the nearby sea floor. On a small screen, the sonar sweep report (your puzzle input) appears: each line is a measurement of the sea floor depth as the sweep looks further and further away from the submarine.\n\nFor example, suppose you had the following report:\n\n199\n200\n208\n210\n200\n207\n240\n269\n260\n263\n\nThis report indicates that, scanning outward from the submarine, the sonar sweep found depths of 199, 200, 208, 210, and so on.\n\nThe first order of business is to figure out how quickly the depth increases, just so you know what you\'re dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.\n\nTo do this, count the number of times a depth measurement increases from the previous measurement. (There is no measurement before the first measurement.) In the example above, the changes are as follows:\n\n199 (N/A - no previous measurement)\n200 (increased)\n208 (increased)\n210 (increased)\n200 (decreased)\n207 (increased)\n240 (increased)\n269 (increased)\n260 (decreased)\n263 (increased)\n\nIn this example, there are 7 measurements that are larger than the previous measurement.\n\nHow many measurements are larger than the previous measurement?\n\n--- Part Two ---\n\nConsidering every single measurement isn\'t as useful as you expected: there\'s just too much noise in the data.\n\nInstead, consider sums of a three-measurement sliding window. Again considering the above example:\n\n199  A\n200  A B\n208  A B C\n210    B C D\n200  E   C D\n207  E F   D\n240  E F G\n269    F G H\n260      G H\n263        H\n\nStart by comparing the first and second three-measurement windows. The measurements in the first window are marked A (199, 200, 208); their sum is 199 + 200 + 208 = 607. The second window is marked B (200, 208, 210); its sum is 618. The sum of measurements in the second window is larger than the sum of the first, so this first comparison increased.\n\nYour goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare A with B, then compare B with C, then C with D, and so on. Stop when there aren\'t enough measurements left to create a new three-measurement sum.\n\nIn the above example, the sum of each three-measurement window is as follows:\n\nA: 607 (N/A - no previous sum)\nB: 618 (increased)\nC: 618 (no change)\nD: 617 (decreased)\nE: 647 (increased)\nF: 716 (increased)\nG: 769 (increased)\nH: 792 (increased)\n\nIn this example, there are 5 sums that are larger than the previous sum.\n\nConsider sums of a three-measurement sliding window. How many sums are larger than the previous sum?\n';
-var $author$project$Days$Day1$day = {am: $author$project$Days$Day1$answer, aD: $author$project$Days$Day1$pitch};
+var $author$project$Days$Day1$day = {ap: $author$project$Days$Day1$answer, aG: $author$project$Days$Day1$pitch};
+var $author$project$Days$Day2$executeCommand1 = F2(
+	function (command, pos) {
+		switch (command.$) {
+			case 0:
+				var _int = command.a;
+				return _Utils_update(
+					pos,
+					{p: pos.p - _int});
+			case 1:
+				var _int = command.a;
+				return _Utils_update(
+					pos,
+					{p: pos.p + _int});
+			default:
+				var _int = command.a;
+				return _Utils_update(
+					pos,
+					{y: pos.y + _int});
+		}
+	});
+var $author$project$Days$Day2$executeCommand2 = F2(
+	function (command, pos) {
+		var aim = pos.C;
+		switch (command.$) {
+			case 0:
+				var _int = command.a;
+				return _Utils_update(
+					pos,
+					{C: aim - _int});
+			case 1:
+				var _int = command.a;
+				return _Utils_update(
+					pos,
+					{C: aim + _int});
+			default:
+				var _int = command.a;
+				return _Utils_update(
+					pos,
+					{y: pos.y + _int, p: pos.p + (aim * _int)});
+		}
+	});
 var $author$project$Days$Day2$data = '\nforward 9\nforward 9\nforward 3\ndown 2\nforward 8\ndown 8\nforward 1\ndown 6\ndown 9\ndown 9\nforward 1\nup 5\nup 4\nup 8\ndown 6\ndown 7\nforward 4\nforward 6\nforward 2\nforward 2\nforward 4\ndown 2\ndown 6\nforward 6\nforward 9\nup 4\nup 6\ndown 2\nforward 7\nup 7\ndown 8\ndown 4\ndown 6\nforward 1\ndown 2\nup 1\nforward 8\ndown 9\nforward 6\nup 9\ndown 8\nforward 5\nforward 8\ndown 8\nup 3\nup 9\ndown 2\ndown 2\nforward 5\nup 7\nforward 5\ndown 6\nforward 4\ndown 2\nup 2\nup 7\nup 1\ndown 4\ndown 8\nforward 6\ndown 2\nforward 7\ndown 1\nforward 7\nforward 1\nup 1\ndown 4\ndown 3\ndown 4\ndown 4\nup 8\ndown 1\nup 7\nforward 8\ndown 5\nup 1\ndown 4\ndown 3\nforward 4\nup 7\nforward 1\ndown 4\ndown 2\ndown 4\nup 8\nup 6\ndown 1\nup 3\ndown 5\nforward 4\ndown 3\nforward 9\ndown 9\nforward 2\ndown 4\nup 3\ndown 4\nforward 1\nforward 7\nforward 9\nforward 7\nforward 3\nforward 6\ndown 4\nforward 7\ndown 5\ndown 1\nforward 7\nup 1\ndown 8\ndown 7\ndown 7\ndown 7\ndown 3\nforward 4\nforward 6\nforward 6\nforward 1\ndown 7\ndown 6\ndown 8\nup 5\ndown 7\nup 6\nforward 9\ndown 7\ndown 1\ndown 9\nforward 8\nup 5\ndown 6\nforward 3\nup 2\ndown 1\nforward 2\ndown 3\nup 6\nforward 8\nforward 1\nforward 3\ndown 9\nforward 1\ndown 3\nup 7\nforward 8\nup 8\ndown 7\ndown 2\nforward 3\nup 7\nforward 6\ndown 7\ndown 6\nup 5\nforward 9\ndown 7\nup 5\nforward 6\nup 5\nup 6\nforward 6\ndown 8\ndown 1\nforward 7\nforward 6\ndown 5\ndown 6\nforward 9\ndown 6\nup 5\nforward 9\nforward 4\ndown 1\nforward 5\ndown 4\nforward 5\nforward 1\ndown 1\nforward 4\ndown 5\nforward 4\nup 8\ndown 1\nforward 6\ndown 5\nforward 8\nforward 8\nforward 5\ndown 7\ndown 4\nforward 4\nup 1\nup 8\ndown 6\nup 5\nforward 6\nforward 5\nforward 9\ndown 3\ndown 5\nforward 3\ndown 6\nforward 6\nup 7\nup 6\ndown 6\ndown 1\nforward 8\nforward 9\nup 5\nforward 8\nforward 9\nforward 9\ndown 2\ndown 8\nforward 8\ndown 2\nup 8\ndown 2\ndown 2\nup 1\ndown 5\ndown 6\ndown 1\ndown 8\ndown 9\nforward 3\nforward 2\ndown 6\nup 8\nforward 9\nforward 7\nforward 1\ndown 8\nup 8\nforward 8\ndown 5\ndown 3\nup 3\nforward 6\nforward 5\ndown 4\nforward 4\ndown 4\nforward 5\nforward 9\nforward 2\nforward 9\ndown 1\ndown 3\ndown 6\nforward 6\ndown 7\nforward 3\nforward 4\nforward 1\ndown 6\nforward 1\nforward 4\nforward 2\nforward 2\nforward 1\nforward 2\ndown 1\nup 2\nforward 1\ndown 3\nforward 8\ndown 3\ndown 9\nforward 5\ndown 3\ndown 3\nforward 2\nforward 9\ndown 9\nforward 4\ndown 2\nforward 5\nup 8\ndown 4\nforward 5\ndown 1\nforward 9\ndown 1\nforward 7\nforward 2\ndown 2\ndown 6\nup 3\nforward 7\nup 4\nforward 7\nforward 6\ndown 8\nforward 2\ndown 3\nforward 9\nforward 4\nforward 8\ndown 6\nforward 8\ndown 9\ndown 2\ndown 3\nforward 1\ndown 5\ndown 3\nforward 2\nforward 7\ndown 4\ndown 3\nforward 9\ndown 2\nforward 2\nforward 1\nup 6\nup 4\ndown 5\nforward 5\nup 8\ndown 7\nforward 6\ndown 5\nforward 3\nforward 3\nforward 7\nup 9\nup 6\ndown 5\nup 7\nforward 2\nforward 5\ndown 9\ndown 6\nforward 7\ndown 9\nup 2\nup 5\nforward 1\nforward 8\nforward 9\nup 8\nforward 9\nforward 5\nup 9\ndown 4\ndown 7\nforward 2\nforward 1\ndown 4\nup 8\ndown 5\ndown 7\ndown 9\ndown 3\ndown 9\nup 8\nup 7\nup 8\ndown 8\ndown 2\ndown 6\ndown 6\nup 5\nup 9\nforward 1\ndown 8\nup 4\nup 3\nforward 7\nup 7\ndown 3\nup 1\nforward 3\ndown 7\nforward 8\nforward 2\ndown 6\ndown 2\nup 7\nup 5\nforward 7\nforward 1\nforward 6\nup 6\nforward 5\ndown 2\nup 4\nforward 2\ndown 9\nforward 6\nforward 3\nforward 3\nforward 4\nforward 2\ndown 6\nforward 9\nforward 7\ndown 4\nup 1\nforward 4\ndown 6\ndown 6\nup 1\nup 1\nforward 3\ndown 5\nup 5\ndown 3\ndown 6\nup 8\ndown 2\nup 6\nup 1\nforward 8\nup 6\ndown 8\nforward 9\nforward 4\nforward 9\ndown 7\ndown 9\ndown 6\ndown 1\nforward 9\nforward 9\ndown 6\ndown 5\nup 6\ndown 9\nup 4\nup 5\nforward 8\ndown 4\ndown 5\nforward 8\nforward 7\ndown 2\nforward 2\nforward 6\nforward 7\ndown 1\ndown 7\ndown 1\ndown 6\nforward 2\nup 2\ndown 4\ndown 8\nforward 1\ndown 1\ndown 3\ndown 3\nup 9\ndown 9\nforward 3\nup 4\nforward 1\ndown 9\ndown 8\ndown 9\nforward 5\nforward 4\nup 3\ndown 8\nforward 2\ndown 3\nup 5\nforward 4\ndown 7\ndown 8\ndown 9\nforward 8\ndown 8\nforward 4\ndown 6\ndown 3\nforward 5\ndown 3\ndown 9\ndown 4\nup 8\nforward 4\nup 6\ndown 3\nforward 6\ndown 9\ndown 7\nforward 7\nforward 3\nforward 2\nforward 4\ndown 4\ndown 5\nup 9\ndown 2\ndown 6\ndown 9\nforward 7\nforward 3\nup 3\nforward 3\ndown 4\ndown 7\nforward 2\ndown 2\nforward 3\ndown 8\ndown 7\ndown 7\nforward 2\nforward 2\nup 6\nforward 8\nforward 9\nup 3\nforward 8\nforward 5\nforward 7\nup 3\nforward 3\nforward 6\ndown 5\ndown 5\ndown 4\nforward 1\nforward 8\nforward 4\nforward 3\ndown 1\nforward 8\ndown 4\nup 5\nforward 4\ndown 2\nforward 7\ndown 2\nforward 9\ndown 1\nforward 6\nforward 8\nforward 6\nforward 7\nforward 1\nforward 6\ndown 5\nup 3\nforward 7\ndown 6\nforward 2\ndown 2\nforward 8\nforward 9\nup 7\nforward 1\nforward 1\nup 1\nforward 1\ndown 2\nforward 6\ndown 9\nup 1\nup 2\nforward 6\nforward 1\nforward 7\ndown 1\nup 8\nforward 7\nup 6\nup 4\ndown 1\nforward 2\ndown 4\ndown 1\ndown 7\ndown 4\nup 3\nforward 8\nforward 3\nforward 5\ndown 7\ndown 8\nforward 5\nforward 2\ndown 5\ndown 2\nforward 2\nup 9\ndown 3\ndown 5\nup 7\ndown 4\ndown 2\ndown 7\nforward 6\ndown 2\nforward 1\nup 4\nforward 2\nforward 2\ndown 5\ndown 1\ndown 1\nforward 7\nforward 6\ndown 7\ndown 5\nup 1\nup 3\nforward 3\nforward 9\nforward 4\ndown 1\ndown 5\nforward 3\nforward 7\ndown 8\nforward 8\nforward 2\nforward 7\nup 7\ndown 7\ndown 4\ndown 2\nup 6\nup 1\nforward 8\nup 8\nup 6\ndown 8\nforward 1\ndown 5\nforward 3\ndown 3\ndown 3\nforward 1\nup 3\nup 3\nforward 8\nforward 8\ndown 8\nforward 6\nforward 2\ndown 7\nforward 8\ndown 7\nup 5\nforward 7\ndown 1\nforward 9\nup 6\ndown 2\nup 2\nup 5\nforward 6\nforward 9\nforward 3\ndown 8\nforward 8\ndown 2\nup 5\ndown 9\nforward 5\ndown 6\ndown 3\ndown 9\nup 8\nup 3\ndown 2\nforward 7\nforward 4\nforward 4\nforward 8\nup 6\nup 4\nforward 9\ndown 6\ndown 8\nup 3\nup 5\nforward 8\nforward 7\nforward 4\ndown 8\nforward 1\nforward 5\ndown 9\nforward 8\nup 6\ndown 6\ndown 8\ndown 2\nforward 4\nforward 9\nforward 2\nforward 7\ndown 3\nforward 3\nup 6\ndown 4\nforward 2\nup 4\ndown 4\nforward 4\nforward 3\nforward 1\nup 6\nforward 1\ndown 1\nforward 7\nup 4\nforward 3\ndown 4\nup 6\nup 2\nup 8\ndown 1\ndown 6\ndown 6\ndown 1\ndown 7\nforward 8\ndown 9\nforward 5\nup 2\nup 7\nup 5\ndown 6\nup 1\nup 6\nforward 4\ndown 7\nforward 5\nforward 1\ndown 6\nforward 2\ndown 2\nforward 9\ndown 9\nup 6\nforward 1\nup 7\ndown 7\nforward 1\ndown 6\nup 1\nforward 2\nforward 1\ndown 4\nforward 9\nforward 7\nforward 5\ndown 1\nforward 2\ndown 2\ndown 2\ndown 5\nforward 1\nup 8\nforward 9\ndown 7\nforward 9\ndown 2\nup 5\ndown 9\ndown 8\ndown 5\nforward 8\nforward 4\ndown 4\ndown 6\nforward 1\ndown 5\nup 6\ndown 3\ndown 3\nforward 9\ndown 9\nforward 6\ndown 5\nup 6\ndown 5\nup 7\nforward 9\ndown 2\ndown 4\ndown 8\nforward 4\nup 7\nforward 9\nforward 7\nup 5\ndown 7\ndown 5\ndown 1\nforward 5\nforward 4\ndown 2\nup 3\nforward 1\nup 4\nup 9\ndown 4\nforward 3\ndown 4\ndown 9\nforward 4\nup 2\nup 3\nforward 7\nup 6\ndown 8\ndown 8\nforward 6\nforward 2\nforward 3\nforward 9\nforward 7\ndown 6\ndown 7\ndown 4\ndown 2\nforward 8\ndown 6\nforward 6\nforward 6\nforward 9\ndown 8\ndown 1\nup 5\ndown 1\nforward 9\ndown 1\nup 8\nforward 8\ndown 3\nforward 1\ndown 9\nforward 6\nforward 4\nforward 8\ndown 2\nup 8\ndown 2\nup 8\ndown 9\ndown 4\nup 7\nforward 7\nforward 5\ndown 5\ndown 4\nup 8\nforward 1\ndown 7\nforward 1\nup 9\nforward 9\nforward 7\nforward 9\ndown 9\nforward 4\ndown 7\nforward 6\nforward 6\nup 3\nforward 2\ndown 5\nup 8\ndown 1\nup 8\ndown 4\ndown 1\nup 6\nforward 4\nforward 3\nforward 6\ndown 3\nforward 4\nforward 4\nforward 4\ndown 8\nforward 3\nup 8\nup 8\ndown 8\nforward 6\nforward 8\nup 5\nforward 6\ndown 8\ndown 7\nup 4\nforward 6\nforward 9\ndown 9\nforward 4\nup 2\nforward 1\nup 3\ndown 9\ndown 8\nforward 8\nforward 8\nforward 7\ndown 6\ndown 1\nup 6\nup 6\nforward 9\nforward 7\nforward 7\ndown 3\ndown 6\ndown 9\ndown 4\nforward 7\nforward 3\nforward 3\ndown 7\nup 5\ndown 3\nforward 6\nforward 3\nforward 5\nup 3\ndown 7\nforward 2\nup 7\nforward 9\ndown 3\ndown 9\nforward 8\nforward 5\nup 7\nup 2\nup 8\nforward 6\ndown 8\nforward 2\nforward 4\nup 2\nforward 2\nforward 8\nforward 4\ndown 8\nforward 5\ndown 4\ndown 7\nforward 3\ndown 3\nup 1\ndown 9\nforward 9\ndown 2\ndown 1\nforward 1\ndown 6\ndown 3\nforward 5\ndown 3\ndown 8\nup 7\ndown 1\nup 9\ndown 4\nforward 9\ndown 4\nforward 3\nforward 6\ndown 3\nforward 3\ndown 2\ndown 7\ndown 1\nup 4\ndown 9\ndown 1\ndown 3\ndown 4\ndown 8\ndown 7\nforward 4\ndown 4\ndown 9\nforward 2\nforward 7\nforward 2\ndown 6\nup 8\nforward 6\ndown 2\nforward 6\nup 8\nforward 6\ndown 9\nforward 2\nforward 6\n';
+var $author$project$Days$Day2$initPosition = {C: 0, y: 0, p: 0};
 var $author$project$Days$Day2$Down = function (a) {
 	return {$: 1, a: a};
 };
@@ -5994,45 +6073,226 @@ var $author$project$Days$Day2$parseCommand = A2(
 			return $elm$core$Maybe$Nothing;
 		}
 	});
-var $author$project$Days$Day2$answer = function () {
-	var pos = A3(
+var $author$project$Days$Day2$parseCommands = function (string) {
+	return A2(
+		$elm$core$List$filterMap,
+		$author$project$Days$Day2$parseCommand,
+		$elm$core$String$lines(
+			$elm$core$String$trim(string)));
+};
+var $author$project$Days$Day2$process = function (exec) {
+	var _v0 = A3(
 		$elm$core$List$foldl,
-		F2(
-			function (command, acc) {
-				switch (command.$) {
-					case 2:
-						var _int = command.a;
-						return _Utils_update(
-							acc,
-							{I: acc.I + _int});
-					case 0:
-						var _int = command.a;
-						return _Utils_update(
-							acc,
-							{A: acc.A - _int});
-					default:
-						var _int = command.a;
-						return _Utils_update(
-							acc,
-							{A: acc.A + _int});
-				}
-			}),
-		{I: 0, A: 0},
+		exec,
+		$author$project$Days$Day2$initPosition,
+		$author$project$Days$Day2$parseCommands($author$project$Days$Day2$data));
+	var x = _v0.y;
+	var y = _v0.p;
+	return $elm$core$String$fromInt(x * y);
+};
+var $author$project$Days$Day2$answer = A2(
+	$elm$core$String$join,
+	'\n',
+	_List_fromArray(
+		[
+			'Part1: ' + $author$project$Days$Day2$process($author$project$Days$Day2$executeCommand1),
+			'Part2: ' + $author$project$Days$Day2$process($author$project$Days$Day2$executeCommand2)
+		]));
+var $author$project$Days$Day2$pitch = '\n--- Day 2: Dive! ---\n\nNow, you need to figure out how to pilot this thing.\n\nIt seems like the submarine can take a series of commands like forward 1, down 2, or up 3:\n\n- forward X increases the horizontal position by X units.\n- down X increases the depth by X units.\n- up X decreases the depth by X units.\n\nNote that since you\'re on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.\n\nThe submarine seems to already have a planned course (your puzzle input). You should probably figure out where it\'s going. For example:\n\nforward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n\nYour horizontal position and depth both start at 0. The steps above would then modify them as follows:\n\n- forward 5 adds 5 to your horizontal position, a total of 5.\n- down 5 adds 5 to your depth, resulting in a value of 5.\n- forward 8 adds 8 to your horizontal position, a total of 13.\n- up 3 decreases your depth by 3, resulting in a value of 2.\n- down 8 adds 8 to your depth, resulting in a value of 10.\n- forward 2 adds 2 to your horizontal position, a total of 15.\n\nAfter following these instructions, you would have a horizontal position of 15 and a depth of 10. (Multiplying these together produces 150.)\n\nCalculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n\n--- Part Two ---\n\nBased on your calculations, the planned course doesn\'t seem to make any sense. You find the submarine manual and discover that the process is actually slightly more complicated.\n\nIn addition to horizontal position and depth, you\'ll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:\n\n- down X increases your aim by X units.\n- up X decreases your aim by X units.\n- forward X does two things:\n    - It increases your horizontal position by X units.\n    - It increases your depth by your aim multiplied by X.\n\nAgain note that since you\'re on a submarine, down and up do the opposite of what you might expect: "down" means aiming in the positive direction.\n\nNow, the above example does something different:\n\n- forward 5 adds 5 to your horizontal position, a total of 5. Because your aim is 0, your depth does not change.\n- down 5 adds 5 to your aim, resulting in a value of 5.\n- forward 8 adds 8 to your horizontal position, a total of 13. Because your aim is 5, your depth increases by 8*5=40.\n- up 3 decreases your aim by 3, resulting in a value of 2.\n- down 8 adds 8 to your aim, resulting in a value of 10.\n- forward 2 adds 2 to your horizontal position, a total of 15. Because your aim is 10, your depth increases by 2*10=20 to a total of 60.\n\nAfter following these new instructions, you would have a horizontal position of 15 and a depth of 60. (Multiplying these produces 900.)\n\nUsing this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n';
+var $author$project$Days$Day2$day = {ap: $author$project$Days$Day2$answer, aG: $author$project$Days$Day2$pitch};
+var $author$project$Days$Day3$data = '\n000011010001\n000001110100\n111100101010\n111001100111\n001010100100\n101010010001\n000001100011\n010010110101\n011001011100\n001110111000\n111101011111\n001111001011\n100110010010\n000001011001\n110001000111\n010011111110\n111011000111\n001000110111\n010011101110\n111010111000\n001101100000\n111101010111\n111000010111\n101111001011\n100000000011\n110000111100\n101110110001\n010000100011\n001100111111\n011011011100\n000001110011\n001110111011\n011110011101\n110011010010\n010111001010\n110010000100\n101111001101\n011111001101\n111110010000\n001011010011\n111111001101\n011110110000\n100001011001\n011010010010\n101001111010\n001100001010\n110000000010\n010000011001\n010010010110\n110101111111\n011001101110\n001100000111\n101111001010\n110000100000\n000111101110\n101101111011\n100110101011\n011010011000\n101000101010\n000001010100\n110101011101\n010101010100\n011010000111\n011001001001\n011101010001\n111111011110\n100010100110\n101001111110\n110010100101\n111110110011\n101101111101\n001010110000\n001111001010\n011001111010\n000111010010\n010100000001\n101000111110\n110111000011\n110111011101\n110111001000\n111111001000\n001000010110\n110000010010\n001011010001\n011000110000\n101001101001\n000101101001\n010100111100\n100001111110\n010011001100\n100010010111\n000010000000\n010110101111\n010000100010\n110111010111\n110100011010\n000111101100\n011110101000\n010000010111\n011010111101\n110111111000\n110001010101\n101011110010\n110011111001\n010111101010\n000000010000\n010010011000\n100100001110\n001101011101\n101101010100\n000011001101\n101000000001\n101000000111\n110001010011\n100001011010\n000100111101\n100011000101\n110001001000\n000110011111\n010100111001\n111111111011\n000010010100\n101001011000\n011000011010\n010011111111\n101100001101\n110101010111\n111010011001\n100010111011\n100010000000\n111001111010\n010111011110\n010010000101\n101100110110\n111101001000\n000010111011\n111010010100\n101011011110\n110110010111\n101100010011\n000110101001\n100010101111\n101001010011\n111010100101\n000011011010\n110010111001\n010100101110\n101001001101\n101110011111\n110101100010\n110100111001\n111110100111\n101101000010\n111111111000\n100001100001\n011100100010\n011100101011\n111101111111\n010011000100\n010001110111\n100101001100\n111100100110\n110001111110\n001100100110\n010011011001\n001001010011\n111000100100\n011011010111\n101011010010\n101100001111\n011111000111\n100001101000\n011101101101\n011000001010\n100101111011\n111000100001\n011101111000\n011011001011\n011010011001\n101111100011\n010001110000\n000101110010\n010100001111\n100110010001\n110011111100\n011100100100\n010011111001\n001010011011\n000111111100\n101000000010\n110101010000\n101110011101\n001110001110\n001110100111\n010111010101\n100100001111\n001111010110\n100010111010\n001010000100\n010001001100\n011111010011\n010000100110\n110011000111\n111010000100\n101101001011\n010110111001\n000110100101\n000010011000\n000111011100\n011010101100\n101100110000\n101001011001\n110011010100\n000101011000\n110010110111\n101001101101\n010100011101\n101100011010\n010111000111\n010110101001\n111000011010\n011011100101\n011111110101\n110110000000\n111111010010\n011001000000\n000100010000\n111011100110\n011100111100\n001010000110\n011110000011\n011001011101\n111001111101\n011010101111\n100011001000\n111111110100\n100101011101\n101110111111\n110100100011\n010100100111\n111011011000\n011111011001\n101111010001\n011111110010\n010000011100\n111101111110\n001010011000\n011010010011\n011011100111\n100001000110\n111111010100\n101100100001\n100101010101\n111110011110\n101001001110\n111011100001\n110111011011\n011100101100\n011000111011\n110100110101\n110000001011\n110101100001\n110011000000\n010010011011\n000110000001\n110001001111\n101010100111\n001011001100\n111100011111\n111101000101\n010110110001\n001000111110\n001110111111\n000100001001\n100101010110\n111110101101\n101111111001\n011011000101\n111011101010\n001000100001\n001111110101\n111110100000\n111011000110\n111101111010\n000100000101\n011000010110\n000000011011\n110011010011\n000101100000\n111100111111\n111110111000\n000101100011\n010000110110\n100101101011\n010101000100\n110110100011\n110001010001\n100010011100\n111101100000\n011110001100\n011101010011\n101111000111\n101000001010\n001010110010\n110000101000\n101101111111\n101000111100\n011011010010\n111101010001\n000100010010\n100010011000\n111110101000\n011101001010\n100100110001\n101010000000\n110100111101\n001101000110\n110101010010\n010101110110\n100011010011\n011011101011\n010110111011\n111001000000\n001100000101\n001101111110\n111000100110\n001010001001\n001000111100\n011110110110\n011111010110\n101010000011\n011111010100\n010100010111\n010100110001\n110100100111\n110001110100\n100101010100\n001111111010\n100111110111\n011010001000\n011101111001\n101110111010\n110011000100\n000010111010\n000011011001\n101010010011\n001110001011\n000100000100\n001001001000\n111101011010\n111110101110\n101110000100\n110101110000\n001110010110\n001001100100\n010011001111\n010011101010\n001111001000\n110001000011\n001100001111\n101100100011\n001100110011\n110111000110\n100010101000\n011110100111\n010111010001\n111100000101\n011110110010\n111010000111\n010101011110\n011101111010\n001100010100\n111000000001\n011001110111\n010000101110\n001010111111\n111100110110\n111000010010\n101011000111\n111000011101\n100111010001\n001110101000\n100111001010\n100110111000\n110001011110\n000001000100\n001100110110\n110110100001\n011101000001\n111001010111\n111000001010\n101100010100\n000110111111\n001100000001\n110011100011\n101111100110\n011010101001\n110001001100\n011111010111\n110100100010\n011100001110\n111000000010\n001010110011\n001100100011\n001010000111\n100000111010\n011011001101\n111001000110\n110011110111\n010001001000\n111010110011\n001100111011\n010000110001\n000110000111\n111100110101\n010111010110\n011100100001\n101011010000\n101010101000\n111011110110\n101100010001\n111110000010\n101010110111\n001001100000\n001110010011\n000110111110\n001001111001\n010101110000\n111001100110\n100100100101\n010001011101\n010000011110\n100001001001\n001001010100\n111100000000\n110011001110\n010101001100\n101000011111\n000010001111\n001111010001\n101010001111\n111101000011\n101000011001\n001111111100\n010110101101\n010011110110\n110000111110\n010000100100\n010011000111\n100101011110\n110100100101\n100100001000\n110110011101\n011011110100\n010001011111\n111000100000\n011100101001\n110010100100\n000001001011\n101011110001\n011011110000\n101011110101\n011011010000\n001110110001\n100010100111\n111001100100\n010011100110\n111111111100\n101110001010\n001001111111\n010100110011\n100101000000\n011101110001\n010110000111\n110100000111\n010100101100\n001000000011\n001100011110\n101100011100\n001001110000\n100110100010\n100011010111\n011101111100\n010110010000\n001111101011\n101100001110\n000010110110\n010110100110\n101110100111\n001111010011\n101110101010\n110011110001\n010001001110\n111010100110\n000001111001\n000100100001\n000000111100\n011100101111\n000001101110\n101000110101\n010011011110\n100000111101\n010010001100\n010101101010\n000001000001\n111111000100\n111111100110\n101011101000\n111100000011\n010110001111\n010011101101\n100101111010\n000001001111\n010000001111\n010111000000\n100110101110\n110101101110\n000000000110\n010001110001\n000111100001\n110101101111\n000110010111\n011010100011\n111110001101\n100000101001\n001010100110\n100001001111\n011010100000\n101010111000\n001101110111\n111001101011\n000111111001\n100010001000\n001010110110\n011001011111\n000111000101\n001111100110\n100110101001\n101111000110\n001101011111\n001111011110\n110110110100\n011001111111\n100001010101\n101101100010\n111101011110\n111110000000\n001011111100\n100100010111\n111000110001\n001110101010\n100100001100\n110100011111\n010101000111\n110111010000\n011111100011\n101110111001\n101011001000\n000011010011\n101011001110\n100101110111\n001011100011\n000110100100\n110110101010\n000011110111\n110010100010\n000111010101\n011011010110\n001001011110\n100101110100\n000110110000\n011001100100\n010010000110\n001110101110\n010000001000\n110000100010\n000010011011\n101000111011\n011001100111\n000000010100\n110101111110\n110100101101\n111111111101\n110100011110\n000001111000\n100110100111\n101010111011\n001000011101\n010001000010\n100100100010\n000111110000\n100001000010\n000110001100\n000001111010\n000101001010\n000101100100\n011000001101\n010000111000\n101111111000\n001110011101\n001010110101\n001011101000\n010110011100\n000010111101\n011001010110\n000011000000\n001000010101\n001101001000\n111100010000\n111111001111\n001011011000\n100000101000\n010101110101\n010010011010\n011001000001\n011000000000\n010101011101\n100101001000\n110101110101\n101101011001\n000101011100\n011001010100\n100010010100\n010101001011\n000001001001\n011011001100\n100001110100\n000101101110\n011011000000\n000010010011\n111111001001\n100110010111\n001011000000\n101111100101\n110100111000\n101110010000\n010000101001\n110100101110\n011000100100\n100100100001\n010101100010\n111011010101\n111001110000\n010011110010\n000011001000\n010011010011\n110110110010\n100101001111\n101011100011\n011111110111\n011000100010\n111001000111\n110001000110\n011100101000\n011100000101\n001010111010\n001101010011\n000101111101\n001101111111\n101111010111\n000011100011\n111001110101\n100101011100\n001011101011\n110001001110\n001001110001\n101011010011\n100110011101\n101001010100\n111001100000\n001011011100\n010001101101\n100100100100\n100110111100\n000101010000\n010011100000\n111101110010\n111001010100\n101100001000\n110100010110\n000010011111\n100100111001\n101011101010\n110101111010\n111011110011\n101110011011\n010101010101\n101111111111\n110011110010\n001010001100\n001001110100\n101110110010\n001010101101\n001111111101\n110110011111\n111000011001\n000010000011\n010001111100\n001001100001\n101011010111\n100111000010\n011101110011\n001110000010\n100000111111\n101101010101\n001010000011\n110101011110\n011011100110\n100101001001\n001101000001\n000001100111\n101100110111\n100000001100\n011100001111\n111000010101\n000110101110\n000101011010\n101110110100\n000001101011\n010001111001\n000000011101\n110100010101\n000101010111\n011011011110\n010010110011\n111101011011\n111100101001\n010010110100\n101001000110\n111100110011\n011100000100\n001000100111\n100001001010\n101101110101\n011010110101\n110110010011\n100110110110\n111110001111\n010111101000\n011100011110\n010110000100\n111001001011\n011010110111\n100110000111\n101110111000\n011000101001\n101010001010\n001101011010\n001010100001\n101111101011\n101111101000\n110010011101\n001010001010\n111000011100\n101011110100\n110000010001\n101010101010\n110111010110\n010100011110\n110101110100\n000101011001\n000110000000\n101110111100\n000110001011\n100010011101\n110001011011\n011010111000\n100111111000\n101011100111\n100001101011\n111110111010\n000011010010\n011010100101\n001110110101\n111110011111\n101010110001\n000011110001\n101001001011\n001100001011\n101111011101\n000110110001\n001001111110\n011001111001\n100001111101\n011110001111\n011011010100\n111101000111\n011000011110\n100011011000\n100001110011\n101010100010\n100110000110\n111010010101\n110000101101\n110111001001\n111001111100\n001000001110\n110001101001\n100111010000\n110110011001\n110100010011\n001100011001\n100111110001\n100000011111\n001000101010\n010010010100\n001010010111\n111111110110\n001011110011\n001010110111\n100100111011\n111100100011\n111111110111\n101110100000\n100001111010\n000100011100\n001011100010\n011001110110\n111010111001\n000101011101\n000011110110\n100000001010\n010110110100\n101100110010\n011010110011\n100010111001\n100101111101\n101110111011\n100001101110\n001101001111\n000011101100\n000011011101\n001001010101\n100111101011\n000111010110\n100000101100\n001011011101\n111001010110\n110000011100\n100011010100\n100110110001\n101001000000\n111111101110\n101110100100\n000101011110\n010010101100\n110011001011\n001100011111\n000000110000\n010101111101\n000111101111\n101110001100\n110101001011\n110010110010\n001110010000\n001100110100\n000001010101\n110001111100\n001101101001\n100010100101\n001010110001\n100000100010\n110010111011\n110101110011\n011111010101\n111001111110\n010000101000\n101001101100\n111010101110\n011010101000\n110011101001\n110110000101\n111011101101\n101110100110\n010010001011\n110000110110\n100001100101\n111000111101\n011000010100\n101111110110\n001100011101\n001100010000\n101110000111\n011110010000\n111101001011\n110101100100\n011100101010\n101001100111\n110110011010\n011110011010\n011101100111\n011001010001\n111111100010\n111011110001\n110111110011\n101111000100\n001000111111\n010011100011\n100110100001\n101000001110\n100010000111\n011010000010\n010100111101\n110001010000\n110011100101\n001101010000\n100011111000\n010001000001\n011011110110\n100101001011\n000011011100\n010000111001\n011111011101\n011011111001\n110010011110\n100010110100\n111010001111\n101110011100\n001111010101\n000100011001\n010111011111\n110010000010\n000010011010\n001101011100\n010000100101\n110011100001\n110100000101\n100010101110\n011010010101\n111101010010\n000111100000\n111010110101\n000100111100\n101100101011\n000100110011\n000111110111\n000101010100\n101101110011\n101011011001\n001001010111\n010011011100\n101100110011\n010101101011\n000011110100\n111111111001\n010011100101\n001001000000\n101101010000\n001111110001\n001100101000\n000000001001\n001111011101\n111110110001\n110110011000\n100000011100\n110101111000\n100010110001\n110101111100\n000001010010\n110010000001\n100101111001\n110010001101\n111011010010\n000110110011\n110000100111\n010110011010\n101111101110\n010101111010\n000011101111\n000001110010\n100100011011\n011100011011\n101010110110\n010001011010\n111110011010\n111110011000\n010110101000\n100110110000\n010100000011\n100001100011\n011101000100\n010111110001\n110111110100\n101001001001\n001001101001\n111000010100\n100010000110\n110010010100\n001001111000\n010001111101\n100111000111\n011110101111\n101110010100\n010010101000\n111011111101\n111010010110\n101000100011\n010000011000\n001011000100\n111001010010\n';
+var $elm$core$Array$fromListHelp = F3(
+	function (list, nodeList, nodeListSize) {
+		fromListHelp:
+		while (true) {
+			var _v0 = A2($elm$core$Elm$JsArray$initializeFromList, $elm$core$Array$branchFactor, list);
+			var jsArray = _v0.a;
+			var remainingItems = _v0.b;
+			if (_Utils_cmp(
+				$elm$core$Elm$JsArray$length(jsArray),
+				$elm$core$Array$branchFactor) < 0) {
+				return A2(
+					$elm$core$Array$builderToArray,
+					true,
+					{d: nodeList, a: nodeListSize, c: jsArray});
+			} else {
+				var $temp$list = remainingItems,
+					$temp$nodeList = A2(
+					$elm$core$List$cons,
+					$elm$core$Array$Leaf(jsArray),
+					nodeList),
+					$temp$nodeListSize = nodeListSize + 1;
+				list = $temp$list;
+				nodeList = $temp$nodeList;
+				nodeListSize = $temp$nodeListSize;
+				continue fromListHelp;
+			}
+		}
+	});
+var $elm$core$Array$fromList = function (list) {
+	if (!list.b) {
+		return $elm$core$Array$empty;
+	} else {
+		return A3($elm$core$Array$fromListHelp, list, _List_Nil, 0);
+	}
+};
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
+var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
+var $elm$core$Basics$ge = _Utils_ge;
+var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
+var $elm$core$Array$getHelp = F3(
+	function (shift, index, tree) {
+		getHelp:
+		while (true) {
+			var pos = $elm$core$Array$bitMask & (index >>> shift);
+			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
+			if (!_v0.$) {
+				var subTree = _v0.a;
+				var $temp$shift = shift - $elm$core$Array$shiftStep,
+					$temp$index = index,
+					$temp$tree = subTree;
+				shift = $temp$shift;
+				index = $temp$index;
+				tree = $temp$tree;
+				continue getHelp;
+			} else {
+				var values = _v0.a;
+				return A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, values);
+			}
+		}
+	});
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
+var $elm$core$Array$tailIndex = function (len) {
+	return (len >>> 5) << 5;
+};
+var $elm$core$Array$get = F2(
+	function (index, _v0) {
+		var len = _v0.a;
+		var startShift = _v0.b;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? $elm$core$Maybe$Nothing : ((_Utils_cmp(
+			index,
+			$elm$core$Array$tailIndex(len)) > -1) ? $elm$core$Maybe$Just(
+			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
+			A3($elm$core$Array$getHelp, startShift, index, tree)));
+	});
+var $author$project$Days$Day3$charsAtIndex = function (index) {
+	return $elm$core$List$filterMap(
+		$elm$core$Array$get(index));
+};
+var $author$project$Days$Day3$mostCommonAtIndex = function (index) {
+	return A2(
+		$elm$core$Basics$composeR,
+		$author$project$Days$Day3$charsAtIndex(index),
 		A2(
-			$elm$core$List$filterMap,
-			$author$project$Days$Day2$parseCommand,
-			$elm$core$String$lines(
-				$elm$core$String$trim($author$project$Days$Day2$data))));
-	return $elm$core$String$fromInt(pos.I * pos.A);
+			$elm$core$Basics$composeR,
+			A2(
+				$elm$core$List$foldl,
+				F2(
+					function (x, acc) {
+						return (!x) ? _Utils_update(
+							acc,
+							{K: acc.K + 1}) : _Utils_update(
+							acc,
+							{L: acc.L + 1});
+					}),
+				{K: 0, L: 0}),
+			function (_v0) {
+				var n0 = _v0.K;
+				var n1 = _v0.L;
+				return (_Utils_cmp(n0, n1) > 0) ? 0 : 1;
+			}));
+};
+var $author$project$Days$Day3$leastCommonAtIndex = F2(
+	function (index, bits) {
+		return (!A2($author$project$Days$Day3$mostCommonAtIndex, index, bits)) ? 1 : 0;
+	});
+var $elm$core$Tuple$pair = F2(
+	function (a, b) {
+		return _Utils_Tuple2(a, b);
+	});
+var $elm$core$Basics$pow = _Basics_pow;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $author$project$Days$Day3$stringToInt = A2(
+	$elm$core$Basics$composeR,
+	$elm$core$String$toInt,
+	$elm$core$Maybe$withDefault(-1));
+var $author$project$Days$Day3$binToInt = function (str) {
+	var lastIndex = $elm$core$String$length(str);
+	return function (x) {
+		return (x / 2) | 0;
+	}(
+		A3(
+			$elm$core$List$foldr,
+			F2(
+				function (_v0, total) {
+					var index = _v0.a;
+					var currValue = _v0.b;
+					return (currValue === 1) ? (total + A2($elm$core$Basics$pow, 2, lastIndex - index)) : total;
+				}),
+			0,
+			A2(
+				$elm$core$List$indexedMap,
+				$elm$core$Tuple$pair,
+				A2(
+					$elm$core$List$map,
+					$author$project$Days$Day3$stringToInt,
+					A2($elm$core$String$split, '', str)))));
+};
+var $author$project$Days$Day3$rate = F2(
+	function (fn, bits) {
+		return $author$project$Days$Day3$binToInt(
+			A2(
+				$elm$core$String$join,
+				'',
+				A2(
+					$elm$core$List$map,
+					$elm$core$String$fromInt,
+					A2(
+						$elm$core$List$map,
+						function (index) {
+							return A2(fn, index, bits);
+						},
+						A2($elm$core$List$range, 0, 11)))));
+	});
+var $author$project$Days$Day3$part1 = function () {
+	var bits = A2(
+		$elm$core$List$map,
+		A2(
+			$elm$core$Basics$composeR,
+			$elm$core$String$split(''),
+			A2(
+				$elm$core$Basics$composeR,
+				$elm$core$List$map($author$project$Days$Day3$stringToInt),
+				$elm$core$Array$fromList)),
+		$elm$core$String$lines(
+			$elm$core$String$trim($author$project$Days$Day3$data)));
+	var _v0 = _Utils_Tuple2(
+		A2($author$project$Days$Day3$rate, $author$project$Days$Day3$mostCommonAtIndex, bits),
+		A2($author$project$Days$Day3$rate, $author$project$Days$Day3$leastCommonAtIndex, bits));
+	var gammaRate = _v0.a;
+	var epsilonRate = _v0.b;
+	return $elm$core$String$fromInt(gammaRate * epsilonRate);
 }();
-var $author$project$Days$Day2$pitch = '\n--- Day 2: Dive! ---\n\nNow, you need to figure out how to pilot this thing.\n\nIt seems like the submarine can take a series of commands like forward 1, down 2, or up 3:\n\n- forward X increases the horizontal position by X units.\n- down X increases the depth by X units.\n- up X decreases the depth by X units.\n\nNote that since you\'re on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.\n\nThe submarine seems to already have a planned course (your puzzle input). You should probably figure out where it\'s going. For example:\n\nforward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n\nYour horizontal position and depth both start at 0. The steps above would then modify them as follows:\n\n- forward 5 adds 5 to your horizontal position, a total of 5.\n- down 5 adds 5 to your depth, resulting in a value of 5.\n- forward 8 adds 8 to your horizontal position, a total of 13.\n- up 3 decreases your depth by 3, resulting in a value of 2.\n- down 8 adds 8 to your depth, resulting in a value of 10.\n- forward 2 adds 2 to your horizontal position, a total of 15.\n\nAfter following these instructions, you would have a horizontal position of 15 and a depth of 10. (Multiplying these together produces 150.)\n\nCalculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n';
-var $author$project$Days$Day2$day = {am: $author$project$Days$Day2$answer, aD: $author$project$Days$Day2$pitch};
+var $author$project$Days$Day3$answer = A2(
+	$elm$core$String$join,
+	'\n',
+	_List_fromArray(
+		['Part1: ' + $author$project$Days$Day3$part1, 'Part2: ' + 'TODO']));
+var $author$project$Days$Day3$pitch = '\n--- Day 3: Binary Diagnostic ---\n\nThe submarine has been making some odd creaking noises, so you ask it to produce a diagnostic report just in case.\n\nThe diagnostic report (your puzzle input) consists of a list of binary numbers which, when decoded properly, can tell you many useful things about the conditions of the submarine. The first parameter to check is the power consumption.\n\nYou need to use the binary numbers in the diagnostic report to generate two new binary numbers (called the gamma rate and the epsilon rate). The power consumption can then be found by multiplying the gamma rate by the epsilon rate.\n\nEach bit in the gamma rate can be determined by finding the most common bit in the corresponding position of all numbers in the diagnostic report. For example, given the following diagnostic report:\n\n00100\n11110\n10110\n10111\n10101\n01111\n00111\n11100\n10000\n11001\n00010\n01010\n\nConsidering only the first bit of each number, there are five 0 bits and seven 1 bits. Since the most common bit is 1, the first bit of the gamma rate is 1.\n\nThe most common second bit of the numbers in the diagnostic report is 0, so the second bit of the gamma rate is 0.\n\nThe most common value of the third, fourth, and fifth bits are 1, 1, and 0, respectively, and so the final three bits of the gamma rate are 110.\n\nSo, the gamma rate is the binary number 10110, or 22 in decimal.\n\nThe epsilon rate is calculated in a similar way; rather than use the most common bit, the least common bit from each position is used. So, the epsilon rate is 01001, or 9 in decimal. Multiplying the gamma rate (22) by the epsilon rate (9) produces the power consumption, 198.\n\nUse the binary numbers in your diagnostic report to calculate the gamma rate and epsilon rate, then multiply them together. What is the power consumption of the submarine? (Be sure to represent your answer in decimal, not binary.)\n';
+var $author$project$Days$Day3$day = {ap: $author$project$Days$Day3$answer, aG: $author$project$Days$Day3$pitch};
 var $author$project$Pages$Day$getDayData = function (day) {
 	switch (day) {
 		case 1:
 			return $elm$core$Result$Ok($author$project$Days$Day1$day);
 		case 2:
 			return $elm$core$Result$Ok($author$project$Days$Day2$day);
+		case 3:
+			return $elm$core$Result$Ok($author$project$Days$Day3$day);
 		default:
 			return $elm$core$Result$Err(
 				'No data could be found for day #' + $elm$core$String$fromInt(day));
@@ -6055,12 +6315,12 @@ var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Pages$Day$view = function (_v0) {
-	var day = _v0.J;
+	var day = _v0.M;
 	var _v1 = $author$project$Pages$Day$getDayData(day);
 	if (!_v1.$) {
 		var dayData = _v1.a;
 		return {
-			S: _List_fromArray(
+			V: _List_fromArray(
 				[
 					A2(
 					$elm$html$Html$div,
@@ -6084,7 +6344,7 @@ var $author$project$Pages$Day$view = function (_v0) {
 									_List_fromArray(
 										[
 											$elm$html$Html$text(
-											$author$project$Pages$Day$extractTitle(dayData.aD))
+											$author$project$Pages$Day$extractTitle(dayData.aG))
 										])),
 									A2(
 									$elm$html$Html$p,
@@ -6113,7 +6373,7 @@ var $author$project$Pages$Day$view = function (_v0) {
 									_List_fromArray(
 										[
 											$elm$html$Html$text(
-											$elm$core$String$trim(dayData.aD))
+											$elm$core$String$trim(dayData.aG))
 										]))
 								])),
 							A2(
@@ -6168,18 +6428,18 @@ var $author$project$Pages$Day$view = function (_v0) {
 												]),
 											_List_fromArray(
 												[
-													$elm$html$Html$text(dayData.am)
+													$elm$html$Html$text(dayData.ap)
 												]))
 										]))
 								]))
 						]))
 				]),
-			ai: $author$project$Pages$Day$extractTitle(dayData.aD)
+			al: $author$project$Pages$Day$extractTitle(dayData.aG)
 		};
 	} else {
 		var error = _v1.a;
 		return {
-			S: _List_fromArray(
+			V: _List_fromArray(
 				[
 					A2(
 					$elm$html$Html$h2,
@@ -6197,43 +6457,43 @@ var $author$project$Pages$Day$view = function (_v0) {
 							$elm$html$Html$text(error)
 						]))
 				]),
-			ai: 'Day #' + ($elm$core$String$fromInt(day) + ': error')
+			al: 'Day #' + ($elm$core$String$fromInt(day) + ': error')
 		};
 	}
 };
 var $author$project$Pages$Day$page = function (_v0) {
 	return $orus_io$elm_spa$Spa$Page$sandbox(
 		{
-			ay: function (day) {
-				return {J: day};
+			aB: function (day) {
+				return {M: day};
 			},
-			aL: F2(
+			aO: F2(
 				function (_v1, model) {
 					return model;
 				}),
-			aM: $author$project$Pages$Day$view
+			aP: $author$project$Pages$Day$view
 		});
 };
 var $orus_io$elm_spa$Spa$Page$static = function (pageView) {
 	return {
-		ay: function (_v0) {
+		aB: function (_v0) {
 			return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
 		},
-		aI: $elm$core$Basics$always($elm$core$Platform$Sub$none),
-		aL: F2(
+		aL: $elm$core$Basics$always($elm$core$Platform$Sub$none),
+		aO: F2(
 			function (_v1, _v2) {
 				return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
 			}),
-		aM: $elm$core$Basics$always(pageView)
+		aP: $elm$core$Basics$always(pageView)
 	};
 };
 var $author$project$Pages$Home$view = function (_v0) {
 	return {
-		S: _List_fromArray(
+		V: _List_fromArray(
 			[
 				$elm$html$Html$text('This is the homepage')
 			]),
-		ai: 'Home'
+		al: 'Home'
 	};
 };
 var $author$project$Pages$Home$page = function (shared) {
@@ -6305,7 +6565,7 @@ var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $author$project$Main$toDocument = F2(
 	function (_v0, view) {
 		return {
-			S: _List_fromArray(
+			V: _List_fromArray(
 				[
 					A2(
 					$elm$html$Html$div,
@@ -6349,7 +6609,7 @@ var $author$project$Main$toDocument = F2(
 										[
 											$elm$html$Html$Attributes$class('col-sm-10')
 										]),
-									view.S),
+									view.V),
 									A2(
 									$elm$html$Html$div,
 									_List_fromArray(
@@ -6361,7 +6621,7 @@ var $author$project$Main$toDocument = F2(
 								]))
 						]))
 				]),
-			ai: view.ai
+			al: view.al
 		};
 	});
 var $author$project$Route$NotFound = function (a) {
@@ -6369,7 +6629,7 @@ var $author$project$Route$NotFound = function (a) {
 };
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
-		return {t: frag, u: params, s: unvisited, o: value, w: visited};
+		return {u: frag, v: params, t: unvisited, o: value, x: visited};
 	});
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -6379,7 +6639,7 @@ var $elm$url$Url$Parser$getFirstMatch = function (states) {
 		} else {
 			var state = states.a;
 			var rest = states.b;
-			var _v1 = state.s;
+			var _v1 = state.t;
 			if (!_v1.b) {
 				return $elm$core$Maybe$Just(state.o);
 			} else {
@@ -6996,19 +7256,19 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.Z),
-					$elm$url$Url$Parser$prepareQuery(url.ac),
-					url.au,
+					$elm$url$Url$Parser$preparePath(url.ab),
+					$elm$url$Url$Parser$prepareQuery(url.af),
+					url.ax,
 					$elm$core$Basics$identity)));
 	});
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
 var $elm$url$Url$Parser$custom = F2(
 	function (tipe, stringToSomething) {
 		return function (_v0) {
-			var visited = _v0.w;
-			var unvisited = _v0.s;
-			var params = _v0.u;
-			var frag = _v0.t;
+			var visited = _v0.x;
+			var unvisited = _v0.t;
+			var params = _v0.v;
+			var frag = _v0.u;
 			var value = _v0.o;
 			if (!unvisited.b) {
 				return _List_Nil;
@@ -7037,10 +7297,10 @@ var $elm$url$Url$Parser$custom = F2(
 var $elm$url$Url$Parser$int = A2($elm$url$Url$Parser$custom, 'NUMBER', $elm$core$String$toInt);
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
-		var visited = _v0.w;
-		var unvisited = _v0.s;
-		var params = _v0.u;
-		var frag = _v0.t;
+		var visited = _v0.x;
+		var unvisited = _v0.t;
+		var params = _v0.v;
+		var frag = _v0.u;
 		var value = _v0.o;
 		return A5(
 			$elm$url$Url$Parser$State,
@@ -7054,10 +7314,10 @@ var $elm$url$Url$Parser$map = F2(
 	function (subValue, _v0) {
 		var parseArg = _v0;
 		return function (_v1) {
-			var visited = _v1.w;
-			var unvisited = _v1.s;
-			var params = _v1.u;
-			var frag = _v1.t;
+			var visited = _v1.x;
+			var unvisited = _v1.t;
+			var params = _v1.v;
+			var frag = _v1.u;
 			var value = _v1.o;
 			return A2(
 				$elm$core$List$map,
@@ -7095,10 +7355,10 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 };
 var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
-		var visited = _v0.w;
-		var unvisited = _v0.s;
-		var params = _v0.u;
-		var frag = _v0.t;
+		var visited = _v0.x;
+		var unvisited = _v0.t;
+		var params = _v0.v;
+		var frag = _v0.u;
 		var value = _v0.o;
 		if (!unvisited.b) {
 			return _List_Nil;
@@ -7146,9 +7406,9 @@ var $author$project$Route$route = $elm$url$Url$Parser$oneOf(
 				$elm$url$Url$Parser$int))
 		]));
 var $author$project$Route$toRoute = function (url) {
-	var protocol = (url.aG === 1) ? 'https' : 'http';
+	var protocol = (url.aJ === 1) ? 'https' : 'http';
 	var port_ = function () {
-		var _v0 = url.aE;
+		var _v0 = url.aH;
 		if (!_v0.$) {
 			var p = _v0.a;
 			return ':' + $elm$core$String$fromInt(p);
@@ -7156,7 +7416,7 @@ var $author$project$Route$toRoute = function (url) {
 			return '';
 		}
 	}();
-	var path = A2($elm$core$Maybe$withDefault, '/', url.au);
+	var path = A2($elm$core$Maybe$withDefault, '/', url.ax);
 	return A2(
 		$elm$core$Maybe$withDefault,
 		$author$project$Route$NotFound(url),
@@ -7166,7 +7426,7 @@ var $author$project$Route$toRoute = function (url) {
 			A2(
 				$elm$core$Maybe$withDefault,
 				url,
-				$elm$url$Url$fromString(protocol + ('://' + (url.aw + (port_ + path)))))));
+				$elm$url$Url$fromString(protocol + ('://' + (url.az + (port_ + path)))))));
 };
 var $author$project$Shared$update = F2(
 	function (msg, shared) {
@@ -7177,27 +7437,27 @@ var $author$project$Shared$update = F2(
 				_Utils_update(
 					shared,
 					{
-						C: $elm$core$Maybe$Just(newIdentity)
+						E: $elm$core$Maybe$Just(newIdentity)
 					}),
 				A2(
 					$elm$core$Maybe$withDefault,
 					$elm$core$Platform$Cmd$none,
 					A2(
 						$elm$core$Maybe$map,
-						$elm$browser$Browser$Navigation$replaceUrl(shared.K),
+						$elm$browser$Browser$Navigation$replaceUrl(shared.N),
 						redirect)));
 		} else {
 			return _Utils_Tuple2(
 				_Utils_update(
 					shared,
-					{C: $elm$core$Maybe$Nothing}),
+					{E: $elm$core$Maybe$Nothing}),
 				$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Main$main = $elm$browser$Browser$application(
 	A2(
 		$orus_io$elm_spa$Spa$application,
-		{aJ: $author$project$Main$toDocument},
+		{aM: $author$project$Main$toDocument},
 		A4(
 			$orus_io$elm_spa$Spa$addPublicPage,
 			$author$project$Main$mappers,
@@ -7210,13 +7470,13 @@ var $author$project$Main$main = $elm$browser$Browser$application(
 				$author$project$Pages$Home$page,
 				$orus_io$elm_spa$Spa$init(
 					{
-						ap: $author$project$View$defaultView,
-						at: $elm$core$Basics$always($elm$core$Maybe$Nothing),
-						ay: $author$project$Shared$init,
-						aF: $elm$core$Basics$always(''),
-						aI: $author$project$Shared$subscriptions,
-						aK: $author$project$Route$toRoute,
-						aL: $author$project$Shared$update
+						as: $author$project$View$defaultView,
+						aw: $elm$core$Basics$always($elm$core$Maybe$Nothing),
+						aB: $author$project$Shared$init,
+						aI: $elm$core$Basics$always(''),
+						aL: $author$project$Shared$subscriptions,
+						aN: $author$project$Route$toRoute,
+						aO: $author$project$Shared$update
 					})))));
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
