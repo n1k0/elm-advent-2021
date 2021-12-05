@@ -19,17 +19,35 @@ toDocument : Shared -> View msg -> Document msg
 toDocument _ view =
     { title = view.title
     , body =
-        [ div []
-            [ h1 [] [ text "Advent of Code 2021, in Elm" ]
-            , List.range 1 31
-                |> List.map
-                    (\day ->
-                        a [ href <| Route.toUrl (Route.Day day) ]
-                            [ text <| "Day " ++ String.fromInt day ]
-                    )
-                |> List.map (\x -> li [] [ x ])
-                |> ul []
-            , div [] view.body
+        [ div [ class "container" ]
+            [ h1 [ class "mb-4" ]
+                [ a [ href <| Route.toUrl Route.Home ]
+                    [ text "Advent of Code 2021, in Elm" ]
+                ]
+            , div [ class "row" ]
+                [ div [ class "col-sm-2" ]
+                    [ List.range 1 31
+                        |> List.map
+                            (\day ->
+                                if Day.hasDayData day then
+                                    a
+                                        [ class "list-group-item list-group-item-action fw-bold"
+                                        , href <| Route.toUrl (Route.Day day)
+                                        ]
+                                        [ text <| "Day #" ++ String.fromInt day ]
+
+                                else
+                                    span
+                                        [ class "list-group-item list-group-item-action disabled"
+                                        , style "text-decoration" "line-through"
+                                        ]
+                                        [ text <| "Day #" ++ String.fromInt day ]
+                            )
+                        |> div [ class "list-group" ]
+                    ]
+                , view.body
+                    |> div [ class "col-sm-10" ]
+                ]
             ]
         ]
     }

@@ -4,6 +4,7 @@
   "description": "Advent of Code 2021, in Elm",
   "main": "index.js",
   "scripts": {
+    "start": "elm-live src/Main.elm --pushstate --start-page=template.html -- --output=main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

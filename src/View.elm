@@ -1,6 +1,7 @@
 module View exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 
 
 type alias View msg =
@@ -12,7 +13,11 @@ type alias View msg =
 map : (msg1 -> msg) -> View msg1 -> View msg
 map tomsg view =
     { title = view.title
-    , body = view.body |> List.map (Html.map tomsg)
+    , body =
+        [ view.body
+            |> List.map (Html.map tomsg)
+            |> div [ class "container" ]
+        ]
     }
 
 

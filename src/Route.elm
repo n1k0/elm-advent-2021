@@ -21,9 +21,7 @@ route =
 toRoute : Url -> Route
 toRoute url =
     url
-        |> Debug.log "url"
         |> Parser.parse route
-        |> Debug.log "route"
         |> Maybe.withDefault (NotFound url)
 
 
