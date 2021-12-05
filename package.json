@@ -4,6 +4,8 @@
   "description": "Advent of Code 2021, in Elm",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf build && mkdir build && cp template.html build/index.html && elm make src/Main.elm --optimize --output=build/main.js",
+    "deploy": "npm run build && gh-pages -d build",
     "start": "elm-live src/Main.elm --pushstate --start-page=template.html -- --output=main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "elm-live": "^4.0.2",
-    "elm-tooling": "^1.7.0"
+    "elm-tooling": "^1.7.0",
+    "gh-pages": "^3.2.3",
+    "rimraf": "^3.0.2"
   }
 }

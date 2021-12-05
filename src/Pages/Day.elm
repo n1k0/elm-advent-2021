@@ -59,6 +59,11 @@ githubSource day =
         ++ ".elm"
 
 
+adventOfCodeSource : Int -> String
+adventOfCodeSource day =
+    "https://adventofcode.com/2021/day/" ++ String.fromInt day
+
+
 view : Model -> View msg
 view { day } =
     case getDayData day of
@@ -68,6 +73,10 @@ view { day } =
                 [ div [ class "row" ]
                     [ div [ class "col-lg-6" ]
                         [ h2 [] [ text <| extractTitle dayData.pitch ]
+                        , p []
+                            [ a [ href <| adventOfCodeSource day, target "_blank" ]
+                                [ text "View original" ]
+                            ]
                         , pre [ style "white-space" "pre-wrap" ]
                             [ dayData.pitch
                                 |> String.trim
