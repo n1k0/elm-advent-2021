@@ -5767,34 +5767,15 @@ var $orus_io$elm_spa$Spa$init = function (shared) {
 		aP: $elm$core$Basics$always(shared.as)
 	};
 };
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
 var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
 var $author$project$View$map = F2(
 	function (tomsg, view) {
 		return {
-			V: _List_fromArray(
-				[
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('container')
-						]),
-					A2(
-						$elm$core$List$map,
-						$elm$html$Html$map(tomsg),
-						view.V))
-				]),
+			V: A2(
+				$elm$core$List$map,
+				$elm$html$Html$map(tomsg),
+				view.V),
 			al: view.al
 		};
 	});
@@ -5840,6 +5821,16 @@ var $elm$html$Html$a = _VirtualDom_node('a');
 var $author$project$Pages$Day$adventOfCodeSource = function (day) {
 	return 'https://adventofcode.com/2021/day/' + $elm$core$String$fromInt(day);
 };
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$core$List$head = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -6576,6 +6567,26 @@ var $author$project$Main$toDocument = F2(
 					_List_fromArray(
 						[
 							A2(
+							$elm$html$Html$h1,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('my-5')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$a,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$href(
+											$author$project$Route$toUrl($author$project$Route$Home))
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Advent of Code 2021, in Elm')
+										]))
+								])),
+							A2(
 							$elm$html$Html$div,
 							_List_fromArray(
 								[
@@ -6584,37 +6595,17 @@ var $author$project$Main$toDocument = F2(
 							_List_fromArray(
 								[
 									A2(
-									$elm$html$Html$h1,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('my-5')
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$a,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$href(
-													$author$project$Route$toUrl($author$project$Route$Home))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Advent of Code 2021, in Elm')
-												]))
-										])),
-									A2(
 									$elm$html$Html$div,
 									_List_fromArray(
 										[
-											$elm$html$Html$Attributes$class('col-sm-10')
+											$elm$html$Html$Attributes$class('col-md-10')
 										]),
 									view.V),
 									A2(
 									$elm$html$Html$div,
 									_List_fromArray(
 										[
-											$elm$html$Html$Attributes$class('col-sm-2')
+											$elm$html$Html$Attributes$class('col-md-2')
 										]),
 									_List_fromArray(
 										[$author$project$Main$dayMenu]))
