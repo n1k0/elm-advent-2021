@@ -1,6 +1,7 @@
 module Pages.Day exposing (..)
 
 import Days.Day1 as Day1
+import Days.Day2 as Day2
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Spa.Page
@@ -24,6 +25,9 @@ getDayData day =
     case day of
         1 ->
             Ok Day1.day
+
+        2 ->
+            Ok Day2.day
 
         _ ->
             Err <| "No data could be found for day #" ++ String.fromInt day
