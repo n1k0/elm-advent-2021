@@ -15,38 +15,41 @@ mappers =
     ( View.map, View.map )
 
 
+dayMenu : Html msg
+dayMenu =
+    List.range 1 31
+        |> List.map
+            (\day ->
+                if Day.hasDayData day then
+                    a
+                        [ class "list-group-item list-group-item-action fw-bold"
+                        , href <| Route.toUrl (Route.Day day)
+                        ]
+                        [ text <| "Day #" ++ String.fromInt day ]
+
+                else
+                    span
+                        [ class "list-group-item list-group-item-action disabled"
+                        , style "text-decoration" "line-through"
+                        ]
+                        [ text <| "Day #" ++ String.fromInt day ]
+            )
+        |> div [ class "list-group" ]
+
+
 toDocument : Shared -> View msg -> Document msg
 toDocument _ view =
     { title = view.title
     , body =
-        [ div [ class "container" ]
-            [ h1 [ class "my-5" ]
-                [ a [ href <| Route.toUrl Route.Home ]
-                    [ text "Advent of Code 2021, in Elm" ]
-                ]
-            , div [ class "row" ]
-                [ div [ class "col-sm-2" ]
-                    [ List.range 1 31
-                        |> List.map
-                            (\day ->
-                                if Day.hasDayData day then
-                                    a
-                                        [ class "list-group-item list-group-item-action fw-bold"
-                                        , href <| Route.toUrl (Route.Day day)
-                                        ]
-                                        [ text <| "Day #" ++ String.fromInt day ]
-
-                                else
-                                    span
-                                        [ class "list-group-item list-group-item-action disabled"
-                                        , style "text-decoration" "line-through"
-                                        ]
-                                        [ text <| "Day #" ++ String.fromInt day ]
-                            )
-                        |> div [ class "list-group" ]
+        [ div [ class "container mb-5" ]
+            [ div [ class "row" ]
+                [ h1 [ class "my-5" ]
+                    [ a [ href <| Route.toUrl Route.Home ]
+                        [ text "Advent of Code 2021, in Elm" ]
                     ]
                 , view.body
                     |> div [ class "col-sm-10" ]
+                , div [ class "col-sm-2" ] [ dayMenu ]
                 ]
             ]
         ]

@@ -52,6 +52,13 @@ extractTitle =
         >> Maybe.withDefault "Untitled"
 
 
+githubSource : Int -> String
+githubSource day =
+    "https://github.com/n1k0/elm-advent-2021/tree/master/src/Days/Day"
+        ++ String.fromInt day
+        ++ ".elm"
+
+
 view : Model -> View msg
 view { day } =
     case getDayData day of
@@ -68,8 +75,15 @@ view { day } =
                             ]
                         ]
                     , div [ class "col-lg-6" ]
-                        [ h3 [] [ text "Answer" ]
-                        , pre [] [ text dayData.answer ]
+                        [ h3 [ class "fs-2" ] [ text "Answer" ]
+                        , p []
+                            [ a [ href <| githubSource day, target "_blank" ]
+                                [ text "View code" ]
+                            ]
+                        , div [ class "card" ]
+                            [ pre [ class "card-body pb-0" ]
+                                [ text dayData.answer ]
+                            ]
                         ]
                     ]
                 ]
