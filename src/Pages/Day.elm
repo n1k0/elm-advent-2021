@@ -54,7 +54,7 @@ extractTitle =
 
 githubSource : Int -> String
 githubSource day =
-    "https://github.com/n1k0/elm-advent-2021/tree/master/src/Days/Day"
+    "https://github.com/n1k0/elm-advent-2021/tree/main/src/Days/Day"
         ++ String.fromInt day
         ++ ".elm"
 

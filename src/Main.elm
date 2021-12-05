@@ -23,7 +23,7 @@ dayMenu =
                 if Day.hasDayData day then
                     a
                         [ class "list-group-item list-group-item-action fw-bold"
-                        , href <| Route.toUrl (Route.Day day)
+                        , href <| "#" ++ Route.toUrl (Route.Day day)
                         ]
                         [ text <| "Day #" ++ String.fromInt day ]
 

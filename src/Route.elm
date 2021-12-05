@@ -20,7 +20,27 @@ route =
 
 toRoute : Url -> Route
 toRoute url =
-    url
+    let
+        protocol =
+            if url.protocol == Url.Https then
+                "https"
+
+            else
+                "http"
+
+        port_ =
+            case url.port_ of
+                Just p ->
+                    ":" ++ String.fromInt p
+
+                Nothing ->
+                    ""
+
+        path =
+            Maybe.withDefault "/" url.fragment
+    in
+    Url.fromString (protocol ++ "://" ++ url.host ++ port_ ++ path)
+        |> Maybe.withDefault url
         |> Parser.parse route
         |> Maybe.withDefault (NotFound url)
 
