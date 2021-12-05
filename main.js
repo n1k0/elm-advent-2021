@@ -1857,7 +1857,7 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aA,
+		impl.ay,
 		impl.aL,
 		impl.aI,
 		function() { return function() {} }
@@ -3928,7 +3928,7 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aA,
+		impl.ay,
 		impl.aL,
 		impl.aI,
 		function(sendToApp, initialModel) {
@@ -3964,7 +3964,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aA,
+		impl.ay,
 		impl.aL,
 		impl.aI,
 		function(sendToApp, initialModel) {
@@ -3982,7 +3982,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.am) && (_VirtualDom_doc.title = title = doc.am);
+				(title !== doc.ai) && (_VirtualDom_doc.title = title = doc.ai);
 			});
 		}
 	);
@@ -4038,8 +4038,8 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.aC;
-	var onUrlRequest = impl.aD;
+	var onUrlChange = impl.aA;
+	var onUrlRequest = impl.aB;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
@@ -4059,9 +4059,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.af === next.af
-							&& curr.Y === next.Y
-							&& curr.ac.a === next.ac.a
+							&& curr.aG === next.aG
+							&& curr.aw === next.aw
+							&& curr.aE.a === next.aE.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4069,9 +4069,9 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		aA: function(flags)
+		ay: function(flags)
 		{
-			return A3(impl.aA, flags, _Browser_getUrl(), key);
+			return A3(impl.ay, flags, _Browser_getUrl(), key);
 		},
 		aM: impl.aM,
 		aL: impl.aL,
@@ -4141,17 +4141,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { ay: 'hidden', as: 'visibilitychange' }
+		? { av: 'hidden', ao: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { ay: 'mozHidden', as: 'mozvisibilitychange' }
+		? { av: 'mozHidden', ao: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { ay: 'msHidden', as: 'msvisibilitychange' }
+		? { av: 'msHidden', ao: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { ay: 'webkitHidden', as: 'webkitvisibilitychange' }
-		: { ay: 'hidden', as: 'visibilitychange' };
+		? { av: 'webkitHidden', ao: 'webkitvisibilitychange' }
+		: { av: 'hidden', ao: 'visibilitychange' };
 }
 
 
@@ -4232,12 +4232,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		aj: _Browser_getScene(),
-		an: {
+		af: _Browser_getScene(),
+		aj: {
 			I: _Browser_window.pageXOffset,
 			A: _Browser_window.pageYOffset,
-			ao: _Browser_doc.documentElement.clientWidth,
-			X: _Browser_doc.documentElement.clientHeight
+			ak: _Browser_doc.documentElement.clientWidth,
+			W: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4247,8 +4247,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		ao: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		X: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		ak: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		W: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4271,15 +4271,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			aj: {
-				ao: node.scrollWidth,
-				X: node.scrollHeight
+			af: {
+				ak: node.scrollWidth,
+				W: node.scrollHeight
 			},
-			an: {
+			aj: {
 				I: node.scrollLeft,
 				A: node.scrollTop,
-				ao: node.clientWidth,
-				X: node.clientHeight
+				ak: node.clientWidth,
+				W: node.clientHeight
 			}
 		};
 	});
@@ -4309,18 +4309,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			aj: _Browser_getScene(),
-			an: {
+			af: _Browser_getScene(),
+			aj: {
 				I: x,
 				A: y,
-				ao: _Browser_doc.documentElement.clientWidth,
-				X: _Browser_doc.documentElement.clientHeight
+				ak: _Browser_doc.documentElement.clientWidth,
+				W: _Browser_doc.documentElement.clientHeight
 			},
-			av: {
+			ar: {
 				I: x + rect.left,
 				A: y + rect.top,
-				ao: rect.width,
-				X: rect.height
+				ak: rect.width,
+				W: rect.height
 			}
 		};
 	});
@@ -4913,7 +4913,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {W: fragment, Y: host, aa: path, ac: port_, af: protocol, ag: query};
+		return {au: fragment, aw: host, Z: path, aE: port_, aG: protocol, ac: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5322,7 +5322,7 @@ var $elm$url$Url$addPrefixed = F3(
 	});
 var $elm$url$Url$toString = function (url) {
 	var http = function () {
-		var _v0 = url.af;
+		var _v0 = url.aG;
 		if (!_v0) {
 			return 'http://';
 		} else {
@@ -5332,17 +5332,17 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.W,
+		url.au,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
-			url.ag,
+			url.ac,
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.ac,
-					_Utils_ap(http, url.Y)),
-				url.aa)));
+					url.aE,
+					_Utils_ap(http, url.aw)),
+				url.Z)));
 };
 var $orus_io$elm_spa$Spa$addPage = F4(
 	function (_v0, matchRoute, page, builder) {
@@ -5358,10 +5358,10 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 					var _v24 = matchRoute(core.m);
 					if (!_v24.$) {
 						var pageFlags = _v24.a;
-						var _v25 = A3($orus_io$elm_spa$Spa$setupPage, builder.ax, core.j, page);
+						var _v25 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
 						if (!_v25.$) {
 							var setup = _v25.a;
-							var _v26 = setup.aA(pageFlags);
+							var _v26 = setup.ay(pageFlags);
 							var newCurrentPage = _v26.a;
 							var newCurrentPageEffect = _v26.b;
 							return _Utils_Tuple2(
@@ -5378,7 +5378,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								A2(
 									$elm$browser$Browser$Navigation$replaceUrl,
 									core.K,
-									builder.aG(core.m)));
+									builder.aF(core.m)));
 						}
 					} else {
 						return _Utils_Tuple2($orus_io$elm_spa$Spa$NoPage, $elm$core$Platform$Cmd$none);
@@ -5402,13 +5402,13 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 						])));
 		};
 		return {
-			ax: builder.ax,
-			aA: F3(
+			at: builder.at,
+			ay: F3(
 				function (flags, url, key) {
 					return setupCurrentPage(
-						A3(builder.aA, flags, url, key));
+						A3(builder.ay, flags, url, key));
 				}),
-			aG: builder.aG,
+			aF: builder.aF,
 			aI: function (_v1) {
 				var core = _v1.a;
 				var currentPage = _v1.b;
@@ -5418,7 +5418,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							function () {
 							if (currentPage.$ === 1) {
 								var current = currentPage.a;
-								var _v3 = A3($orus_io$elm_spa$Spa$setupPage, builder.ax, core.j, page);
+								var _v3 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
 								if (!_v3.$) {
 									var setup = _v3.a;
 									return A2(
@@ -5452,7 +5452,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								var _v6 = $orus_io$elm_spa$Spa$currentPageModel(currentPage);
 								if (!_v6.$) {
 									var pageModel = _v6.a;
-									var _v7 = A3($orus_io$elm_spa$Spa$setupPage, builder.ax, core.j, page);
+									var _v7 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
 									if (!_v7.$) {
 										var setup = _v7.a;
 										var _v8 = A2(setup.aL, pageMsg, pageModel);
@@ -5474,7 +5474,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 											A2(
 												$elm$browser$Browser$Navigation$replaceUrl,
 												core.K,
-												builder.aG(core.m)));
+												builder.aF(core.m)));
 									}
 								} else {
 									return _Utils_Tuple2(
@@ -5514,7 +5514,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								if (!_v14.a.$) {
 									if (_v14.b.$ === 1) {
 										var _v15 = _v14.a;
-										var _v16 = A3($orus_io$elm_spa$Spa$setupPage, builder.ax, previousCore.j, page);
+										var _v16 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, previousCore.j, page);
 										if (!_v16.$) {
 											var setup = _v16.a;
 											return _Utils_Tuple2(currentPage, $elm$core$Platform$Cmd$none);
@@ -5524,7 +5524,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 												A2(
 													$elm$browser$Browser$Navigation$replaceUrl,
 													core.K,
-													builder.aG(core.m)));
+													builder.aF(core.m)));
 										}
 									} else {
 										var _v17 = _v14.a;
@@ -5585,7 +5585,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 				var currentPage = _v19.b;
 				if (currentPage.$ === 1) {
 					var pageModel = currentPage.a;
-					var _v21 = A3($orus_io$elm_spa$Spa$setupPage, builder.ax, core.j, page);
+					var _v21 = A3($orus_io$elm_spa$Spa$setupPage, builder.at, core.j, page);
 					if (!_v21.$) {
 						var setup = _v21.a;
 						return A2(
@@ -5632,9 +5632,9 @@ var $orus_io$elm_spa$Spa$application = F2(
 	function (_v0, builder) {
 		var toDocument = _v0.aJ;
 		return {
-			aA: builder.aA,
-			aC: $orus_io$elm_spa$Spa$UrlChange,
-			aD: $orus_io$elm_spa$Spa$UrlRequest,
+			ay: builder.ay,
+			aA: $orus_io$elm_spa$Spa$UrlChange,
+			aB: $orus_io$elm_spa$Spa$UrlRequest,
 			aI: builder.aI,
 			aL: builder.aL,
 			aM: function (model) {
@@ -5652,7 +5652,7 @@ var $author$project$View$defaultView = {
 		[
 			$elm$html$Html$text('You should not see this page unless you forgot to add pages to your application')
 		]),
-	am: 'No page'
+	ai: 'No page'
 };
 var $author$project$Shared$init = F2(
 	function (_v0, key) {
@@ -5715,9 +5715,9 @@ var $orus_io$elm_spa$Spa$builderRootUpdate = F4(
 	});
 var $orus_io$elm_spa$Spa$init = function (shared) {
 	return {
-		ax: shared.ax,
-		aA: A2($orus_io$elm_spa$Spa$builderInit, shared.aK, shared.aA),
-		aG: shared.aG,
+		at: shared.at,
+		ay: A2($orus_io$elm_spa$Spa$builderInit, shared.aK, shared.ay),
+		aF: shared.aF,
 		aI: function (_v0) {
 			var core = _v0.a;
 			return A2(
@@ -5727,7 +5727,7 @@ var $orus_io$elm_spa$Spa$init = function (shared) {
 		},
 		aK: shared.aK,
 		aL: A2($orus_io$elm_spa$Spa$builderRootUpdate, shared.aK, shared.aL),
-		aM: $elm$core$Basics$always(shared.at)
+		aM: $elm$core$Basics$always(shared.ap)
 	};
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -5758,7 +5758,7 @@ var $author$project$View$map = F2(
 						$elm$html$Html$map(tomsg),
 						view.S))
 				]),
-			am: view.am
+			ai: view.ai
 		};
 	});
 var $author$project$Main$mappers = _Utils_Tuple2($author$project$View$map, $author$project$View$map);
@@ -5785,11 +5785,11 @@ var $orus_io$elm_spa$Effect$withNone = function (model) {
 	return _Utils_Tuple2(model, $orus_io$elm_spa$Effect$none);
 };
 var $orus_io$elm_spa$Spa$Page$sandbox = function (_v0) {
-	var init = _v0.aA;
+	var init = _v0.ay;
 	var update = _v0.aL;
 	var view = _v0.aM;
 	return {
-		aA: A2($elm$core$Basics$composeR, init, $orus_io$elm_spa$Effect$withNone),
+		ay: A2($elm$core$Basics$composeR, init, $orus_io$elm_spa$Effect$withNone),
 		aI: $elm$core$Basics$always($elm$core$Platform$Sub$none),
 		aL: F2(
 			function (msg, model) {
@@ -5800,6 +5800,9 @@ var $orus_io$elm_spa$Spa$Page$sandbox = function (_v0) {
 	};
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
+var $author$project$Pages$Day$adventOfCodeSource = function (day) {
+	return 'https://adventofcode.com/2021/day/' + $elm$core$String$fromInt(day);
+};
 var $elm$core$List$head = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -5940,8 +5943,8 @@ var $author$project$Days$Day1$answer = A2(
 	'\n',
 	_List_fromArray(
 		['Part1: ' + $author$project$Days$Day1$part1, 'Part2: ' + $author$project$Days$Day1$part2]));
-var $author$project$Days$Day1$pitch = '\n--- Day 1: Sonar Sweep ---\n\nYou\'re minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!\n\nBefore you know it, you\'re inside a submarine the Elves keep ready for situations like this. It\'s covered in Christmas lights (because of course it is), and it even has an experimental antenna that should be able to track the keys if you can boost its signal strength high enough; there\'s a little meter that indicates the antenna\'s signal strength by displaying 0-50 stars.\n\nYour instincts tell you that in order to save Christmas, you\'ll need to get all fifty stars by December 25th.\n\nCollect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!\n\nAs the submarine drops below the surface of the ocean, it automatically performs a sonar sweep of the nearby sea floor. On a small screen, the sonar sweep report (your puzzle input) appears: each line is a measurement of the sea floor depth as the sweep looks further and further away from the submarine.\n\nFor example, suppose you had the following report:\n\n199\n200\n208\n210\n200\n207\n240\n269\n260\n263\n\nThis report indicates that, scanning outward from the submarine, the sonar sweep found depths of 199, 200, 208, 210, and so on.\n\nThe first order of business is to figure out how quickly the depth increases, just so you know what you\'re dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.\n\nTo do this, count the number of times a depth measurement increases from the previous measurement. (There is no measurement before the first measurement.) In the example above, the changes are as follows:\n\n199 (N/A - no previous measurement)\n200 (increased)\n208 (increased)\n210 (increased)\n200 (decreased)\n207 (increased)\n240 (increased)\n269 (increased)\n260 (decreased)\n263 (increased)\n\nIn this example, there are 7 measurements that are larger than the previous measurement.\n\nHow many measurements are larger than the previous measurement?\n\n--- Part Two ---\nConsidering every single measurement isn\'t as useful as you expected: there\'s just too much noise in the data.\n\nInstead, consider sums of a three-measurement sliding window. Again considering the above example:\n\n199  A\n200  A B\n208  A B C\n210    B C D\n200  E   C D\n207  E F   D\n240  E F G\n269    F G H\n260      G H\n263        H\n\nStart by comparing the first and second three-measurement windows. The measurements in the first window are marked A (199, 200, 208); their sum is 199 + 200 + 208 = 607. The second window is marked B (200, 208, 210); its sum is 618. The sum of measurements in the second window is larger than the sum of the first, so this first comparison increased.\n\nYour goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare A with B, then compare B with C, then C with D, and so on. Stop when there aren\'t enough measurements left to create a new three-measurement sum.\n\nIn the above example, the sum of each three-measurement window is as follows:\n\nA: 607 (N/A - no previous sum)\nB: 618 (increased)\nC: 618 (no change)\nD: 617 (decreased)\nE: 647 (increased)\nF: 716 (increased)\nG: 769 (increased)\nH: 792 (increased)\n\nIn this example, there are 5 sums that are larger than the previous sum.\n\nConsider sums of a three-measurement sliding window. How many sums are larger than the previous sum?\n';
-var $author$project$Days$Day1$day = {aq: $author$project$Days$Day1$answer, aF: $author$project$Days$Day1$pitch};
+var $author$project$Days$Day1$pitch = '\n--- Day 1: Sonar Sweep ---\n\nYou\'re minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!\n\nBefore you know it, you\'re inside a submarine the Elves keep ready for situations like this. It\'s covered in Christmas lights (because of course it is), and it even has an experimental antenna that should be able to track the keys if you can boost its signal strength high enough; there\'s a little meter that indicates the antenna\'s signal strength by displaying 0-50 stars.\n\nYour instincts tell you that in order to save Christmas, you\'ll need to get all fifty stars by December 25th.\n\nCollect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!\n\nAs the submarine drops below the surface of the ocean, it automatically performs a sonar sweep of the nearby sea floor. On a small screen, the sonar sweep report (your puzzle input) appears: each line is a measurement of the sea floor depth as the sweep looks further and further away from the submarine.\n\nFor example, suppose you had the following report:\n\n199\n200\n208\n210\n200\n207\n240\n269\n260\n263\n\nThis report indicates that, scanning outward from the submarine, the sonar sweep found depths of 199, 200, 208, 210, and so on.\n\nThe first order of business is to figure out how quickly the depth increases, just so you know what you\'re dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.\n\nTo do this, count the number of times a depth measurement increases from the previous measurement. (There is no measurement before the first measurement.) In the example above, the changes are as follows:\n\n199 (N/A - no previous measurement)\n200 (increased)\n208 (increased)\n210 (increased)\n200 (decreased)\n207 (increased)\n240 (increased)\n269 (increased)\n260 (decreased)\n263 (increased)\n\nIn this example, there are 7 measurements that are larger than the previous measurement.\n\nHow many measurements are larger than the previous measurement?\n\n--- Part Two ---\n\nConsidering every single measurement isn\'t as useful as you expected: there\'s just too much noise in the data.\n\nInstead, consider sums of a three-measurement sliding window. Again considering the above example:\n\n199  A\n200  A B\n208  A B C\n210    B C D\n200  E   C D\n207  E F   D\n240  E F G\n269    F G H\n260      G H\n263        H\n\nStart by comparing the first and second three-measurement windows. The measurements in the first window are marked A (199, 200, 208); their sum is 199 + 200 + 208 = 607. The second window is marked B (200, 208, 210); its sum is 618. The sum of measurements in the second window is larger than the sum of the first, so this first comparison increased.\n\nYour goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare A with B, then compare B with C, then C with D, and so on. Stop when there aren\'t enough measurements left to create a new three-measurement sum.\n\nIn the above example, the sum of each three-measurement window is as follows:\n\nA: 607 (N/A - no previous sum)\nB: 618 (increased)\nC: 618 (no change)\nD: 617 (decreased)\nE: 647 (increased)\nF: 716 (increased)\nG: 769 (increased)\nH: 792 (increased)\n\nIn this example, there are 5 sums that are larger than the previous sum.\n\nConsider sums of a three-measurement sliding window. How many sums are larger than the previous sum?\n';
+var $author$project$Days$Day1$day = {am: $author$project$Days$Day1$answer, aD: $author$project$Days$Day1$pitch};
 var $author$project$Days$Day2$data = '\nforward 9\nforward 9\nforward 3\ndown 2\nforward 8\ndown 8\nforward 1\ndown 6\ndown 9\ndown 9\nforward 1\nup 5\nup 4\nup 8\ndown 6\ndown 7\nforward 4\nforward 6\nforward 2\nforward 2\nforward 4\ndown 2\ndown 6\nforward 6\nforward 9\nup 4\nup 6\ndown 2\nforward 7\nup 7\ndown 8\ndown 4\ndown 6\nforward 1\ndown 2\nup 1\nforward 8\ndown 9\nforward 6\nup 9\ndown 8\nforward 5\nforward 8\ndown 8\nup 3\nup 9\ndown 2\ndown 2\nforward 5\nup 7\nforward 5\ndown 6\nforward 4\ndown 2\nup 2\nup 7\nup 1\ndown 4\ndown 8\nforward 6\ndown 2\nforward 7\ndown 1\nforward 7\nforward 1\nup 1\ndown 4\ndown 3\ndown 4\ndown 4\nup 8\ndown 1\nup 7\nforward 8\ndown 5\nup 1\ndown 4\ndown 3\nforward 4\nup 7\nforward 1\ndown 4\ndown 2\ndown 4\nup 8\nup 6\ndown 1\nup 3\ndown 5\nforward 4\ndown 3\nforward 9\ndown 9\nforward 2\ndown 4\nup 3\ndown 4\nforward 1\nforward 7\nforward 9\nforward 7\nforward 3\nforward 6\ndown 4\nforward 7\ndown 5\ndown 1\nforward 7\nup 1\ndown 8\ndown 7\ndown 7\ndown 7\ndown 3\nforward 4\nforward 6\nforward 6\nforward 1\ndown 7\ndown 6\ndown 8\nup 5\ndown 7\nup 6\nforward 9\ndown 7\ndown 1\ndown 9\nforward 8\nup 5\ndown 6\nforward 3\nup 2\ndown 1\nforward 2\ndown 3\nup 6\nforward 8\nforward 1\nforward 3\ndown 9\nforward 1\ndown 3\nup 7\nforward 8\nup 8\ndown 7\ndown 2\nforward 3\nup 7\nforward 6\ndown 7\ndown 6\nup 5\nforward 9\ndown 7\nup 5\nforward 6\nup 5\nup 6\nforward 6\ndown 8\ndown 1\nforward 7\nforward 6\ndown 5\ndown 6\nforward 9\ndown 6\nup 5\nforward 9\nforward 4\ndown 1\nforward 5\ndown 4\nforward 5\nforward 1\ndown 1\nforward 4\ndown 5\nforward 4\nup 8\ndown 1\nforward 6\ndown 5\nforward 8\nforward 8\nforward 5\ndown 7\ndown 4\nforward 4\nup 1\nup 8\ndown 6\nup 5\nforward 6\nforward 5\nforward 9\ndown 3\ndown 5\nforward 3\ndown 6\nforward 6\nup 7\nup 6\ndown 6\ndown 1\nforward 8\nforward 9\nup 5\nforward 8\nforward 9\nforward 9\ndown 2\ndown 8\nforward 8\ndown 2\nup 8\ndown 2\ndown 2\nup 1\ndown 5\ndown 6\ndown 1\ndown 8\ndown 9\nforward 3\nforward 2\ndown 6\nup 8\nforward 9\nforward 7\nforward 1\ndown 8\nup 8\nforward 8\ndown 5\ndown 3\nup 3\nforward 6\nforward 5\ndown 4\nforward 4\ndown 4\nforward 5\nforward 9\nforward 2\nforward 9\ndown 1\ndown 3\ndown 6\nforward 6\ndown 7\nforward 3\nforward 4\nforward 1\ndown 6\nforward 1\nforward 4\nforward 2\nforward 2\nforward 1\nforward 2\ndown 1\nup 2\nforward 1\ndown 3\nforward 8\ndown 3\ndown 9\nforward 5\ndown 3\ndown 3\nforward 2\nforward 9\ndown 9\nforward 4\ndown 2\nforward 5\nup 8\ndown 4\nforward 5\ndown 1\nforward 9\ndown 1\nforward 7\nforward 2\ndown 2\ndown 6\nup 3\nforward 7\nup 4\nforward 7\nforward 6\ndown 8\nforward 2\ndown 3\nforward 9\nforward 4\nforward 8\ndown 6\nforward 8\ndown 9\ndown 2\ndown 3\nforward 1\ndown 5\ndown 3\nforward 2\nforward 7\ndown 4\ndown 3\nforward 9\ndown 2\nforward 2\nforward 1\nup 6\nup 4\ndown 5\nforward 5\nup 8\ndown 7\nforward 6\ndown 5\nforward 3\nforward 3\nforward 7\nup 9\nup 6\ndown 5\nup 7\nforward 2\nforward 5\ndown 9\ndown 6\nforward 7\ndown 9\nup 2\nup 5\nforward 1\nforward 8\nforward 9\nup 8\nforward 9\nforward 5\nup 9\ndown 4\ndown 7\nforward 2\nforward 1\ndown 4\nup 8\ndown 5\ndown 7\ndown 9\ndown 3\ndown 9\nup 8\nup 7\nup 8\ndown 8\ndown 2\ndown 6\ndown 6\nup 5\nup 9\nforward 1\ndown 8\nup 4\nup 3\nforward 7\nup 7\ndown 3\nup 1\nforward 3\ndown 7\nforward 8\nforward 2\ndown 6\ndown 2\nup 7\nup 5\nforward 7\nforward 1\nforward 6\nup 6\nforward 5\ndown 2\nup 4\nforward 2\ndown 9\nforward 6\nforward 3\nforward 3\nforward 4\nforward 2\ndown 6\nforward 9\nforward 7\ndown 4\nup 1\nforward 4\ndown 6\ndown 6\nup 1\nup 1\nforward 3\ndown 5\nup 5\ndown 3\ndown 6\nup 8\ndown 2\nup 6\nup 1\nforward 8\nup 6\ndown 8\nforward 9\nforward 4\nforward 9\ndown 7\ndown 9\ndown 6\ndown 1\nforward 9\nforward 9\ndown 6\ndown 5\nup 6\ndown 9\nup 4\nup 5\nforward 8\ndown 4\ndown 5\nforward 8\nforward 7\ndown 2\nforward 2\nforward 6\nforward 7\ndown 1\ndown 7\ndown 1\ndown 6\nforward 2\nup 2\ndown 4\ndown 8\nforward 1\ndown 1\ndown 3\ndown 3\nup 9\ndown 9\nforward 3\nup 4\nforward 1\ndown 9\ndown 8\ndown 9\nforward 5\nforward 4\nup 3\ndown 8\nforward 2\ndown 3\nup 5\nforward 4\ndown 7\ndown 8\ndown 9\nforward 8\ndown 8\nforward 4\ndown 6\ndown 3\nforward 5\ndown 3\ndown 9\ndown 4\nup 8\nforward 4\nup 6\ndown 3\nforward 6\ndown 9\ndown 7\nforward 7\nforward 3\nforward 2\nforward 4\ndown 4\ndown 5\nup 9\ndown 2\ndown 6\ndown 9\nforward 7\nforward 3\nup 3\nforward 3\ndown 4\ndown 7\nforward 2\ndown 2\nforward 3\ndown 8\ndown 7\ndown 7\nforward 2\nforward 2\nup 6\nforward 8\nforward 9\nup 3\nforward 8\nforward 5\nforward 7\nup 3\nforward 3\nforward 6\ndown 5\ndown 5\ndown 4\nforward 1\nforward 8\nforward 4\nforward 3\ndown 1\nforward 8\ndown 4\nup 5\nforward 4\ndown 2\nforward 7\ndown 2\nforward 9\ndown 1\nforward 6\nforward 8\nforward 6\nforward 7\nforward 1\nforward 6\ndown 5\nup 3\nforward 7\ndown 6\nforward 2\ndown 2\nforward 8\nforward 9\nup 7\nforward 1\nforward 1\nup 1\nforward 1\ndown 2\nforward 6\ndown 9\nup 1\nup 2\nforward 6\nforward 1\nforward 7\ndown 1\nup 8\nforward 7\nup 6\nup 4\ndown 1\nforward 2\ndown 4\ndown 1\ndown 7\ndown 4\nup 3\nforward 8\nforward 3\nforward 5\ndown 7\ndown 8\nforward 5\nforward 2\ndown 5\ndown 2\nforward 2\nup 9\ndown 3\ndown 5\nup 7\ndown 4\ndown 2\ndown 7\nforward 6\ndown 2\nforward 1\nup 4\nforward 2\nforward 2\ndown 5\ndown 1\ndown 1\nforward 7\nforward 6\ndown 7\ndown 5\nup 1\nup 3\nforward 3\nforward 9\nforward 4\ndown 1\ndown 5\nforward 3\nforward 7\ndown 8\nforward 8\nforward 2\nforward 7\nup 7\ndown 7\ndown 4\ndown 2\nup 6\nup 1\nforward 8\nup 8\nup 6\ndown 8\nforward 1\ndown 5\nforward 3\ndown 3\ndown 3\nforward 1\nup 3\nup 3\nforward 8\nforward 8\ndown 8\nforward 6\nforward 2\ndown 7\nforward 8\ndown 7\nup 5\nforward 7\ndown 1\nforward 9\nup 6\ndown 2\nup 2\nup 5\nforward 6\nforward 9\nforward 3\ndown 8\nforward 8\ndown 2\nup 5\ndown 9\nforward 5\ndown 6\ndown 3\ndown 9\nup 8\nup 3\ndown 2\nforward 7\nforward 4\nforward 4\nforward 8\nup 6\nup 4\nforward 9\ndown 6\ndown 8\nup 3\nup 5\nforward 8\nforward 7\nforward 4\ndown 8\nforward 1\nforward 5\ndown 9\nforward 8\nup 6\ndown 6\ndown 8\ndown 2\nforward 4\nforward 9\nforward 2\nforward 7\ndown 3\nforward 3\nup 6\ndown 4\nforward 2\nup 4\ndown 4\nforward 4\nforward 3\nforward 1\nup 6\nforward 1\ndown 1\nforward 7\nup 4\nforward 3\ndown 4\nup 6\nup 2\nup 8\ndown 1\ndown 6\ndown 6\ndown 1\ndown 7\nforward 8\ndown 9\nforward 5\nup 2\nup 7\nup 5\ndown 6\nup 1\nup 6\nforward 4\ndown 7\nforward 5\nforward 1\ndown 6\nforward 2\ndown 2\nforward 9\ndown 9\nup 6\nforward 1\nup 7\ndown 7\nforward 1\ndown 6\nup 1\nforward 2\nforward 1\ndown 4\nforward 9\nforward 7\nforward 5\ndown 1\nforward 2\ndown 2\ndown 2\ndown 5\nforward 1\nup 8\nforward 9\ndown 7\nforward 9\ndown 2\nup 5\ndown 9\ndown 8\ndown 5\nforward 8\nforward 4\ndown 4\ndown 6\nforward 1\ndown 5\nup 6\ndown 3\ndown 3\nforward 9\ndown 9\nforward 6\ndown 5\nup 6\ndown 5\nup 7\nforward 9\ndown 2\ndown 4\ndown 8\nforward 4\nup 7\nforward 9\nforward 7\nup 5\ndown 7\ndown 5\ndown 1\nforward 5\nforward 4\ndown 2\nup 3\nforward 1\nup 4\nup 9\ndown 4\nforward 3\ndown 4\ndown 9\nforward 4\nup 2\nup 3\nforward 7\nup 6\ndown 8\ndown 8\nforward 6\nforward 2\nforward 3\nforward 9\nforward 7\ndown 6\ndown 7\ndown 4\ndown 2\nforward 8\ndown 6\nforward 6\nforward 6\nforward 9\ndown 8\ndown 1\nup 5\ndown 1\nforward 9\ndown 1\nup 8\nforward 8\ndown 3\nforward 1\ndown 9\nforward 6\nforward 4\nforward 8\ndown 2\nup 8\ndown 2\nup 8\ndown 9\ndown 4\nup 7\nforward 7\nforward 5\ndown 5\ndown 4\nup 8\nforward 1\ndown 7\nforward 1\nup 9\nforward 9\nforward 7\nforward 9\ndown 9\nforward 4\ndown 7\nforward 6\nforward 6\nup 3\nforward 2\ndown 5\nup 8\ndown 1\nup 8\ndown 4\ndown 1\nup 6\nforward 4\nforward 3\nforward 6\ndown 3\nforward 4\nforward 4\nforward 4\ndown 8\nforward 3\nup 8\nup 8\ndown 8\nforward 6\nforward 8\nup 5\nforward 6\ndown 8\ndown 7\nup 4\nforward 6\nforward 9\ndown 9\nforward 4\nup 2\nforward 1\nup 3\ndown 9\ndown 8\nforward 8\nforward 8\nforward 7\ndown 6\ndown 1\nup 6\nup 6\nforward 9\nforward 7\nforward 7\ndown 3\ndown 6\ndown 9\ndown 4\nforward 7\nforward 3\nforward 3\ndown 7\nup 5\ndown 3\nforward 6\nforward 3\nforward 5\nup 3\ndown 7\nforward 2\nup 7\nforward 9\ndown 3\ndown 9\nforward 8\nforward 5\nup 7\nup 2\nup 8\nforward 6\ndown 8\nforward 2\nforward 4\nup 2\nforward 2\nforward 8\nforward 4\ndown 8\nforward 5\ndown 4\ndown 7\nforward 3\ndown 3\nup 1\ndown 9\nforward 9\ndown 2\ndown 1\nforward 1\ndown 6\ndown 3\nforward 5\ndown 3\ndown 8\nup 7\ndown 1\nup 9\ndown 4\nforward 9\ndown 4\nforward 3\nforward 6\ndown 3\nforward 3\ndown 2\ndown 7\ndown 1\nup 4\ndown 9\ndown 1\ndown 3\ndown 4\ndown 8\ndown 7\nforward 4\ndown 4\ndown 9\nforward 2\nforward 7\nforward 2\ndown 6\nup 8\nforward 6\ndown 2\nforward 6\nup 8\nforward 6\ndown 9\nforward 2\nforward 6\n';
 var $author$project$Days$Day2$Down = function (a) {
 	return {$: 1, a: a};
@@ -6023,7 +6026,7 @@ var $author$project$Days$Day2$answer = function () {
 	return $elm$core$String$fromInt(pos.I * pos.A);
 }();
 var $author$project$Days$Day2$pitch = '\n--- Day 2: Dive! ---\n\nNow, you need to figure out how to pilot this thing.\n\nIt seems like the submarine can take a series of commands like forward 1, down 2, or up 3:\n\n- forward X increases the horizontal position by X units.\n- down X increases the depth by X units.\n- up X decreases the depth by X units.\n\nNote that since you\'re on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.\n\nThe submarine seems to already have a planned course (your puzzle input). You should probably figure out where it\'s going. For example:\n\nforward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n\nYour horizontal position and depth both start at 0. The steps above would then modify them as follows:\n\n- forward 5 adds 5 to your horizontal position, a total of 5.\n- down 5 adds 5 to your depth, resulting in a value of 5.\n- forward 8 adds 8 to your horizontal position, a total of 13.\n- up 3 decreases your depth by 3, resulting in a value of 2.\n- down 8 adds 8 to your depth, resulting in a value of 10.\n- forward 2 adds 2 to your horizontal position, a total of 15.\n\nAfter following these instructions, you would have a horizontal position of 15 and a depth of 10. (Multiplying these together produces 150.)\n\nCalculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n';
-var $author$project$Days$Day2$day = {aq: $author$project$Days$Day2$answer, aF: $author$project$Days$Day2$pitch};
+var $author$project$Days$Day2$day = {am: $author$project$Days$Day2$answer, aD: $author$project$Days$Day2$pitch};
 var $author$project$Pages$Day$getDayData = function (day) {
 	switch (day) {
 		case 1:
@@ -6036,7 +6039,7 @@ var $author$project$Pages$Day$getDayData = function (day) {
 	}
 };
 var $author$project$Pages$Day$githubSource = function (day) {
-	return 'https://github.com/n1k0/elm-advent-2021/tree/master/src/Days/Day' + ($elm$core$String$fromInt(day) + '.elm');
+	return 'https://github.com/n1k0/elm-advent-2021/tree/main/src/Days/Day' + ($elm$core$String$fromInt(day) + '.elm');
 };
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
@@ -6081,7 +6084,25 @@ var $author$project$Pages$Day$view = function (_v0) {
 									_List_fromArray(
 										[
 											$elm$html$Html$text(
-											$author$project$Pages$Day$extractTitle(dayData.aF))
+											$author$project$Pages$Day$extractTitle(dayData.aD))
+										])),
+									A2(
+									$elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$a,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$href(
+													$author$project$Pages$Day$adventOfCodeSource(day)),
+													$elm$html$Html$Attributes$target('_blank')
+												]),
+											_List_fromArray(
+												[
+													$elm$html$Html$text('View original')
+												]))
 										])),
 									A2(
 									$elm$html$Html$pre,
@@ -6092,7 +6113,7 @@ var $author$project$Pages$Day$view = function (_v0) {
 									_List_fromArray(
 										[
 											$elm$html$Html$text(
-											$elm$core$String$trim(dayData.aF))
+											$elm$core$String$trim(dayData.aD))
 										]))
 								])),
 							A2(
@@ -6147,13 +6168,13 @@ var $author$project$Pages$Day$view = function (_v0) {
 												]),
 											_List_fromArray(
 												[
-													$elm$html$Html$text(dayData.aq)
+													$elm$html$Html$text(dayData.am)
 												]))
 										]))
 								]))
 						]))
 				]),
-			am: $author$project$Pages$Day$extractTitle(dayData.aF)
+			ai: $author$project$Pages$Day$extractTitle(dayData.aD)
 		};
 	} else {
 		var error = _v1.a;
@@ -6176,14 +6197,14 @@ var $author$project$Pages$Day$view = function (_v0) {
 							$elm$html$Html$text(error)
 						]))
 				]),
-			am: 'Day #' + ($elm$core$String$fromInt(day) + ': error')
+			ai: 'Day #' + ($elm$core$String$fromInt(day) + ': error')
 		};
 	}
 };
 var $author$project$Pages$Day$page = function (_v0) {
 	return $orus_io$elm_spa$Spa$Page$sandbox(
 		{
-			aA: function (day) {
+			ay: function (day) {
 				return {J: day};
 			},
 			aL: F2(
@@ -6195,7 +6216,7 @@ var $author$project$Pages$Day$page = function (_v0) {
 };
 var $orus_io$elm_spa$Spa$Page$static = function (pageView) {
 	return {
-		aA: function (_v0) {
+		ay: function (_v0) {
 			return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
 		},
 		aI: $elm$core$Basics$always($elm$core$Platform$Sub$none),
@@ -6212,7 +6233,7 @@ var $author$project$Pages$Home$view = function (_v0) {
 			[
 				$elm$html$Html$text('This is the homepage')
 			]),
-		am: 'Home'
+		ai: 'Home'
 	};
 };
 var $author$project$Pages$Home$page = function (shared) {
@@ -6259,7 +6280,7 @@ var $author$project$Main$dayMenu = A2(
 					[
 						$elm$html$Html$Attributes$class('list-group-item list-group-item-action fw-bold'),
 						$elm$html$Html$Attributes$href(
-						$author$project$Route$toUrl(
+						'#' + $author$project$Route$toUrl(
 							$author$project$Route$Day(day)))
 					]),
 				_List_fromArray(
@@ -6340,7 +6361,7 @@ var $author$project$Main$toDocument = F2(
 								]))
 						]))
 				]),
-			am: view.am
+			ai: view.ai
 		};
 	});
 var $author$project$Route$NotFound = function (a) {
@@ -6975,9 +6996,9 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.aa),
-					$elm$url$Url$Parser$prepareQuery(url.ag),
-					url.W,
+					$elm$url$Url$Parser$preparePath(url.Z),
+					$elm$url$Url$Parser$prepareQuery(url.ac),
+					url.au,
 					$elm$core$Basics$identity)));
 	});
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
@@ -7125,10 +7146,27 @@ var $author$project$Route$route = $elm$url$Url$Parser$oneOf(
 				$elm$url$Url$Parser$int))
 		]));
 var $author$project$Route$toRoute = function (url) {
+	var protocol = (url.aG === 1) ? 'https' : 'http';
+	var port_ = function () {
+		var _v0 = url.aE;
+		if (!_v0.$) {
+			var p = _v0.a;
+			return ':' + $elm$core$String$fromInt(p);
+		} else {
+			return '';
+		}
+	}();
+	var path = A2($elm$core$Maybe$withDefault, '/', url.au);
 	return A2(
 		$elm$core$Maybe$withDefault,
 		$author$project$Route$NotFound(url),
-		A2($elm$url$Url$Parser$parse, $author$project$Route$route, url));
+		A2(
+			$elm$url$Url$Parser$parse,
+			$author$project$Route$route,
+			A2(
+				$elm$core$Maybe$withDefault,
+				url,
+				$elm$url$Url$fromString(protocol + ('://' + (url.aw + (port_ + path)))))));
 };
 var $author$project$Shared$update = F2(
 	function (msg, shared) {
@@ -7172,10 +7210,10 @@ var $author$project$Main$main = $elm$browser$Browser$application(
 				$author$project$Pages$Home$page,
 				$orus_io$elm_spa$Spa$init(
 					{
-						at: $author$project$View$defaultView,
-						ax: $elm$core$Basics$always($elm$core$Maybe$Nothing),
-						aA: $author$project$Shared$init,
-						aG: $elm$core$Basics$always(''),
+						ap: $author$project$View$defaultView,
+						at: $elm$core$Basics$always($elm$core$Maybe$Nothing),
+						ay: $author$project$Shared$init,
+						aF: $elm$core$Basics$always(''),
 						aI: $author$project$Shared$subscriptions,
 						aK: $author$project$Route$toRoute,
 						aL: $author$project$Shared$update
