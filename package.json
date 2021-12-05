@@ -1,0 +1,15 @@
+{
+  "name": "advent",
+  "version": "1.0.0",
+  "description": "Advent of Code 2021, in Elm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "elm-live": "^4.0.2",
+    "elm-tooling": "^1.7.0"
+  }
+}
