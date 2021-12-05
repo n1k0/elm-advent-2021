@@ -20,7 +20,7 @@ toDocument _ view =
     { title = view.title
     , body =
         [ div [ class "container" ]
-            [ h1 [ class "mb-4" ]
+            [ h1 [ class "my-5" ]
                 [ a [ href <| Route.toUrl Route.Home ]
                     [ text "Advent of Code 2021, in Elm" ]
                 ]
