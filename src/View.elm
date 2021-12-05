@@ -14,10 +14,8 @@ map : (msg1 -> msg) -> View msg1 -> View msg
 map tomsg view =
     { title = view.title
     , body =
-        [ view.body
+        view.body
             |> List.map (Html.map tomsg)
-            |> div [ class "container" ]
-        ]
     }
 
 

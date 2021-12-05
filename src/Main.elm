@@ -42,14 +42,14 @@ toDocument _ view =
     { title = view.title
     , body =
         [ div [ class "container mb-5" ]
-            [ div [ class "row" ]
-                [ h1 [ class "my-5" ]
-                    [ a [ href <| Route.toUrl Route.Home ]
-                        [ text "Advent of Code 2021, in Elm" ]
-                    ]
-                , view.body
-                    |> div [ class "col-sm-10" ]
-                , div [ class "col-sm-2" ] [ dayMenu ]
+            [ h1 [ class "my-5" ]
+                [ a [ href <| Route.toUrl Route.Home ]
+                    [ text "Advent of Code 2021, in Elm" ]
+                ]
+            , div [ class "row" ]
+                [ view.body
+                    |> div [ class "col-md-10" ]
+                , div [ class "col-md-2" ] [ dayMenu ]
                 ]
             ]
         ]
