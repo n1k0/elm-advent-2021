@@ -6941,6 +6941,22 @@ var $author$project$Pages$Day$init = function (day) {
 };
 var $orus_io$elm_spa$Effect$None = {$: 0};
 var $orus_io$elm_spa$Effect$none = $orus_io$elm_spa$Effect$None;
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
 var $elm$core$List$head = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -6950,6 +6966,9 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
+var $elm$core$String$lines = _String_lines;
+var $elm$core$Basics$not = _Basics_not;
+var $elm$core$String$trim = _String_trim;
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {
 		if (!maybe.$) {
@@ -6964,7 +6983,26 @@ var $author$project$Pages$Day$parseSourceCode = function (string) {
 		$elm$core$Maybe$withDefault,
 		'Error: couldn\'t parse source code',
 		$elm$core$List$head(
-			A2($elm$core$String$split, '-- Answer', string)));
+			A2(
+				$elm$core$String$split,
+				'-- Answer',
+				$elm$core$String$trim(
+					A2(
+						$elm$core$String$join,
+						'\n',
+						A2(
+							$elm$core$List$filter,
+							A2(
+								$elm$core$Basics$composeL,
+								$elm$core$Basics$not,
+								$elm$core$String$startsWith('import ')),
+							A2(
+								$elm$core$List$filter,
+								A2(
+									$elm$core$Basics$composeL,
+									$elm$core$Basics$not,
+									$elm$core$String$startsWith('module ')),
+								$elm$core$String$lines(string))))))));
 };
 var $author$project$Pages$Day$update = F2(
 	function (msg, model) {
@@ -7341,11 +7379,6 @@ var $elm$parser$Parser$Advanced$andThen = F2(
 	});
 var $elm$parser$Parser$andThen = $elm$parser$Parser$Advanced$andThen;
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Type$Comment = {$: 1};
-var $elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
-	});
 var $elm$parser$Parser$Advanced$mapChompedString = F2(
 	function (func, _v0) {
 		var parse = _v0;
@@ -7377,7 +7410,6 @@ var $elm$parser$Parser$getChompedString = $elm$parser$Parser$Advanced$getChomped
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$isLineBreak = function (c) {
 	return c === '\n';
 };
-var $elm$core$Basics$not = _Basics_not;
 var $elm$parser$Parser$ExpectingSymbol = function (a) {
 	return {$: 8, a: a};
 };
@@ -8739,7 +8771,6 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$elm = A2(
 	$elm$core$Basics$composeR,
 	$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$toLines,
 	$elm$core$Result$map($elm$core$Basics$identity));
-var $elm$core$String$lines = _String_lines;
 var $elm$core$String$replace = F3(
 	function (before, after, string) {
 		return A2(
@@ -8747,7 +8778,6 @@ var $elm$core$String$replace = F3(
 			after,
 			A2($elm$core$String$split, before, string));
 	});
-var $elm$core$String$trim = _String_trim;
 var $author$project$Pages$Day$extractTitle = A2(
 	$elm$core$Basics$composeR,
 	$elm$core$String$trim,
@@ -8782,17 +8812,6 @@ var $elm$core$List$drop = F2(
 				}
 			}
 		}
-	});
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
 	});
 var $author$project$Days$Day1$countIncreases = function (ints) {
 	return $elm$core$List$length(
