@@ -40,7 +40,7 @@ dayMenu currentDay =
 
 toDocument : Shared -> View msg -> Document msg
 toDocument { currentDay } view =
-    { title = view.title
+    { title = view.title ++ " | Elm Advent of Code 2021"
     , body =
         [ div [ class "container mb-5" ]
             [ h1 [ class "my-5" ]
