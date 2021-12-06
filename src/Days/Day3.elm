@@ -10,6 +10,7 @@ type alias BinSeq =
 
 part1 : Int
 part1 =
+    -- Note: data is the provided input string
     let
         bits =
             data

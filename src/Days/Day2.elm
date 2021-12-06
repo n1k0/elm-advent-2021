@@ -15,12 +15,16 @@ type alias Position =
 
 part1 : Int
 part1 =
-    process executeCommand1
+    -- Note: data is the provided input string
+    data
+        |> process executeCommand1
 
 
 part2 : Int
 part2 =
-    process executeCommand2
+    -- Note: data is the provided input string
+    data
+        |> process executeCommand2
 
 
 executeCommand1 : Command -> Position -> Position
@@ -49,9 +53,9 @@ executeCommand2 command ({ aim } as pos) =
             { pos | x = pos.x + int, y = pos.y + (aim * int) }
 
 
-process : (Command -> Position -> Position) -> Int
-process exec =
-    parseCommands data
+process : (Command -> Position -> Position) -> String -> Int
+process exec data_ =
+    parseCommands data_
         |> List.foldl exec { x = 0, y = 0, aim = 0 }
         |> (\{ x, y } -> x * y)
 

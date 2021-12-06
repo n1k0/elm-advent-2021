@@ -5,9 +5,10 @@ import Html exposing (..)
 
 part1 : Int
 part1 =
+    -- Note: data is the provided input string
     data
         |> parseInts
-        |> filterIncreases
+        |> countIncreases
 
 
 part2 : Int
@@ -22,7 +23,7 @@ part2 =
                 (List.drop 1 ints)
                 (List.drop 2 ints)
     in
-    filterIncreases windows
+    countIncreases windows
 
 
 parseInts : String -> List Int
@@ -32,8 +33,8 @@ parseInts =
         >> List.filterMap identity
 
 
-filterIncreases : List Int -> Int
-filterIncreases ints =
+countIncreases : List Int -> Int
+countIncreases ints =
     List.drop 1 ints
         |> List.map2 (\a b -> b - a) ints
         |> List.filter (\x -> x > 0)
