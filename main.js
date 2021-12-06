@@ -10147,7 +10147,7 @@ var $author$project$Main$toDocument = F2(
 								]))
 						]))
 				]),
-			a0: view.a0
+			a0: view.a0 + ' | Elm Advent of Code 2021'
 		};
 	});
 var $author$project$Route$NotFound = function (a) {
