@@ -3,13 +3,6 @@ module Days.Day2 exposing (..)
 import Html exposing (..)
 
 
-day : { pitch : String, answer : String }
-day =
-    { pitch = pitch
-    , answer = answer
-    }
-
-
 type Command
     = Up Int
     | Down Int
@@ -1176,3 +1169,10 @@ After following these new instructions, you would have a horizontal position of 
 
 Using this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?
 """
+
+
+day : { pitch : String, answer : String }
+day =
+    { pitch = pitch
+    , answer = answer
+    }

@@ -3,13 +3,6 @@ module Days.Day1 exposing (..)
 import Html exposing (..)
 
 
-day : { pitch : String, answer : String }
-day =
-    { pitch = pitch
-    , answer = answer
-    }
-
-
 
 -- Common
 
@@ -2166,3 +2159,10 @@ In this example, there are 5 sums that are larger than the previous sum.
 
 Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
 """
+
+
+day : { pitch : String, answer : String }
+day =
+    { pitch = pitch
+    , answer = answer
+    }
