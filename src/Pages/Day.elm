@@ -118,6 +118,11 @@ adventOfCodeSource day =
 parseSourceCode : String -> String
 parseSourceCode string =
     string
+        |> String.lines
+        |> List.filter (not << String.startsWith "module ")
+        |> List.filter (not << String.startsWith "import ")
+        |> String.join "\n"
+        |> String.trim
         |> String.split "-- Answer"
         |> List.head
         |> Maybe.withDefault "Error: couldn't parse source code"
