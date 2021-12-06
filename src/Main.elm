@@ -15,14 +15,15 @@ mappers =
     ( View.map, View.map )
 
 
-dayMenu : Html msg
-dayMenu =
+dayMenu : Maybe Int -> Html msg
+dayMenu currentDay =
     List.range 1 31
         |> List.map
             (\day ->
                 if Day.hasDayData day then
                     a
                         [ class "list-group-item list-group-item-action fw-bold"
+                        , classList [ ( "active", currentDay == Just day ) ]
                         , href <| "#" ++ Route.toUrl (Route.Day day)
                         ]
                         [ text <| "Day #" ++ String.fromInt day ]
@@ -38,7 +39,7 @@ dayMenu =
 
 
 toDocument : Shared -> View msg -> Document msg
-toDocument _ view =
+toDocument { currentDay } view =
     { title = view.title
     , body =
         [ div [ class "container mb-5" ]
@@ -49,7 +50,7 @@ toDocument _ view =
             , div [ class "row" ]
                 [ view.body
                     |> div [ class "col-md-10" ]
-                , div [ class "col-md-2" ] [ dayMenu ]
+                , div [ class "col-md-2" ] [ dayMenu currentDay ]
                 ]
             ]
         ]

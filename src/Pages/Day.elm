@@ -35,7 +35,8 @@ type alias Model =
 init : Int -> ( Model, Effect Shared.Msg Msg )
 init day =
     { day = day, sourceCode = "" }
-        |> Effect.withCmd (requestSourceCode day)
+        |> Effect.withShared (Shared.setCurrentDay (Just day))
+        |> Effect.addCmd (requestSourceCode day)
 
 
 requestSourceCode : Int -> Cmd Msg
