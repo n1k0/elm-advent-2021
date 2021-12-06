@@ -4,6 +4,23 @@ import Array exposing (Array)
 import Html exposing (..)
 
 
+part1 : String
+part1 =
+    let
+        bits =
+            data
+                |> String.trim
+                |> String.lines
+                |> List.map (String.split "" >> List.map stringToInt >> Array.fromList)
+
+        ( gammaRate, epsilonRate ) =
+            ( rate mostCommonAtIndex bits
+            , rate leastCommonAtIndex bits
+            )
+    in
+    gammaRate * epsilonRate |> String.fromInt
+
+
 charsAtIndex : Int -> List (Array Int) -> List Int
 charsAtIndex index =
     List.filterMap (Array.get index)
@@ -51,23 +68,6 @@ rate fn bits =
         |> List.map String.fromInt
         |> String.join ""
         |> binToInt
-
-
-part1 : String
-part1 =
-    let
-        bits =
-            data
-                |> String.trim
-                |> String.lines
-                |> List.map (String.split "" >> List.map stringToInt >> Array.fromList)
-
-        ( gammaRate, epsilonRate ) =
-            ( rate mostCommonAtIndex bits
-            , rate leastCommonAtIndex bits
-            )
-    in
-    gammaRate * epsilonRate |> String.fromInt
 
 
 binToInt : String -> Int
