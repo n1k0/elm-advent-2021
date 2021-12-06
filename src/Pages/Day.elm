@@ -114,6 +114,14 @@ adventOfCodeSource day =
     "https://adventofcode.com/2021/day/" ++ String.fromInt day
 
 
+parseSourceCode : String -> String
+parseSourceCode string =
+    string
+        |> String.split "-- Answer"
+        |> List.head
+        |> Maybe.withDefault "Error: couldn't parse source code"
+
+
 view : Model -> View msg
 view { day, sourceCode } =
     case getDayData day of
@@ -146,7 +154,7 @@ view { day, sourceCode } =
                                     [ text "Open on Github" ]
                                 ]
                             , pre [ class "card-body pb-0", style "font-size" ".75em" ]
-                                [ text sourceCode ]
+                                [ sourceCode |> parseSourceCode |> text ]
                             ]
                         ]
                     ]

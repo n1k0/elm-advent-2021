@@ -13,41 +13,24 @@ type alias Position =
     { x : Int, y : Int, aim : Int }
 
 
-initPosition : Position
-initPosition =
-    { x = 0, y = 0, aim = 0 }
+part1 : String
+part1 =
+    process executeCommand1
 
 
-parseCommand : String -> Maybe Command
-parseCommand =
-    String.split " "
-        >> (\res ->
-                case res of
-                    [ dir, len ] ->
-                        case ( dir, String.toInt len ) of
-                            ( "forward", Just int ) ->
-                                Just (Forward int)
-
-                            ( "up", Just int ) ->
-                                Just (Up int)
-
-                            ( "down", Just int ) ->
-                                Just (Down int)
-
-                            _ ->
-                                Nothing
-
-                    _ ->
-                        Nothing
-           )
+part2 : String
+part2 =
+    process executeCommand2
 
 
-parseCommands : String -> List Command
-parseCommands string =
-    string
-        |> String.trim
-        |> String.lines
-        |> List.filterMap parseCommand
+process : (Command -> Position -> Position) -> String
+process exec =
+    let
+        { x, y } =
+            parseCommands data
+                |> List.foldl exec { x = 0, y = 0, aim = 0 }
+    in
+    String.fromInt (x * y)
 
 
 executeCommand1 : Command -> Position -> Position
@@ -76,21 +59,51 @@ executeCommand2 command ({ aim } as pos) =
             { pos | x = pos.x + int, y = pos.y + (aim * int) }
 
 
-process : (Command -> Position -> Position) -> String
-process exec =
-    let
-        { x, y } =
-            parseCommands data
-                |> List.foldl exec initPosition
-    in
-    String.fromInt (x * y)
+createCommand : ( String, Maybe Int ) -> Maybe Command
+createCommand ( dir, maybeInt ) =
+    case ( dir, maybeInt ) of
+        ( "forward", Just int ) ->
+            Just (Forward int)
+
+        ( "up", Just int ) ->
+            Just (Up int)
+
+        ( "down", Just int ) ->
+            Just (Down int)
+
+        _ ->
+            Nothing
+
+
+parseCommands : String -> List Command
+parseCommands =
+    String.trim
+        >> String.lines
+        >> List.filterMap parseCommand
+
+
+parseCommand : String -> Maybe Command
+parseCommand =
+    String.split " "
+        >> (\res ->
+                case res of
+                    [ dir, len ] ->
+                        createCommand ( String.trim dir, String.toInt len )
+
+                    _ ->
+                        Nothing
+           )
+
+
+
+-- Answer
 
 
 answer : String
 answer =
     String.join "\n"
-        [ "Part1: " ++ process executeCommand1
-        , "Part2: " ++ process executeCommand2
+        [ "Part1: " ++ part1
+        , "Part2: " ++ part2
         ]
 
 
