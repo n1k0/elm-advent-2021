@@ -144,7 +144,7 @@ view { day, sourceCode } =
                                 , a [ href <| githubSource day, target "_blank" ]
                                     [ text "Open on Github" ]
                                 ]
-                            , pre [ class "card-body pb-0" ]
+                            , pre [ class "card-body pb-0", style "font-size" ".75em" ]
                                 [ text sourceCode ]
                             ]
                         ]

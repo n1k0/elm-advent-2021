@@ -18,8 +18,8 @@ parseInts string =
 filterIncreases : List Int -> Int
 filterIncreases ints =
     List.drop 1 ints
-        |> List.map2 (\a b -> a - b) ints
-        |> List.filter (\x -> x < 0)
+        |> List.map2 (\a b -> b - a) ints
+        |> List.filter (\x -> x > 0)
         |> List.length
 
 
