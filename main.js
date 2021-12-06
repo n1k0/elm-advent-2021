@@ -6936,18 +6936,15 @@ var $author$project$Days$Day1$filterIncreases = function (ints) {
 				ints,
 				A2($elm$core$List$drop, 1, ints))));
 };
-var $author$project$Days$Day1$parseInts = function (string) {
-	return A2(
-		$elm$core$List$filterMap,
-		$elm$core$Basics$identity,
-		A2(
-			$elm$core$List$map,
-			$elm$core$String$toInt,
-			$elm$core$String$lines(string)));
-};
-var $author$project$Days$Day1$part1 = $elm$core$String$fromInt(
-	$author$project$Days$Day1$filterIncreases(
-		$author$project$Days$Day1$parseInts($author$project$Days$Day1$data)));
+var $author$project$Days$Day1$parseInts = A2(
+	$elm$core$Basics$composeR,
+	$elm$core$String$lines,
+	A2(
+		$elm$core$Basics$composeR,
+		$elm$core$List$map($elm$core$String$toInt),
+		$elm$core$List$filterMap($elm$core$Basics$identity)));
+var $author$project$Days$Day1$part1 = $author$project$Days$Day1$filterIncreases(
+	$author$project$Days$Day1$parseInts($author$project$Days$Day1$data));
 var $elm$core$List$map3 = _List_map3;
 var $author$project$Days$Day1$part2 = function () {
 	var ints = $author$project$Days$Day1$parseInts($author$project$Days$Day1$data);
@@ -6960,14 +6957,16 @@ var $author$project$Days$Day1$part2 = function () {
 		ints,
 		A2($elm$core$List$drop, 1, ints),
 		A2($elm$core$List$drop, 2, ints));
-	return $elm$core$String$fromInt(
-		$author$project$Days$Day1$filterIncreases(windows));
+	return $author$project$Days$Day1$filterIncreases(windows);
 }();
 var $author$project$Days$Day1$answer = A2(
 	$elm$core$String$join,
 	'\n',
 	_List_fromArray(
-		['Part1: ' + $author$project$Days$Day1$part1, 'Part2: ' + $author$project$Days$Day1$part2]));
+		[
+			'Part1: ' + $elm$core$String$fromInt($author$project$Days$Day1$part1),
+			'Part2: ' + $elm$core$String$fromInt($author$project$Days$Day1$part2)
+		]));
 var $author$project$Days$Day1$pitch = '\n--- Day 1: Sonar Sweep ---\n\nYou\'re minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!\n\nBefore you know it, you\'re inside a submarine the Elves keep ready for situations like this. It\'s covered in Christmas lights (because of course it is), and it even has an experimental antenna that should be able to track the keys if you can boost its signal strength high enough; there\'s a little meter that indicates the antenna\'s signal strength by displaying 0-50 stars.\n\nYour instincts tell you that in order to save Christmas, you\'ll need to get all fifty stars by December 25th.\n\nCollect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!\n\nAs the submarine drops below the surface of the ocean, it automatically performs a sonar sweep of the nearby sea floor. On a small screen, the sonar sweep report (your puzzle input) appears: each line is a measurement of the sea floor depth as the sweep looks further and further away from the submarine.\n\nFor example, suppose you had the following report:\n\n199\n200\n208\n210\n200\n207\n240\n269\n260\n263\n\nThis report indicates that, scanning outward from the submarine, the sonar sweep found depths of 199, 200, 208, 210, and so on.\n\nThe first order of business is to figure out how quickly the depth increases, just so you know what you\'re dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.\n\nTo do this, count the number of times a depth measurement increases from the previous measurement. (There is no measurement before the first measurement.) In the example above, the changes are as follows:\n\n199 (N/A - no previous measurement)\n200 (increased)\n208 (increased)\n210 (increased)\n200 (decreased)\n207 (increased)\n240 (increased)\n269 (increased)\n260 (decreased)\n263 (increased)\n\nIn this example, there are 7 measurements that are larger than the previous measurement.\n\nHow many measurements are larger than the previous measurement?\n\n--- Part Two ---\n\nConsidering every single measurement isn\'t as useful as you expected: there\'s just too much noise in the data.\n\nInstead, consider sums of a three-measurement sliding window. Again considering the above example:\n\n199  A\n200  A B\n208  A B C\n210    B C D\n200  E   C D\n207  E F   D\n240  E F G\n269    F G H\n260      G H\n263        H\n\nStart by comparing the first and second three-measurement windows. The measurements in the first window are marked A (199, 200, 208); their sum is 199 + 200 + 208 = 607. The second window is marked B (200, 208, 210); its sum is 618. The sum of measurements in the second window is larger than the sum of the first, so this first comparison increased.\n\nYour goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare A with B, then compare B with C, then C with D, and so on. Stop when there aren\'t enough measurements left to create a new three-measurement sum.\n\nIn the above example, the sum of each three-measurement window is as follows:\n\nA: 607 (N/A - no previous sum)\nB: 618 (increased)\nC: 618 (no change)\nD: 617 (decreased)\nE: 647 (increased)\nF: 716 (increased)\nG: 769 (increased)\nH: 792 (increased)\n\nIn this example, there are 5 sums that are larger than the previous sum.\n\nConsider sums of a three-measurement sliding window. How many sums are larger than the previous sum?\n';
 var $author$project$Days$Day1$day = {aw: $author$project$Days$Day1$answer, aQ: $author$project$Days$Day1$pitch};
 var $author$project$Days$Day2$executeCommand1 = F2(
@@ -7053,14 +7052,16 @@ var $author$project$Days$Day2$parseCommands = A2(
 		$elm$core$String$lines,
 		$elm$core$List$filterMap($author$project$Days$Day2$parseCommand)));
 var $author$project$Days$Day2$process = function (exec) {
-	var _v0 = A3(
-		$elm$core$List$foldl,
-		exec,
-		{C: 0, y: 0, p: 0},
-		$author$project$Days$Day2$parseCommands($author$project$Days$Day2$data));
-	var x = _v0.y;
-	var y = _v0.p;
-	return $elm$core$String$fromInt(x * y);
+	return function (_v0) {
+		var x = _v0.y;
+		var y = _v0.p;
+		return x * y;
+	}(
+		A3(
+			$elm$core$List$foldl,
+			exec,
+			{C: 0, y: 0, p: 0},
+			$author$project$Days$Day2$parseCommands($author$project$Days$Day2$data)));
 };
 var $author$project$Days$Day2$part1 = $author$project$Days$Day2$process($author$project$Days$Day2$executeCommand1);
 var $author$project$Days$Day2$executeCommand2 = F2(
@@ -7089,45 +7090,13 @@ var $author$project$Days$Day2$answer = A2(
 	$elm$core$String$join,
 	'\n',
 	_List_fromArray(
-		['Part1: ' + $author$project$Days$Day2$part1, 'Part2: ' + $author$project$Days$Day2$part2]));
+		[
+			'Part1: ' + $elm$core$String$fromInt($author$project$Days$Day2$part1),
+			'Part2: ' + $elm$core$String$fromInt($author$project$Days$Day2$part2)
+		]));
 var $author$project$Days$Day2$pitch = '\n--- Day 2: Dive! ---\n\nNow, you need to figure out how to pilot this thing.\n\nIt seems like the submarine can take a series of commands like forward 1, down 2, or up 3:\n\n- forward X increases the horizontal position by X units.\n- down X increases the depth by X units.\n- up X decreases the depth by X units.\n\nNote that since you\'re on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.\n\nThe submarine seems to already have a planned course (your puzzle input). You should probably figure out where it\'s going. For example:\n\nforward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n\nYour horizontal position and depth both start at 0. The steps above would then modify them as follows:\n\n- forward 5 adds 5 to your horizontal position, a total of 5.\n- down 5 adds 5 to your depth, resulting in a value of 5.\n- forward 8 adds 8 to your horizontal position, a total of 13.\n- up 3 decreases your depth by 3, resulting in a value of 2.\n- down 8 adds 8 to your depth, resulting in a value of 10.\n- forward 2 adds 2 to your horizontal position, a total of 15.\n\nAfter following these instructions, you would have a horizontal position of 15 and a depth of 10. (Multiplying these together produces 150.)\n\nCalculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n\n--- Part Two ---\n\nBased on your calculations, the planned course doesn\'t seem to make any sense. You find the submarine manual and discover that the process is actually slightly more complicated.\n\nIn addition to horizontal position and depth, you\'ll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:\n\n- down X increases your aim by X units.\n- up X decreases your aim by X units.\n- forward X does two things:\n    - It increases your horizontal position by X units.\n    - It increases your depth by your aim multiplied by X.\n\nAgain note that since you\'re on a submarine, down and up do the opposite of what you might expect: "down" means aiming in the positive direction.\n\nNow, the above example does something different:\n\n- forward 5 adds 5 to your horizontal position, a total of 5. Because your aim is 0, your depth does not change.\n- down 5 adds 5 to your aim, resulting in a value of 5.\n- forward 8 adds 8 to your horizontal position, a total of 13. Because your aim is 5, your depth increases by 8*5=40.\n- up 3 decreases your aim by 3, resulting in a value of 2.\n- down 8 adds 8 to your aim, resulting in a value of 10.\n- forward 2 adds 2 to your horizontal position, a total of 15. Because your aim is 10, your depth increases by 2*10=20 to a total of 60.\n\nAfter following these new instructions, you would have a horizontal position of 15 and a depth of 60. (Multiplying these produces 900.)\n\nUsing this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n';
 var $author$project$Days$Day2$day = {aw: $author$project$Days$Day2$answer, aQ: $author$project$Days$Day2$pitch};
 var $author$project$Days$Day3$data = '\n000011010001\n000001110100\n111100101010\n111001100111\n001010100100\n101010010001\n000001100011\n010010110101\n011001011100\n001110111000\n111101011111\n001111001011\n100110010010\n000001011001\n110001000111\n010011111110\n111011000111\n001000110111\n010011101110\n111010111000\n001101100000\n111101010111\n111000010111\n101111001011\n100000000011\n110000111100\n101110110001\n010000100011\n001100111111\n011011011100\n000001110011\n001110111011\n011110011101\n110011010010\n010111001010\n110010000100\n101111001101\n011111001101\n111110010000\n001011010011\n111111001101\n011110110000\n100001011001\n011010010010\n101001111010\n001100001010\n110000000010\n010000011001\n010010010110\n110101111111\n011001101110\n001100000111\n101111001010\n110000100000\n000111101110\n101101111011\n100110101011\n011010011000\n101000101010\n000001010100\n110101011101\n010101010100\n011010000111\n011001001001\n011101010001\n111111011110\n100010100110\n101001111110\n110010100101\n111110110011\n101101111101\n001010110000\n001111001010\n011001111010\n000111010010\n010100000001\n101000111110\n110111000011\n110111011101\n110111001000\n111111001000\n001000010110\n110000010010\n001011010001\n011000110000\n101001101001\n000101101001\n010100111100\n100001111110\n010011001100\n100010010111\n000010000000\n010110101111\n010000100010\n110111010111\n110100011010\n000111101100\n011110101000\n010000010111\n011010111101\n110111111000\n110001010101\n101011110010\n110011111001\n010111101010\n000000010000\n010010011000\n100100001110\n001101011101\n101101010100\n000011001101\n101000000001\n101000000111\n110001010011\n100001011010\n000100111101\n100011000101\n110001001000\n000110011111\n010100111001\n111111111011\n000010010100\n101001011000\n011000011010\n010011111111\n101100001101\n110101010111\n111010011001\n100010111011\n100010000000\n111001111010\n010111011110\n010010000101\n101100110110\n111101001000\n000010111011\n111010010100\n101011011110\n110110010111\n101100010011\n000110101001\n100010101111\n101001010011\n111010100101\n000011011010\n110010111001\n010100101110\n101001001101\n101110011111\n110101100010\n110100111001\n111110100111\n101101000010\n111111111000\n100001100001\n011100100010\n011100101011\n111101111111\n010011000100\n010001110111\n100101001100\n111100100110\n110001111110\n001100100110\n010011011001\n001001010011\n111000100100\n011011010111\n101011010010\n101100001111\n011111000111\n100001101000\n011101101101\n011000001010\n100101111011\n111000100001\n011101111000\n011011001011\n011010011001\n101111100011\n010001110000\n000101110010\n010100001111\n100110010001\n110011111100\n011100100100\n010011111001\n001010011011\n000111111100\n101000000010\n110101010000\n101110011101\n001110001110\n001110100111\n010111010101\n100100001111\n001111010110\n100010111010\n001010000100\n010001001100\n011111010011\n010000100110\n110011000111\n111010000100\n101101001011\n010110111001\n000110100101\n000010011000\n000111011100\n011010101100\n101100110000\n101001011001\n110011010100\n000101011000\n110010110111\n101001101101\n010100011101\n101100011010\n010111000111\n010110101001\n111000011010\n011011100101\n011111110101\n110110000000\n111111010010\n011001000000\n000100010000\n111011100110\n011100111100\n001010000110\n011110000011\n011001011101\n111001111101\n011010101111\n100011001000\n111111110100\n100101011101\n101110111111\n110100100011\n010100100111\n111011011000\n011111011001\n101111010001\n011111110010\n010000011100\n111101111110\n001010011000\n011010010011\n011011100111\n100001000110\n111111010100\n101100100001\n100101010101\n111110011110\n101001001110\n111011100001\n110111011011\n011100101100\n011000111011\n110100110101\n110000001011\n110101100001\n110011000000\n010010011011\n000110000001\n110001001111\n101010100111\n001011001100\n111100011111\n111101000101\n010110110001\n001000111110\n001110111111\n000100001001\n100101010110\n111110101101\n101111111001\n011011000101\n111011101010\n001000100001\n001111110101\n111110100000\n111011000110\n111101111010\n000100000101\n011000010110\n000000011011\n110011010011\n000101100000\n111100111111\n111110111000\n000101100011\n010000110110\n100101101011\n010101000100\n110110100011\n110001010001\n100010011100\n111101100000\n011110001100\n011101010011\n101111000111\n101000001010\n001010110010\n110000101000\n101101111111\n101000111100\n011011010010\n111101010001\n000100010010\n100010011000\n111110101000\n011101001010\n100100110001\n101010000000\n110100111101\n001101000110\n110101010010\n010101110110\n100011010011\n011011101011\n010110111011\n111001000000\n001100000101\n001101111110\n111000100110\n001010001001\n001000111100\n011110110110\n011111010110\n101010000011\n011111010100\n010100010111\n010100110001\n110100100111\n110001110100\n100101010100\n001111111010\n100111110111\n011010001000\n011101111001\n101110111010\n110011000100\n000010111010\n000011011001\n101010010011\n001110001011\n000100000100\n001001001000\n111101011010\n111110101110\n101110000100\n110101110000\n001110010110\n001001100100\n010011001111\n010011101010\n001111001000\n110001000011\n001100001111\n101100100011\n001100110011\n110111000110\n100010101000\n011110100111\n010111010001\n111100000101\n011110110010\n111010000111\n010101011110\n011101111010\n001100010100\n111000000001\n011001110111\n010000101110\n001010111111\n111100110110\n111000010010\n101011000111\n111000011101\n100111010001\n001110101000\n100111001010\n100110111000\n110001011110\n000001000100\n001100110110\n110110100001\n011101000001\n111001010111\n111000001010\n101100010100\n000110111111\n001100000001\n110011100011\n101111100110\n011010101001\n110001001100\n011111010111\n110100100010\n011100001110\n111000000010\n001010110011\n001100100011\n001010000111\n100000111010\n011011001101\n111001000110\n110011110111\n010001001000\n111010110011\n001100111011\n010000110001\n000110000111\n111100110101\n010111010110\n011100100001\n101011010000\n101010101000\n111011110110\n101100010001\n111110000010\n101010110111\n001001100000\n001110010011\n000110111110\n001001111001\n010101110000\n111001100110\n100100100101\n010001011101\n010000011110\n100001001001\n001001010100\n111100000000\n110011001110\n010101001100\n101000011111\n000010001111\n001111010001\n101010001111\n111101000011\n101000011001\n001111111100\n010110101101\n010011110110\n110000111110\n010000100100\n010011000111\n100101011110\n110100100101\n100100001000\n110110011101\n011011110100\n010001011111\n111000100000\n011100101001\n110010100100\n000001001011\n101011110001\n011011110000\n101011110101\n011011010000\n001110110001\n100010100111\n111001100100\n010011100110\n111111111100\n101110001010\n001001111111\n010100110011\n100101000000\n011101110001\n010110000111\n110100000111\n010100101100\n001000000011\n001100011110\n101100011100\n001001110000\n100110100010\n100011010111\n011101111100\n010110010000\n001111101011\n101100001110\n000010110110\n010110100110\n101110100111\n001111010011\n101110101010\n110011110001\n010001001110\n111010100110\n000001111001\n000100100001\n000000111100\n011100101111\n000001101110\n101000110101\n010011011110\n100000111101\n010010001100\n010101101010\n000001000001\n111111000100\n111111100110\n101011101000\n111100000011\n010110001111\n010011101101\n100101111010\n000001001111\n010000001111\n010111000000\n100110101110\n110101101110\n000000000110\n010001110001\n000111100001\n110101101111\n000110010111\n011010100011\n111110001101\n100000101001\n001010100110\n100001001111\n011010100000\n101010111000\n001101110111\n111001101011\n000111111001\n100010001000\n001010110110\n011001011111\n000111000101\n001111100110\n100110101001\n101111000110\n001101011111\n001111011110\n110110110100\n011001111111\n100001010101\n101101100010\n111101011110\n111110000000\n001011111100\n100100010111\n111000110001\n001110101010\n100100001100\n110100011111\n010101000111\n110111010000\n011111100011\n101110111001\n101011001000\n000011010011\n101011001110\n100101110111\n001011100011\n000110100100\n110110101010\n000011110111\n110010100010\n000111010101\n011011010110\n001001011110\n100101110100\n000110110000\n011001100100\n010010000110\n001110101110\n010000001000\n110000100010\n000010011011\n101000111011\n011001100111\n000000010100\n110101111110\n110100101101\n111111111101\n110100011110\n000001111000\n100110100111\n101010111011\n001000011101\n010001000010\n100100100010\n000111110000\n100001000010\n000110001100\n000001111010\n000101001010\n000101100100\n011000001101\n010000111000\n101111111000\n001110011101\n001010110101\n001011101000\n010110011100\n000010111101\n011001010110\n000011000000\n001000010101\n001101001000\n111100010000\n111111001111\n001011011000\n100000101000\n010101110101\n010010011010\n011001000001\n011000000000\n010101011101\n100101001000\n110101110101\n101101011001\n000101011100\n011001010100\n100010010100\n010101001011\n000001001001\n011011001100\n100001110100\n000101101110\n011011000000\n000010010011\n111111001001\n100110010111\n001011000000\n101111100101\n110100111000\n101110010000\n010000101001\n110100101110\n011000100100\n100100100001\n010101100010\n111011010101\n111001110000\n010011110010\n000011001000\n010011010011\n110110110010\n100101001111\n101011100011\n011111110111\n011000100010\n111001000111\n110001000110\n011100101000\n011100000101\n001010111010\n001101010011\n000101111101\n001101111111\n101111010111\n000011100011\n111001110101\n100101011100\n001011101011\n110001001110\n001001110001\n101011010011\n100110011101\n101001010100\n111001100000\n001011011100\n010001101101\n100100100100\n100110111100\n000101010000\n010011100000\n111101110010\n111001010100\n101100001000\n110100010110\n000010011111\n100100111001\n101011101010\n110101111010\n111011110011\n101110011011\n010101010101\n101111111111\n110011110010\n001010001100\n001001110100\n101110110010\n001010101101\n001111111101\n110110011111\n111000011001\n000010000011\n010001111100\n001001100001\n101011010111\n100111000010\n011101110011\n001110000010\n100000111111\n101101010101\n001010000011\n110101011110\n011011100110\n100101001001\n001101000001\n000001100111\n101100110111\n100000001100\n011100001111\n111000010101\n000110101110\n000101011010\n101110110100\n000001101011\n010001111001\n000000011101\n110100010101\n000101010111\n011011011110\n010010110011\n111101011011\n111100101001\n010010110100\n101001000110\n111100110011\n011100000100\n001000100111\n100001001010\n101101110101\n011010110101\n110110010011\n100110110110\n111110001111\n010111101000\n011100011110\n010110000100\n111001001011\n011010110111\n100110000111\n101110111000\n011000101001\n101010001010\n001101011010\n001010100001\n101111101011\n101111101000\n110010011101\n001010001010\n111000011100\n101011110100\n110000010001\n101010101010\n110111010110\n010100011110\n110101110100\n000101011001\n000110000000\n101110111100\n000110001011\n100010011101\n110001011011\n011010111000\n100111111000\n101011100111\n100001101011\n111110111010\n000011010010\n011010100101\n001110110101\n111110011111\n101010110001\n000011110001\n101001001011\n001100001011\n101111011101\n000110110001\n001001111110\n011001111001\n100001111101\n011110001111\n011011010100\n111101000111\n011000011110\n100011011000\n100001110011\n101010100010\n100110000110\n111010010101\n110000101101\n110111001001\n111001111100\n001000001110\n110001101001\n100111010000\n110110011001\n110100010011\n001100011001\n100111110001\n100000011111\n001000101010\n010010010100\n001010010111\n111111110110\n001011110011\n001010110111\n100100111011\n111100100011\n111111110111\n101110100000\n100001111010\n000100011100\n001011100010\n011001110110\n111010111001\n000101011101\n000011110110\n100000001010\n010110110100\n101100110010\n011010110011\n100010111001\n100101111101\n101110111011\n100001101110\n001101001111\n000011101100\n000011011101\n001001010101\n100111101011\n000111010110\n100000101100\n001011011101\n111001010110\n110000011100\n100011010100\n100110110001\n101001000000\n111111101110\n101110100100\n000101011110\n010010101100\n110011001011\n001100011111\n000000110000\n010101111101\n000111101111\n101110001100\n110101001011\n110010110010\n001110010000\n001100110100\n000001010101\n110001111100\n001101101001\n100010100101\n001010110001\n100000100010\n110010111011\n110101110011\n011111010101\n111001111110\n010000101000\n101001101100\n111010101110\n011010101000\n110011101001\n110110000101\n111011101101\n101110100110\n010010001011\n110000110110\n100001100101\n111000111101\n011000010100\n101111110110\n001100011101\n001100010000\n101110000111\n011110010000\n111101001011\n110101100100\n011100101010\n101001100111\n110110011010\n011110011010\n011101100111\n011001010001\n111111100010\n111011110001\n110111110011\n101111000100\n001000111111\n010011100011\n100110100001\n101000001110\n100010000111\n011010000010\n010100111101\n110001010000\n110011100101\n001101010000\n100011111000\n010001000001\n011011110110\n100101001011\n000011011100\n010000111001\n011111011101\n011011111001\n110010011110\n100010110100\n111010001111\n101110011100\n001111010101\n000100011001\n010111011111\n110010000010\n000010011010\n001101011100\n010000100101\n110011100001\n110100000101\n100010101110\n011010010101\n111101010010\n000111100000\n111010110101\n000100111100\n101100101011\n000100110011\n000111110111\n000101010100\n101101110011\n101011011001\n001001010111\n010011011100\n101100110011\n010101101011\n000011110100\n111111111001\n010011100101\n001001000000\n101101010000\n001111110001\n001100101000\n000000001001\n001111011101\n111110110001\n110110011000\n100000011100\n110101111000\n100010110001\n110101111100\n000001010010\n110010000001\n100101111001\n110010001101\n111011010010\n000110110011\n110000100111\n010110011010\n101111101110\n010101111010\n000011101111\n000001110010\n100100011011\n011100011011\n101010110110\n010001011010\n111110011010\n111110011000\n010110101000\n100110110000\n010100000011\n100001100011\n011101000100\n010111110001\n110111110100\n101001001001\n001001101001\n111000010100\n100010000110\n110010010100\n001001111000\n010001111101\n100111000111\n011110101111\n101110010100\n010010101000\n111011111101\n111010010110\n101000100011\n010000011000\n001011000100\n111001010010\n';
-var $elm$core$Array$fromListHelp = F3(
-	function (list, nodeList, nodeListSize) {
-		fromListHelp:
-		while (true) {
-			var _v0 = A2($elm$core$Elm$JsArray$initializeFromList, $elm$core$Array$branchFactor, list);
-			var jsArray = _v0.a;
-			var remainingItems = _v0.b;
-			if (_Utils_cmp(
-				$elm$core$Elm$JsArray$length(jsArray),
-				$elm$core$Array$branchFactor) < 0) {
-				return A2(
-					$elm$core$Array$builderToArray,
-					true,
-					{d: nodeList, a: nodeListSize, c: jsArray});
-			} else {
-				var $temp$list = remainingItems,
-					$temp$nodeList = A2(
-					$elm$core$List$cons,
-					$elm$core$Array$Leaf(jsArray),
-					nodeList),
-					$temp$nodeListSize = nodeListSize + 1;
-				list = $temp$list;
-				nodeList = $temp$nodeList;
-				nodeListSize = $temp$nodeListSize;
-				continue fromListHelp;
-			}
-		}
-	});
-var $elm$core$Array$fromList = function (list) {
-	if (!list.b) {
-		return $elm$core$Array$empty;
-	} else {
-		return A3($elm$core$Array$fromListHelp, list, _List_Nil, 0);
-	}
-};
 var $elm$core$Bitwise$and = _Bitwise_and;
 var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
 var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
@@ -7170,14 +7139,14 @@ var $elm$core$Array$get = F2(
 			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
 			A3($elm$core$Array$getHelp, startShift, index, tree)));
 	});
-var $author$project$Days$Day3$charsAtIndex = function (index) {
+var $author$project$Days$Day3$bitAtIndex = function (index) {
 	return $elm$core$List$filterMap(
 		$elm$core$Array$get(index));
 };
 var $author$project$Days$Day3$mostCommonAtIndex = function (index) {
 	return A2(
 		$elm$core$Basics$composeR,
-		$author$project$Days$Day3$charsAtIndex(index),
+		$author$project$Days$Day3$bitAtIndex(index),
 		A2(
 			$elm$core$Basics$composeR,
 			A2(
@@ -7209,7 +7178,7 @@ var $elm$core$Basics$pow = _Basics_pow;
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
-var $author$project$Days$Day3$stringToInt = A2(
+var $author$project$Days$Day3$strToInt = A2(
 	$elm$core$Basics$composeR,
 	$elm$core$String$toInt,
 	$elm$core$Maybe$withDefault(-1));
@@ -7232,7 +7201,7 @@ var $author$project$Days$Day3$binToInt = function (str) {
 				$elm$core$Tuple$pair,
 				A2(
 					$elm$core$List$map,
-					$author$project$Days$Day3$stringToInt,
+					$author$project$Days$Day3$strToInt,
 					A2($elm$core$String$split, '', str)))));
 };
 var $author$project$Days$Day3$rate = F2(
@@ -7251,16 +7220,52 @@ var $author$project$Days$Day3$rate = F2(
 						},
 						A2($elm$core$List$range, 0, 11)))));
 	});
+var $elm$core$Array$fromListHelp = F3(
+	function (list, nodeList, nodeListSize) {
+		fromListHelp:
+		while (true) {
+			var _v0 = A2($elm$core$Elm$JsArray$initializeFromList, $elm$core$Array$branchFactor, list);
+			var jsArray = _v0.a;
+			var remainingItems = _v0.b;
+			if (_Utils_cmp(
+				$elm$core$Elm$JsArray$length(jsArray),
+				$elm$core$Array$branchFactor) < 0) {
+				return A2(
+					$elm$core$Array$builderToArray,
+					true,
+					{d: nodeList, a: nodeListSize, c: jsArray});
+			} else {
+				var $temp$list = remainingItems,
+					$temp$nodeList = A2(
+					$elm$core$List$cons,
+					$elm$core$Array$Leaf(jsArray),
+					nodeList),
+					$temp$nodeListSize = nodeListSize + 1;
+				list = $temp$list;
+				nodeList = $temp$nodeList;
+				nodeListSize = $temp$nodeListSize;
+				continue fromListHelp;
+			}
+		}
+	});
+var $elm$core$Array$fromList = function (list) {
+	if (!list.b) {
+		return $elm$core$Array$empty;
+	} else {
+		return A3($elm$core$Array$fromListHelp, list, _List_Nil, 0);
+	}
+};
+var $author$project$Days$Day3$strToBinSeq = A2(
+	$elm$core$Basics$composeR,
+	$elm$core$String$split(''),
+	A2(
+		$elm$core$Basics$composeR,
+		$elm$core$List$map($author$project$Days$Day3$strToInt),
+		$elm$core$Array$fromList));
 var $author$project$Days$Day3$part1 = function () {
 	var bits = A2(
 		$elm$core$List$map,
-		A2(
-			$elm$core$Basics$composeR,
-			$elm$core$String$split(''),
-			A2(
-				$elm$core$Basics$composeR,
-				$elm$core$List$map($author$project$Days$Day3$stringToInt),
-				$elm$core$Array$fromList)),
+		$author$project$Days$Day3$strToBinSeq,
 		$elm$core$String$lines(
 			$elm$core$String$trim($author$project$Days$Day3$data)));
 	var _v0 = _Utils_Tuple2(
@@ -7268,13 +7273,16 @@ var $author$project$Days$Day3$part1 = function () {
 		A2($author$project$Days$Day3$rate, $author$project$Days$Day3$leastCommonAtIndex, bits));
 	var gammaRate = _v0.a;
 	var epsilonRate = _v0.b;
-	return $elm$core$String$fromInt(gammaRate * epsilonRate);
+	return gammaRate * epsilonRate;
 }();
 var $author$project$Days$Day3$answer = A2(
 	$elm$core$String$join,
 	'\n',
 	_List_fromArray(
-		['Part1: ' + $author$project$Days$Day3$part1, 'Part2: ' + 'TODO']));
+		[
+			'Part1: ' + $elm$core$String$fromInt($author$project$Days$Day3$part1),
+			'Part2: ' + 'TODO'
+		]));
 var $author$project$Days$Day3$pitch = '\n--- Day 3: Binary Diagnostic ---\n\nThe submarine has been making some odd creaking noises, so you ask it to produce a diagnostic report just in case.\n\nThe diagnostic report (your puzzle input) consists of a list of binary numbers which, when decoded properly, can tell you many useful things about the conditions of the submarine. The first parameter to check is the power consumption.\n\nYou need to use the binary numbers in the diagnostic report to generate two new binary numbers (called the gamma rate and the epsilon rate). The power consumption can then be found by multiplying the gamma rate by the epsilon rate.\n\nEach bit in the gamma rate can be determined by finding the most common bit in the corresponding position of all numbers in the diagnostic report. For example, given the following diagnostic report:\n\n00100\n11110\n10110\n10111\n10101\n01111\n00111\n11100\n10000\n11001\n00010\n01010\n\nConsidering only the first bit of each number, there are five 0 bits and seven 1 bits. Since the most common bit is 1, the first bit of the gamma rate is 1.\n\nThe most common second bit of the numbers in the diagnostic report is 0, so the second bit of the gamma rate is 0.\n\nThe most common value of the third, fourth, and fifth bits are 1, 1, and 0, respectively, and so the final three bits of the gamma rate are 110.\n\nSo, the gamma rate is the binary number 10110, or 22 in decimal.\n\nThe epsilon rate is calculated in a similar way; rather than use the most common bit, the least common bit from each position is used. So, the epsilon rate is 01001, or 9 in decimal. Multiplying the gamma rate (22) by the epsilon rate (9) produces the power consumption, 198.\n\nUse the binary numbers in your diagnostic report to calculate the gamma rate and epsilon rate, then multiply them together. What is the power consumption of the submarine? (Be sure to represent your answer in decimal, not binary.)\n';
 var $author$project$Days$Day3$day = {aw: $author$project$Days$Day3$answer, aQ: $author$project$Days$Day3$pitch};
 var $author$project$Pages$Day$getDayData = function (day) {
