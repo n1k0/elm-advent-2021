@@ -9,6 +9,7 @@ import Html.Attributes exposing (..)
 import Http
 import Shared
 import Spa.Page
+import SyntaxHighlight as SH
 import View exposing (View)
 
 
@@ -57,7 +58,7 @@ update msg model =
             ( { model | sourceCode = "Error while fetching source code." }, Effect.none )
 
         CodeSourceReceived (Ok sourceCode) ->
-            ( { model | sourceCode = sourceCode }, Effect.none )
+            ( { model | sourceCode = parseSourceCode sourceCode }, Effect.none )
 
 
 getDayData : Int -> Result String { pitch : String, answer : String }
@@ -153,8 +154,17 @@ view { day, sourceCode } =
                                 , a [ href <| githubSource day, target "_blank" ]
                                     [ text "Open on Github" ]
                                 ]
-                            , pre [ class "card-body pb-0", style "font-size" ".75em" ]
-                                [ sourceCode |> parseSourceCode |> text ]
+                            , div [ class "card-body pb-0" ]
+                                [ SH.useTheme SH.monokai
+                                , SH.elm sourceCode
+                                    |> Result.map (SH.toBlockHtml Nothing)
+                                    |> Result.withDefault
+                                        (pre [] [ code [] [ text sourceCode ] ])
+                                , node "style"
+                                    []
+                                    [ text ".elmsh { background: none; font-size: .9em; }"
+                                    ]
+                                ]
                             ]
                         ]
                     ]
