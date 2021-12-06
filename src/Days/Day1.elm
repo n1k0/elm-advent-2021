@@ -3,43 +3,14 @@ module Days.Day1 exposing (..)
 import Html exposing (..)
 
 
-
--- Common
-
-
-parseInts : String -> List Int
-parseInts string =
-    string
-        |> String.lines
-        |> List.map String.toInt
-        |> List.filterMap identity
-
-
-filterIncreases : List Int -> Int
-filterIncreases ints =
-    List.drop 1 ints
-        |> List.map2 (\a b -> b - a) ints
-        |> List.filter (\x -> x > 0)
-        |> List.length
-
-
-
--- Part 1
-
-
-part1 : String
+part1 : Int
 part1 =
     data
         |> parseInts
         |> filterIncreases
-        |> String.fromInt
 
 
-
--- Part 2
-
-
-part2 : String
+part2 : Int
 part2 =
     let
         ints =
@@ -51,9 +22,22 @@ part2 =
                 (List.drop 1 ints)
                 (List.drop 2 ints)
     in
-    windows
-        |> filterIncreases
-        |> String.fromInt
+    filterIncreases windows
+
+
+parseInts : String -> List Int
+parseInts =
+    String.lines
+        >> List.map String.toInt
+        >> List.filterMap identity
+
+
+filterIncreases : List Int -> Int
+filterIncreases ints =
+    List.drop 1 ints
+        |> List.map2 (\a b -> b - a) ints
+        |> List.filter (\x -> x > 0)
+        |> List.length
 
 
 
@@ -63,8 +47,8 @@ part2 =
 answer : String
 answer =
     String.join "\n"
-        [ "Part1: " ++ part1
-        , "Part2: " ++ part2
+        [ "Part1: " ++ String.fromInt part1
+        , "Part2: " ++ String.fromInt part2
         ]
 
 

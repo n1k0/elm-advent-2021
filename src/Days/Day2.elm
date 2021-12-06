@@ -13,24 +13,14 @@ type alias Position =
     { x : Int, y : Int, aim : Int }
 
 
-part1 : String
+part1 : Int
 part1 =
     process executeCommand1
 
 
-part2 : String
+part2 : Int
 part2 =
     process executeCommand2
-
-
-process : (Command -> Position -> Position) -> String
-process exec =
-    let
-        { x, y } =
-            parseCommands data
-                |> List.foldl exec { x = 0, y = 0, aim = 0 }
-    in
-    String.fromInt (x * y)
 
 
 executeCommand1 : Command -> Position -> Position
@@ -57,6 +47,13 @@ executeCommand2 command ({ aim } as pos) =
 
         Forward int ->
             { pos | x = pos.x + int, y = pos.y + (aim * int) }
+
+
+process : (Command -> Position -> Position) -> Int
+process exec =
+    parseCommands data
+        |> List.foldl exec { x = 0, y = 0, aim = 0 }
+        |> (\{ x, y } -> x * y)
 
 
 createCommand : ( String, Maybe Int ) -> Maybe Command
@@ -102,8 +99,8 @@ parseCommand =
 answer : String
 answer =
     String.join "\n"
-        [ "Part1: " ++ part1
-        , "Part2: " ++ part2
+        [ "Part1: " ++ String.fromInt part1
+        , "Part2: " ++ String.fromInt part2
         ]
 
 

@@ -4,31 +4,45 @@ import Array exposing (Array)
 import Html exposing (..)
 
 
-part1 : String
+type alias BinSeq =
+    Array Int
+
+
+part1 : Int
 part1 =
     let
         bits =
             data
                 |> String.trim
                 |> String.lines
-                |> List.map (String.split "" >> List.map stringToInt >> Array.fromList)
+                |> List.map strToBinSeq
 
         ( gammaRate, epsilonRate ) =
             ( rate mostCommonAtIndex bits
             , rate leastCommonAtIndex bits
             )
     in
-    gammaRate * epsilonRate |> String.fromInt
+    gammaRate * epsilonRate
 
 
-charsAtIndex : Int -> List (Array Int) -> List Int
-charsAtIndex index =
+strToBinSeq : String -> BinSeq
+strToBinSeq =
+    String.split "" >> List.map strToInt >> Array.fromList
+
+
+strToInt : String -> Int
+strToInt =
+    String.toInt >> Maybe.withDefault -1
+
+
+bitAtIndex : Int -> List BinSeq -> List Int
+bitAtIndex index =
     List.filterMap (Array.get index)
 
 
-mostCommonAtIndex : Int -> List (Array Int) -> Int
+mostCommonAtIndex : Int -> List BinSeq -> Int
 mostCommonAtIndex index =
-    charsAtIndex index
+    bitAtIndex index
         >> List.foldl
             (\x acc ->
                 if x == 0 then
@@ -47,7 +61,7 @@ mostCommonAtIndex index =
            )
 
 
-leastCommonAtIndex : Int -> List (Array Int) -> Int
+leastCommonAtIndex : Int -> List BinSeq -> Int
 leastCommonAtIndex index bits =
     if mostCommonAtIndex index bits == 0 then
         1
@@ -56,12 +70,7 @@ leastCommonAtIndex index bits =
         0
 
 
-stringToInt : String -> Int
-stringToInt =
-    String.toInt >> Maybe.withDefault -1
-
-
-rate : (Int -> List (Array Int) -> Int) -> List (Array Int) -> Int
+rate : (Int -> List BinSeq -> Int) -> List BinSeq -> Int
 rate fn bits =
     List.range 0 11
         |> List.map (\index -> fn index bits)
@@ -79,7 +88,7 @@ binToInt str =
     in
     str
         |> String.split ""
-        |> List.map stringToInt
+        |> List.map strToInt
         |> List.indexedMap Tuple.pair
         |> List.foldr
             (\( index, currValue ) total ->
@@ -100,7 +109,7 @@ binToInt str =
 answer : String
 answer =
     String.join "\n"
-        [ "Part1: " ++ part1
+        [ "Part1: " ++ String.fromInt part1
         , "Part2: " ++ "TODO"
         ]
 
