@@ -6898,13 +6898,13 @@ var $author$project$Days$Day1$filterIncreases = function (ints) {
 		A2(
 			$elm$core$List$filter,
 			function (x) {
-				return x < 0;
+				return x > 0;
 			},
 			A3(
 				$elm$core$List$map2,
 				F2(
 					function (a, b) {
-						return a - b;
+						return b - a;
 					}),
 				ints,
 				A2($elm$core$List$drop, 1, ints))));
@@ -7416,7 +7416,8 @@ var $author$project$Pages$Day$view = function (_v0) {
 											$elm$html$Html$pre,
 											_List_fromArray(
 												[
-													$elm$html$Html$Attributes$class('card-body pb-0')
+													$elm$html$Html$Attributes$class('card-body pb-0'),
+													A2($elm$html$Html$Attributes$style, 'font-size', '.75em')
 												]),
 											_List_fromArray(
 												[
