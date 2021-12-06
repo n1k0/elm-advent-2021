@@ -155,7 +155,7 @@ view { day, sourceCode } =
                                     [ text "Open on Github" ]
                                 ]
                             , div [ class "card-body pb-0" ]
-                                [ SH.useTheme SH.monokai
+                                [ SH.useTheme SH.oneDark
                                 , SH.elm sourceCode
                                     |> Result.map (SH.toBlockHtml Nothing)
                                     |> Result.withDefault
