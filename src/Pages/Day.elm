@@ -3,10 +3,12 @@ module Pages.Day exposing (..)
 import Days.Day1 as Day1
 import Days.Day2 as Day2
 import Days.Day3 as Day3
+import Days.Day4 as Day4
 import Effect exposing (Effect)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Http
+import Lib.Markdown as Markdown
 import Shared
 import Spa.Page
 import SyntaxHighlight as SH
@@ -72,6 +74,9 @@ getDayData day =
 
         3 ->
             Ok Day3.day
+
+        4 ->
+            Ok Day4.day
 
         _ ->
             Err <| "No data could be found for day #" ++ String.fromInt day
@@ -141,16 +146,14 @@ view { day, sourceCode } =
                             [ a [ href <| adventOfCodeSource day, target "_blank" ]
                                 [ text "View original" ]
                             ]
-                        , pre [ style "white-space" "pre-wrap" ]
-                            [ dayData.pitch
-                                |> String.trim
-                                |> text
-                            ]
+                        , dayData.pitch
+                            |> Markdown.simple
+                            |> div []
                         ]
                     , div [ class "col-lg-6" ]
                         [ h3 [ class "fs-2" ] [ text "Answer" ]
                         , div [ class "card mb-3" ]
-                            [ pre [ class "card-body pb-0" ]
+                            [ pre [ class "card-body pb-0", style "white-space" "pre-wrap" ]
                                 [ text dayData.answer ]
                             ]
                         , div [ class "card" ]
