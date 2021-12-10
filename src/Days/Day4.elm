@@ -3,24 +3,114 @@ module Days.Day4 exposing (..)
 import Html exposing (..)
 
 
-type Bingo
-    = Win Int Grid
-    | Run (List Grid)
+type alias Bingo =
+    { wins : List Win
+    , grids : List Grid
+    }
+
+
+type alias Win =
+    { gridId : GridId
+    , score : Score
+    }
 
 
 type alias Grid =
-    List (List ( Int, Bool ))
+    { id : GridId
+    , cells : List (List ( Number, Bool ))
+    }
 
 
-part1 : Result String Int
+type alias Number =
+    Int
+
+
+type alias GridId =
+    Int
+
+
+type alias Score =
+    Int
+
+
+part1 : Result String Score
 part1 =
+    runBingo (List.reverse >> List.head)
+
+
+part2 : Result String Score
+part2 =
+    runBingo List.head
+
+
+runBingo : (List Win -> Maybe Win) -> Result String Score
+runBingo selectWin =
     let
         ( numbers, grids ) =
-            parseInputs data
+            parseInputs sampleData
+
+        bingo =
+            { wins = [], grids = grids }
     in
     numbers
-        |> List.foldl fillGridsWithNumber (Run grids)
-        |> endGame
+        |> List.foldl fillGridsWithNumber bingo
+        |> .wins
+        |> selectWin
+        |> Maybe.map .score
+        |> Result.fromMaybe "Nobody won :("
+
+
+fillGridsWithNumber : Int -> Bingo -> Bingo
+fillGridsWithNumber num { grids, wins } =
+    let
+        filledGrids =
+            grids |> List.map (fillGrid num)
+    in
+    { grids = filledGrids
+    , wins = filledGrids |> List.foldl (checkWinningGrid num) wins
+    }
+
+
+fillGrid : Int -> Grid -> Grid
+fillGrid num grid =
+    let
+        updateCell =
+            List.map
+                (\( int, checked ) ->
+                    ( int, checked || num == int )
+                )
+    in
+    { grid | cells = grid.cells |> List.map updateCell }
+
+
+checkWinningGrid : Number -> Grid -> List Win -> List Win
+checkWinningGrid num grid wins =
+    let
+        checkLine =
+            List.any (List.all Tuple.second)
+
+        winning =
+            checkLine grid.cells || checkLine (rotate grid.cells)
+    in
+    if winning && (wins |> List.map .gridId |> List.member grid.id |> not) then
+        { gridId = grid.id
+        , score = num * countUnchecked grid
+        }
+            :: wins
+
+    else
+        wins
+
+
+countUnchecked : Grid -> Int
+countUnchecked { cells } =
+    cells
+        |> List.map
+            (List.filter (Tuple.second >> not)
+                >> List.map Tuple.first
+            )
+        |> List.concat
+        |> List.sum
 
 
 parseInputs : String -> ( List Int, List Grid )
@@ -43,91 +133,9 @@ parseInputs string =
                 |> List.map String.trim
                 |> String.join "\n"
                 |> String.split "\n\n"
-                |> List.map parseGrid
+                |> List.indexedMap parseGrid
     in
     ( numbers, grids )
-
-
-fillGridsWithNumber : Int -> Bingo -> Bingo
-fillGridsWithNumber num bingo =
-    case bingo of
-        Win x prevGrids ->
-            Win x prevGrids
-
-        Run prevGrids ->
-            checkWinningGrids num prevGrids
-
-
-endGame : Bingo -> Result String Int
-endGame bingo =
-    case bingo of
-        Win num winningGrid ->
-            Ok (num * countUnchecked winningGrid)
-
-        Run _ ->
-            Err "Nobody won :("
-
-
-checkWinningGrids : Int -> List Grid -> Bingo
-checkWinningGrids num grids =
-    let
-        filledGrids =
-            fillGrids num grids
-    in
-    filledGrids
-        |> List.filter checkWinningGrid
-        |> handleWinningGrids num filledGrids
-
-
-checkWinningGrid : Grid -> Bool
-checkWinningGrid grid =
-    let
-        ( anyFullRow, anyFullColumn ) =
-            ( grid |> List.any (List.all Tuple.second)
-            , grid |> rotate |> List.any (List.all Tuple.second)
-            )
-    in
-    anyFullRow || anyFullColumn
-
-
-handleWinningGrids : Int -> List Grid -> List Grid -> Bingo
-handleWinningGrids num currentGrids winningGrids =
-    case winningGrids of
-        [ winningGrid ] ->
-            Win num winningGrid
-
-        _ ->
-            Run currentGrids
-
-
-countUnchecked : Grid -> Int
-countUnchecked grid =
-    grid
-        |> List.map
-            (List.filter (Tuple.second >> not)
-                >> List.map Tuple.first
-            )
-        |> List.concat
-        |> List.sum
-
-
-fillGrid : Int -> Grid -> Grid
-fillGrid num =
-    List.map
-        (List.map
-            (\( int, checked ) ->
-                if checked || num == int then
-                    ( int, True )
-
-                else
-                    ( int, False )
-            )
-        )
-
-
-fillGrids : Int -> List Grid -> List Grid
-fillGrids num grids =
-    grids |> List.map (fillGrid num)
 
 
 parseInts : String -> String -> List Int
@@ -138,16 +146,17 @@ parseInts sep string =
         |> List.filterMap (String.trim >> String.toInt)
 
 
-parseGrid : String -> Grid
-parseGrid string =
-    string
-        |> String.lines
-        |> List.map (parseInts " " >> List.map (\int -> ( int, False )))
-
-
-part2 : Int
-part2 =
-    -1
+parseGrid : GridId -> String -> Grid
+parseGrid gridId string =
+    { id = gridId
+    , cells =
+        string
+            |> String.lines
+            |> List.map
+                (parseInts " "
+                    >> List.map (\int -> ( int, False ))
+                )
+    }
 
 
 
@@ -185,7 +194,14 @@ answer =
                     Err error ->
                         "Error: " ++ error
                )
-        , "Part2: " ++ String.fromInt part2
+        , "Part2: "
+            ++ (case part2 of
+                    Ok result ->
+                        String.fromInt result
+
+                    Err error ->
+                        "Error: " ++ error
+               )
         ]
 
 
