@@ -17,7 +17,7 @@ part1 =
     -- Note: data is the provided input string
     let
         bitCounts =
-            data
+            sampleData
                 |> toBitRows
                 |> rotate
                 |> List.map countBits
@@ -35,7 +35,7 @@ part2 =
     -- Note: data is the provided input string
     let
         bitRows =
-            toBitRows data
+            toBitRows sampleData
 
         ( oxygenGeneratorRating, co2ScrubberRating ) =
             ( bitRows
@@ -174,16 +174,6 @@ answer =
         [ "Part1: " ++ String.fromInt part1
         , "Part2: " ++ String.fromInt part2
         ]
-
-
-expected1 : Int
-expected1 =
-    1131506
-
-
-expected2 : Int
-expected2 =
-    -1
 
 
 pitch : String
