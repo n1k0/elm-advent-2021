@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.co,
-		impl.cS,
-		impl.cO,
+		impl.cn,
+		impl.cR,
+		impl.cN,
 		function() { return function() {} }
 	);
 });
@@ -2704,7 +2704,7 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		E: func(record.E),
+		F: func(record.F),
 		a6: record.a6,
 		a2: record.a2
 	}
@@ -2974,7 +2974,7 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.E;
+		var message = !tag ? value : tag < 3 ? value.a : value.F;
 		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.a6;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
@@ -3928,11 +3928,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.co,
-		impl.cS,
-		impl.cO,
+		impl.cn,
+		impl.cR,
+		impl.cN,
 		function(sendToApp, initialModel) {
-			var view = impl.cU;
+			var view = impl.cT;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3964,12 +3964,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.co,
-		impl.cS,
-		impl.cO,
+		impl.cn,
+		impl.cR,
+		impl.cN,
 		function(sendToApp, initialModel) {
 			var divertHrefToApp = impl.a4 && impl.a4(sendToApp)
-			var view = impl.cU;
+			var view = impl.cT;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3982,7 +3982,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.bX) && (_VirtualDom_doc.title = title = doc.bX);
+				(title !== doc.bW) && (_VirtualDom_doc.title = title = doc.bW);
 			});
 		}
 	);
@@ -4038,8 +4038,8 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.cw;
-	var onUrlRequest = impl.cx;
+	var onUrlChange = impl.cv;
+	var onUrlRequest = impl.cw;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
@@ -4059,9 +4059,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.cE === next.cE
-							&& curr.cl === next.cl
-							&& curr.cB.a === next.cB.a
+							&& curr.cD === next.cD
+							&& curr.ck === next.ck
+							&& curr.cA.a === next.cA.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4069,13 +4069,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		co: function(flags)
+		cn: function(flags)
 		{
-			return A3(impl.co, flags, _Browser_getUrl(), key);
+			return A3(impl.cn, flags, _Browser_getUrl(), key);
 		},
-		cU: impl.cU,
-		cS: impl.cS,
-		cO: impl.cO
+		cT: impl.cT,
+		cR: impl.cR,
+		cN: impl.cN
 	});
 }
 
@@ -4141,17 +4141,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { ck: 'hidden', b7: 'visibilitychange' }
+		? { cj: 'hidden', b6: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { ck: 'mozHidden', b7: 'mozvisibilitychange' }
+		? { cj: 'mozHidden', b6: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { ck: 'msHidden', b7: 'msvisibilitychange' }
+		? { cj: 'msHidden', b6: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { ck: 'webkitHidden', b7: 'webkitvisibilitychange' }
-		: { ck: 'hidden', b7: 'visibilitychange' };
+		? { cj: 'webkitHidden', b6: 'webkitvisibilitychange' }
+		: { cj: 'hidden', b6: 'visibilitychange' };
 }
 
 
@@ -4232,12 +4232,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		bR: _Browser_getScene(),
-		b$: {
-			M: _Browser_window.pageXOffset,
-			C: _Browser_window.pageYOffset,
-			b0: _Browser_doc.documentElement.clientWidth,
-			bu: _Browser_doc.documentElement.clientHeight
+		bQ: _Browser_getScene(),
+		b_: {
+			N: _Browser_window.pageXOffset,
+			D: _Browser_window.pageYOffset,
+			b$: _Browser_doc.documentElement.clientWidth,
+			bt: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4247,8 +4247,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		b0: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		bu: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		b$: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		bt: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4271,15 +4271,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			bR: {
-				b0: node.scrollWidth,
-				bu: node.scrollHeight
+			bQ: {
+				b$: node.scrollWidth,
+				bt: node.scrollHeight
 			},
-			b$: {
-				M: node.scrollLeft,
-				C: node.scrollTop,
-				b0: node.clientWidth,
-				bu: node.clientHeight
+			b_: {
+				N: node.scrollLeft,
+				D: node.scrollTop,
+				b$: node.clientWidth,
+				bt: node.clientHeight
 			}
 		};
 	});
@@ -4309,18 +4309,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			bR: _Browser_getScene(),
-			b$: {
-				M: x,
-				C: y,
-				b0: _Browser_doc.documentElement.clientWidth,
-				bu: _Browser_doc.documentElement.clientHeight
+			bQ: _Browser_getScene(),
+			b_: {
+				N: x,
+				D: y,
+				b$: _Browser_doc.documentElement.clientWidth,
+				bt: _Browser_doc.documentElement.clientHeight
 			},
-			ce: {
-				M: x + rect.left,
-				C: y + rect.top,
-				b0: rect.width,
-				bu: rect.height
+			cd: {
+				N: x + rect.left,
+				D: y + rect.top,
+				b$: rect.width,
+				bt: rect.height
 			}
 		};
 	});
@@ -4365,19 +4365,19 @@ var _Http_toTask = F3(function(router, toTask, request)
 	return _Scheduler_binding(function(callback)
 	{
 		function done(response) {
-			callback(toTask(request.cf.a(response)));
+			callback(toTask(request.ce.a(response)));
 		}
 
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('error', function() { done($elm$http$Http$NetworkError_); });
 		xhr.addEventListener('timeout', function() { done($elm$http$Http$Timeout_); });
-		xhr.addEventListener('load', function() { done(_Http_toResponse(request.cf.b, xhr)); });
-		$elm$core$Maybe$isJust(request.bY) && _Http_track(router, xhr, request.bY.a);
+		xhr.addEventListener('load', function() { done(_Http_toResponse(request.ce.b, xhr)); });
+		$elm$core$Maybe$isJust(request.bX) && _Http_track(router, xhr, request.bX.a);
 
 		try {
-			xhr.open(request.ct, request.cT, true);
+			xhr.open(request.cs, request.cS, true);
 		} catch (e) {
-			return done($elm$http$Http$BadUrl_(request.cT));
+			return done($elm$http$Http$BadUrl_(request.cS));
 		}
 
 		_Http_configureRequest(xhr, request);
@@ -4394,13 +4394,13 @@ var _Http_toTask = F3(function(router, toTask, request)
 
 function _Http_configureRequest(xhr, request)
 {
-	for (var headers = request.bt; headers.b; headers = headers.b) // WHILE_CONS
+	for (var headers = request.bs; headers.b; headers = headers.b) // WHILE_CONS
 	{
 		xhr.setRequestHeader(headers.a.a, headers.a.b);
 	}
-	xhr.timeout = request.cP.a || 0;
-	xhr.responseType = request.cf.d;
-	xhr.withCredentials = request.b3;
+	xhr.timeout = request.cO.a || 0;
+	xhr.responseType = request.ce.d;
+	xhr.withCredentials = request.b2;
 }
 
 
@@ -4421,10 +4421,10 @@ function _Http_toResponse(toBody, xhr)
 function _Http_toMetadata(xhr)
 {
 	return {
-		cT: xhr.responseURL,
-		cM: xhr.status,
-		cN: xhr.statusText,
-		bt: _Http_parseHeaders(xhr.getAllResponseHeaders())
+		cS: xhr.responseURL,
+		cL: xhr.status,
+		cM: xhr.statusText,
+		bs: _Http_parseHeaders(xhr.getAllResponseHeaders())
 	};
 }
 
@@ -4519,15 +4519,15 @@ function _Http_track(router, xhr, tracker)
 	xhr.upload.addEventListener('progress', function(event) {
 		if (xhr.c) { return; }
 		_Scheduler_rawSpawn(A2($elm$core$Platform$sendToSelf, router, _Utils_Tuple2(tracker, $elm$http$Http$Sending({
-			cL: event.loaded,
-			bT: event.total
+			cK: event.loaded,
+			bS: event.total
 		}))));
 	});
 	xhr.addEventListener('progress', function(event) {
 		if (xhr.c) { return; }
 		_Scheduler_rawSpawn(A2($elm$core$Platform$sendToSelf, router, _Utils_Tuple2(tracker, $elm$http$Http$Receiving({
-			cG: event.loaded,
-			bT: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
+			cF: event.loaded,
+			bS: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
 		}))));
 	});
 }
@@ -4706,8 +4706,8 @@ var _Regex_never = /.^/;
 var _Regex_fromStringWith = F2(function(options, string)
 {
 	var flags = 'g';
-	if (options.cu) { flags += 'm'; }
-	if (options.b6) { flags += 'i'; }
+	if (options.ct) { flags += 'm'; }
+	if (options.b5) { flags += 'i'; }
 
 	try
 	{
@@ -5246,22 +5246,22 @@ var $elm$core$Array$builderToArray = F2(
 		if (!builder.m) {
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.n),
+				$elm$core$Elm$JsArray$length(builder.o),
 				$elm$core$Array$shiftStep,
 				$elm$core$Elm$JsArray$empty,
-				builder.n);
+				builder.o);
 		} else {
 			var treeLen = builder.m * $elm$core$Array$branchFactor;
 			var depth = $elm$core$Basics$floor(
 				A2($elm$core$Basics$logBase, $elm$core$Array$branchFactor, treeLen - 1));
-			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.p) : builder.p;
+			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.q) : builder.q;
 			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.m);
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.n) + treeLen,
+				$elm$core$Elm$JsArray$length(builder.o) + treeLen,
 				A2($elm$core$Basics$max, 5, depth * $elm$core$Array$shiftStep),
 				tree,
-				builder.n);
+				builder.o);
 		}
 	});
 var $elm$core$Basics$idiv = _Basics_idiv;
@@ -5274,7 +5274,7 @@ var $elm$core$Array$initializeHelp = F5(
 				return A2(
 					$elm$core$Array$builderToArray,
 					false,
-					{p: nodeList, m: (len / $elm$core$Array$branchFactor) | 0, n: tail});
+					{q: nodeList, m: (len / $elm$core$Array$branchFactor) | 0, o: tail});
 			} else {
 				var leaf = $elm$core$Array$Leaf(
 					A3($elm$core$Elm$JsArray$initialize, $elm$core$Array$branchFactor, fromIndex, fn));
@@ -5356,7 +5356,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {ci: fragment, cl: host, bG: path, cB: port_, cE: protocol, bK: query};
+		return {ch: fragment, ck: host, bF: path, cA: port_, cD: protocol, bJ: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5765,7 +5765,7 @@ var $elm$url$Url$addPrefixed = F3(
 	});
 var $elm$url$Url$toString = function (url) {
 	var http = function () {
-		var _v0 = url.cE;
+		var _v0 = url.cD;
 		if (!_v0) {
 			return 'http://';
 		} else {
@@ -5775,17 +5775,17 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.ci,
+		url.ch,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
-			url.bK,
+			url.bJ,
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.cB,
-					_Utils_ap(http, url.cl)),
-				url.bG)));
+					url.cA,
+					_Utils_ap(http, url.ck)),
+				url.bF)));
 };
 var $orus_io$elm_spa$Spa$addPage = F4(
 	function (_v0, matchRoute, page, builder) {
@@ -5798,13 +5798,13 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 			var previousCmd = _v27.b;
 			var _v22 = function () {
 				if (!currentPage.$) {
-					var _v24 = matchRoute(core.A);
+					var _v24 = matchRoute(core.B);
 					if (!_v24.$) {
 						var pageFlags = _v24.a;
-						var _v25 = A3($orus_io$elm_spa$Spa$setupPage, builder.ch, core.x, page);
+						var _v25 = A3($orus_io$elm_spa$Spa$setupPage, builder.cg, core.y, page);
 						if (!_v25.$) {
 							var setup = _v25.a;
-							var _v26 = setup.co(pageFlags);
+							var _v26 = setup.cn(pageFlags);
 							var newCurrentPage = _v26.a;
 							var newCurrentPageEffect = _v26.b;
 							return _Utils_Tuple2(
@@ -5821,7 +5821,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								A2(
 									$elm$browser$Browser$Navigation$replaceUrl,
 									core.aV,
-									builder.cD(core.A)));
+									builder.cC(core.B)));
 						}
 					} else {
 						return _Utils_Tuple2($orus_io$elm_spa$Spa$NoPage, $elm$core$Platform$Cmd$none);
@@ -5845,14 +5845,14 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 						])));
 		};
 		return {
-			ch: builder.ch,
-			co: F3(
+			cg: builder.cg,
+			cn: F3(
 				function (flags, url, key) {
 					return setupCurrentPage(
-						A3(builder.co, flags, url, key));
+						A3(builder.cn, flags, url, key));
 				}),
-			cD: builder.cD,
-			cO: function (_v1) {
+			cC: builder.cC,
+			cN: function (_v1) {
 				var core = _v1.a;
 				var currentPage = _v1.b;
 				return $elm$core$Platform$Sub$batch(
@@ -5861,13 +5861,13 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							function () {
 							if (currentPage.$ === 1) {
 								var current = currentPage.a;
-								var _v3 = A3($orus_io$elm_spa$Spa$setupPage, builder.ch, core.x, page);
+								var _v3 = A3($orus_io$elm_spa$Spa$setupPage, builder.cg, core.y, page);
 								if (!_v3.$) {
 									var setup = _v3.a;
 									return A2(
 										$elm$core$Platform$Sub$map,
 										A2($elm$core$Basics$composeR, $orus_io$elm_spa$Spa$CurrentMsg, $orus_io$elm_spa$Spa$PageMsg),
-										setup.cO(current));
+										setup.cN(current));
 								} else {
 									return $elm$core$Platform$Sub$none;
 								}
@@ -5878,13 +5878,13 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							A2(
 							$elm$core$Platform$Sub$map,
 							$orus_io$elm_spa$Spa$mapPreviousMsg,
-							builder.cO(
+							builder.cN(
 								$orus_io$elm_spa$Spa$modelPrevious(
 									_Utils_Tuple2(core, currentPage))))
 						]));
 			},
-			cR: builder.cR,
-			cS: F2(
+			cQ: builder.cQ,
+			cR: F2(
 				function (msg, _v4) {
 					var core = _v4.a;
 					var currentPage = _v4.b;
@@ -5895,10 +5895,10 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								var _v6 = $orus_io$elm_spa$Spa$currentPageModel(currentPage);
 								if (!_v6.$) {
 									var pageModel = _v6.a;
-									var _v7 = A3($orus_io$elm_spa$Spa$setupPage, builder.ch, core.x, page);
+									var _v7 = A3($orus_io$elm_spa$Spa$setupPage, builder.cg, core.y, page);
 									if (!_v7.$) {
 										var setup = _v7.a;
-										var _v8 = A2(setup.cS, pageMsg, pageModel);
+										var _v8 = A2(setup.cR, pageMsg, pageModel);
 										var pageModelNew = _v8.a;
 										var pageEffect = _v8.b;
 										return _Utils_Tuple2(
@@ -5917,7 +5917,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 											A2(
 												$elm$browser$Browser$Navigation$replaceUrl,
 												core.aV,
-												builder.cD(core.A)));
+												builder.cC(core.B)));
 									}
 								} else {
 									return _Utils_Tuple2(
@@ -5927,7 +5927,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							} else {
 								var pageMsg = msg.a.a;
 								var _v9 = A2(
-									builder.cS,
+									builder.cR,
 									$orus_io$elm_spa$Spa$PageMsg(pageMsg),
 									$orus_io$elm_spa$Spa$modelPrevious(
 										_Utils_Tuple2(core, currentPage)));
@@ -5944,7 +5944,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 						case 0:
 							var sharedMsg = msg.a;
 							var _v11 = A2(
-								builder.cS,
+								builder.cR,
 								$orus_io$elm_spa$Spa$SharedMsg(sharedMsg),
 								$orus_io$elm_spa$Spa$modelPrevious(
 									_Utils_Tuple2(core, currentPage)));
@@ -5957,7 +5957,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								if (!_v14.a.$) {
 									if (_v14.b.$ === 1) {
 										var _v15 = _v14.a;
-										var _v16 = A3($orus_io$elm_spa$Spa$setupPage, builder.ch, previousCore.x, page);
+										var _v16 = A3($orus_io$elm_spa$Spa$setupPage, builder.cg, previousCore.y, page);
 										if (!_v16.$) {
 											var setup = _v16.a;
 											return _Utils_Tuple2(currentPage, $elm$core$Platform$Cmd$none);
@@ -5967,7 +5967,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 												A2(
 													$elm$browser$Browser$Navigation$replaceUrl,
 													core.aV,
-													builder.cD(core.A)));
+													builder.cC(core.B)));
 										}
 									} else {
 										var _v17 = _v14.a;
@@ -5986,7 +5986,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 								_Utils_Tuple2(
 									_Utils_update(
 										previousCore,
-										{A: core.A}),
+										{B: core.B}),
 									newPage),
 								$elm$core$Platform$Cmd$batch(
 									_List_fromArray(
@@ -6017,29 +6017,29 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 							var url = msg.a;
 							return setupCurrentPage(
 								A2(
-									builder.cS,
+									builder.cR,
 									$orus_io$elm_spa$Spa$UrlChange(url),
 									$orus_io$elm_spa$Spa$modelPrevious(
 										_Utils_Tuple2(core, currentPage))));
 					}
 				}),
-			cU: function (_v19) {
+			cT: function (_v19) {
 				var core = _v19.a;
 				var currentPage = _v19.b;
 				if (currentPage.$ === 1) {
 					var pageModel = currentPage.a;
-					var _v21 = A3($orus_io$elm_spa$Spa$setupPage, builder.ch, core.x, page);
+					var _v21 = A3($orus_io$elm_spa$Spa$setupPage, builder.cg, core.y, page);
 					if (!_v21.$) {
 						var setup = _v21.a;
 						return A2(
 							viewMap1,
 							A2($elm$core$Basics$composeR, $orus_io$elm_spa$Spa$CurrentMsg, $orus_io$elm_spa$Spa$PageMsg),
-							setup.cU(pageModel));
+							setup.cT(pageModel));
 					} else {
 						return A2(
 							viewMap2,
 							$orus_io$elm_spa$Spa$mapPreviousMsg,
-							builder.cU(
+							builder.cT(
 								$orus_io$elm_spa$Spa$modelPrevious(
 									_Utils_Tuple2(core, currentPage))));
 					}
@@ -6047,7 +6047,7 @@ var $orus_io$elm_spa$Spa$addPage = F4(
 					return A2(
 						viewMap2,
 						$orus_io$elm_spa$Spa$mapPreviousMsg,
-						builder.cU(
+						builder.cT(
 							$orus_io$elm_spa$Spa$modelPrevious(
 								_Utils_Tuple2(core, currentPage))));
 				}
@@ -6069,22 +6069,22 @@ var $elm$core$Basics$always = F2(
 var $elm$browser$Browser$application = _Browser_application;
 var $orus_io$elm_spa$Spa$modelShared = function (_v0) {
 	var core = _v0.a;
-	return core.x;
+	return core.y;
 };
 var $orus_io$elm_spa$Spa$application = F2(
 	function (_v0, builder) {
-		var toDocument = _v0.cQ;
+		var toDocument = _v0.cP;
 		return {
-			co: builder.co,
-			cw: $orus_io$elm_spa$Spa$UrlChange,
-			cx: $orus_io$elm_spa$Spa$UrlRequest,
-			cO: builder.cO,
-			cS: builder.cS,
-			cU: function (model) {
+			cn: builder.cn,
+			cv: $orus_io$elm_spa$Spa$UrlChange,
+			cw: $orus_io$elm_spa$Spa$UrlRequest,
+			cN: builder.cN,
+			cR: builder.cR,
+			cT: function (model) {
 				return A2(
 					toDocument,
 					$orus_io$elm_spa$Spa$modelShared(model),
-					builder.cU(model));
+					builder.cT(model));
 			}
 		};
 	});
@@ -6095,18 +6095,18 @@ var $author$project$View$defaultView = {
 		[
 			$elm$html$Html$text('You should not see this page unless you forgot to add pages to your application')
 		]),
-	bX: 'No page'
+	bW: 'No page'
 };
 var $author$project$Shared$init = F2(
 	function (_v0, key) {
 		return _Utils_Tuple2(
-			{b9: $elm$core$Maybe$Nothing, ae: $elm$core$Maybe$Nothing, aV: key},
+			{b8: $elm$core$Maybe$Nothing, ae: $elm$core$Maybe$Nothing, aV: key},
 			$elm$core$Platform$Cmd$none);
 	});
 var $orus_io$elm_spa$Spa$initModel = F3(
 	function (route, key, shared) {
 		return _Utils_Tuple2(
-			{A: route, aV: key, x: shared},
+			{B: route, aV: key, y: shared},
 			$orus_io$elm_spa$Spa$NoPage);
 	});
 var $orus_io$elm_spa$Spa$builderInit = F5(
@@ -6129,14 +6129,14 @@ var $orus_io$elm_spa$Spa$builderRootUpdate = F4(
 		switch (msg.$) {
 			case 0:
 				var sharedMsg = msg.a;
-				var _v2 = A2(sharedUpdate, sharedMsg, core.x);
+				var _v2 = A2(sharedUpdate, sharedMsg, core.y);
 				var sharedNew = _v2.a;
 				var sharedCmd = _v2.b;
 				return _Utils_Tuple2(
 					_Utils_Tuple2(
 						_Utils_update(
 							core,
-							{x: sharedNew}),
+							{y: sharedNew}),
 						page),
 					A2($elm$core$Platform$Cmd$map, $orus_io$elm_spa$Spa$SharedMsg, sharedCmd));
 			case 3:
@@ -6146,7 +6146,7 @@ var $orus_io$elm_spa$Spa$builderRootUpdate = F4(
 						_Utils_update(
 							core,
 							{
-								A: toRoute(url)
+								B: toRoute(url)
 							}),
 						$orus_io$elm_spa$Spa$NoPage),
 					$elm$core$Platform$Cmd$none);
@@ -6158,19 +6158,19 @@ var $orus_io$elm_spa$Spa$builderRootUpdate = F4(
 	});
 var $orus_io$elm_spa$Spa$init = function (shared) {
 	return {
-		ch: shared.ch,
-		co: A2($orus_io$elm_spa$Spa$builderInit, shared.cR, shared.co),
-		cD: shared.cD,
-		cO: function (_v0) {
+		cg: shared.cg,
+		cn: A2($orus_io$elm_spa$Spa$builderInit, shared.cQ, shared.cn),
+		cC: shared.cC,
+		cN: function (_v0) {
 			var core = _v0.a;
 			return A2(
 				$elm$core$Platform$Sub$map,
 				$orus_io$elm_spa$Spa$SharedMsg,
-				shared.cO(core.x));
+				shared.cN(core.y));
 		},
-		cR: shared.cR,
-		cS: A2($orus_io$elm_spa$Spa$builderRootUpdate, shared.cR, shared.cS),
-		cU: $elm$core$Basics$always(shared.cb)
+		cQ: shared.cQ,
+		cR: A2($orus_io$elm_spa$Spa$builderRootUpdate, shared.cQ, shared.cR),
+		cT: $elm$core$Basics$always(shared.ca)
 	};
 };
 var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
@@ -6182,7 +6182,7 @@ var $author$project$View$map = F2(
 				$elm$core$List$map,
 				$elm$html$Html$map(tomsg),
 				view.bk),
-			bX: view.bX
+			bW: view.bW
 		};
 	});
 var $author$project$Main$mappers = _Utils_Tuple2($author$project$View$map, $author$project$View$map);
@@ -6204,11 +6204,11 @@ var $author$project$Route$matchHome = function (r) {
 };
 var $orus_io$elm_spa$Internal$Page = $elm$core$Basics$identity;
 var $orus_io$elm_spa$Spa$Page$element = function (_v0) {
-	var init = _v0.co;
-	var update = _v0.cS;
-	var view = _v0.cU;
-	var subscriptions = _v0.cO;
-	return {co: init, cO: subscriptions, cS: update, cU: view};
+	var init = _v0.cn;
+	var update = _v0.cR;
+	var view = _v0.cT;
+	var subscriptions = _v0.cN;
+	return {cn: init, cN: subscriptions, cR: update, cT: view};
 };
 var $orus_io$elm_spa$Effect$Batch = function (a) {
 	return {$: 4, a: a};
@@ -6818,7 +6818,7 @@ var $elm$http$Http$resolve = F2(
 			case 3:
 				var metadata = response.a;
 				return $elm$core$Result$Err(
-					$elm$http$Http$BadStatus(metadata.cM));
+					$elm$http$Http$BadStatus(metadata.cL));
 			default:
 				var body = response.b;
 				return A2(
@@ -6839,7 +6839,7 @@ var $elm$http$Http$Request = function (a) {
 };
 var $elm$http$Http$State = F2(
 	function (reqs, subs) {
-		return {bN: reqs, bV: subs};
+		return {bM: reqs, bU: subs};
 	});
 var $elm$http$Http$init = $elm$core$Task$succeed(
 	A2($elm$http$Http$State, $elm$core$Dict$empty, _List_Nil));
@@ -6883,7 +6883,7 @@ var $elm$http$Http$updateReqs = F3(
 					return A2(
 						$elm$core$Task$andThen,
 						function (pid) {
-							var _v4 = req.bY;
+							var _v4 = req.bX;
 							if (_v4.$ === 1) {
 								return A3($elm$http$Http$updateReqs, router, otherCmds, reqs);
 							} else {
@@ -6913,7 +6913,7 @@ var $elm$http$Http$onEffects = F4(
 				return $elm$core$Task$succeed(
 					A2($elm$http$Http$State, reqs, subs));
 			},
-			A3($elm$http$Http$updateReqs, router, cmds, state.bN));
+			A3($elm$http$Http$updateReqs, router, cmds, state.bM));
 	});
 var $elm$core$List$maybeCons = F3(
 	function (f, mx, xs) {
@@ -6956,7 +6956,7 @@ var $elm$http$Http$onSelfMsg = F3(
 				A2(
 					$elm$core$List$filterMap,
 					A3($elm$http$Http$maybeSend, router, tracker, progress),
-					state.bV)));
+					state.bU)));
 	});
 var $elm$http$Http$Cancel = function (a) {
 	return {$: 0, a: a};
@@ -6970,14 +6970,14 @@ var $elm$http$Http$cmdMap = F2(
 			var r = cmd.a;
 			return $elm$http$Http$Request(
 				{
-					b3: r.b3,
+					b2: r.b2,
 					bk: r.bk,
-					cf: A2(_Http_mapExpect, func, r.cf),
-					bt: r.bt,
-					ct: r.ct,
-					cP: r.cP,
-					bY: r.bY,
-					cT: r.cT
+					ce: A2(_Http_mapExpect, func, r.ce),
+					bs: r.bs,
+					cs: r.cs,
+					cO: r.cO,
+					bX: r.bX,
+					cS: r.cS
 				});
 		}
 	});
@@ -7000,11 +7000,11 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{b3: false, bk: r.bk, cf: r.cf, bt: r.bt, ct: r.ct, cP: r.cP, bY: r.bY, cT: r.cT}));
+			{b2: false, bk: r.bk, ce: r.ce, bs: r.bs, cs: r.cs, cO: r.cO, bX: r.bX, cS: r.cS}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{bk: $elm$http$Http$emptyBody, cf: r.cf, bt: _List_Nil, ct: 'GET', cP: $elm$core$Maybe$Nothing, bY: $elm$core$Maybe$Nothing, cT: r.cT});
+		{bk: $elm$http$Http$emptyBody, ce: r.ce, bs: _List_Nil, cs: 'GET', cO: $elm$core$Maybe$Nothing, bX: $elm$core$Maybe$Nothing, cS: r.cS});
 };
 var $author$project$Pages$Day$githubSourceCode = function (day) {
 	return 'https://raw.githubusercontent.com/n1k0/elm-advent-2021/main/src/Days/Day' + ($elm$core$String$fromInt(day) + '.elm');
@@ -7012,8 +7012,8 @@ var $author$project$Pages$Day$githubSourceCode = function (day) {
 var $author$project$Pages$Day$requestSourceCode = function (day) {
 	return $elm$http$Http$get(
 		{
-			cf: $elm$http$Http$expectString($author$project$Pages$Day$CodeSourceReceived),
-			cT: $author$project$Pages$Day$githubSourceCode(day)
+			ce: $elm$http$Http$expectString($author$project$Pages$Day$CodeSourceReceived),
+			cS: $author$project$Pages$Day$githubSourceCode(day)
 		});
 };
 var $author$project$Shared$SetCurrentDay = function (a) {
@@ -7157,10 +7157,10 @@ var $elm$core$Result$map = F2(
 	});
 var $elm$parser$Parser$DeadEnd = F3(
 	function (row, col, problem) {
-		return {bn: col, cC: problem, cK: row};
+		return {bn: col, cB: problem, cJ: row};
 	});
 var $elm$parser$Parser$problemToDeadEnd = function (p) {
-	return A3($elm$parser$Parser$DeadEnd, p.cK, p.bn, p.cC);
+	return A3($elm$parser$Parser$DeadEnd, p.cJ, p.bn, p.cB);
 };
 var $elm$parser$Parser$Advanced$bagToList = F2(
 	function (bag, list) {
@@ -7192,7 +7192,7 @@ var $elm$parser$Parser$Advanced$run = F2(
 	function (_v0, src) {
 		var parse = _v0;
 		var _v1 = parse(
-			{bn: 1, f: _List_Nil, h: 1, d: 0, cK: 1, a5: src});
+			{bn: 1, f: _List_Nil, h: 1, d: 0, cJ: 1, a5: src});
 		if (!_v1.$) {
 			var value = _v1.b;
 			return $elm$core$Result$Ok(value);
@@ -7241,7 +7241,7 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$syntaxToSty
 	}
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Line$Helpers$newLine = function (fragments) {
-	return {cj: fragments, O: $elm$core$Maybe$Nothing};
+	return {ci: fragments, P: $elm$core$Maybe$Nothing};
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Type$LineBreak = {$: 2};
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$Comment = 1;
@@ -7252,17 +7252,17 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Line$Helpers$toFragment 
 		var text = _v0.b;
 		switch (syntax.$) {
 			case 0:
-				return {b2: '', cH: 0, j: text};
+				return {b1: '', cG: 0, j: text};
 			case 1:
-				return {b2: '', cH: 1, j: text};
+				return {b1: '', cG: 1, j: text};
 			case 2:
-				return {b2: '', cH: 0, j: text};
+				return {b1: '', cG: 0, j: text};
 			default:
 				var c = syntax.a;
 				var _v2 = toStyle(c);
 				var requiredStyle = _v2.a;
 				var additionalClass = _v2.b;
-				return {b2: additionalClass, cH: requiredStyle, j: text};
+				return {b1: additionalClass, cG: requiredStyle, j: text};
 		}
 	});
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Line$Helpers$toLinesHelp = F3(
@@ -7524,7 +7524,7 @@ var $elm$parser$Parser$Advanced$AddRight = F2(
 	});
 var $elm$parser$Parser$Advanced$DeadEnd = F4(
 	function (row, col, problem, contextStack) {
-		return {bn: col, b8: contextStack, cC: problem, cK: row};
+		return {bn: col, b7: contextStack, cB: problem, cJ: row};
 	});
 var $elm$parser$Parser$Advanced$Empty = {$: 0};
 var $elm$parser$Parser$Advanced$fromState = F2(
@@ -7532,7 +7532,7 @@ var $elm$parser$Parser$Advanced$fromState = F2(
 		return A2(
 			$elm$parser$Parser$Advanced$AddRight,
 			$elm$parser$Parser$Advanced$Empty,
-			A4($elm$parser$Parser$Advanced$DeadEnd, s.cK, s.bn, x, s.f));
+			A4($elm$parser$Parser$Advanced$DeadEnd, s.cJ, s.bn, x, s.f));
 	});
 var $elm$parser$Parser$Advanced$isSubString = _Parser_isSubString;
 var $elm$core$Basics$negate = function (n) {
@@ -7543,7 +7543,7 @@ var $elm$parser$Parser$Advanced$token = function (_v0) {
 	var expecting = _v0.b;
 	var progress = !$elm$core$String$isEmpty(str);
 	return function (s) {
-		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.d, s.cK, s.bn, s.a5);
+		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.d, s.cJ, s.bn, s.a5);
 		var newOffset = _v1.a;
 		var newRow = _v1.b;
 		var newCol = _v1.c;
@@ -7554,7 +7554,7 @@ var $elm$parser$Parser$Advanced$token = function (_v0) {
 			$elm$parser$Parser$Advanced$Good,
 			progress,
 			0,
-			{bn: newCol, f: s.f, h: s.h, d: newOffset, cK: newRow, a5: s.a5});
+			{bn: newCol, f: s.f, h: s.h, d: newOffset, cJ: newRow, a5: s.a5});
 	};
 };
 var $elm$parser$Parser$Advanced$symbol = $elm$parser$Parser$Advanced$token;
@@ -7576,7 +7576,7 @@ var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 					$elm$parser$Parser$Advanced$Good,
 					_Utils_cmp(s0.d, offset) < 0,
 					0,
-					{bn: col, f: s0.f, h: s0.h, d: offset, cK: row, a5: s0.a5});
+					{bn: col, f: s0.f, h: s0.h, d: offset, cJ: row, a5: s0.a5});
 			} else {
 				if (_Utils_eq(newOffset, -2)) {
 					var $temp$isGood = isGood,
@@ -7608,7 +7608,7 @@ var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 	});
 var $elm$parser$Parser$Advanced$chompWhile = function (isGood) {
 	return function (s) {
-		return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.d, s.cK, s.bn, s);
+		return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.d, s.cJ, s.bn, s);
 	};
 };
 var $elm$parser$Parser$chompWhile = $elm$parser$Parser$Advanced$chompWhile;
@@ -7691,11 +7691,11 @@ var $elm$parser$Parser$Advanced$chompIf = F2(
 				$elm$parser$Parser$Advanced$Good,
 				true,
 				0,
-				{bn: 1, f: s.f, h: s.h, d: s.d + 1, cK: s.cK + 1, a5: s.a5}) : A3(
+				{bn: 1, f: s.f, h: s.h, d: s.d + 1, cJ: s.cJ + 1, a5: s.a5}) : A3(
 				$elm$parser$Parser$Advanced$Good,
 				true,
 				0,
-				{bn: s.bn + 1, f: s.f, h: s.h, d: newOffset, cK: s.cK, a5: s.a5}));
+				{bn: s.bn + 1, f: s.f, h: s.h, d: newOffset, cJ: s.cJ, a5: s.a5}));
 		};
 	});
 var $elm$parser$Parser$chompIf = function (isGood) {
@@ -7767,10 +7767,10 @@ var $elm$parser$Parser$Advanced$oneOf = function (parsers) {
 var $elm$parser$Parser$oneOf = $elm$parser$Parser$Advanced$oneOf;
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimitedUnnestable = F2(
 	function (options, revAList) {
-		var defaultMap = options.bp;
-		var isNotRelevant = options.bB;
+		var defaultMap = options.bo;
+		var isNotRelevant = options.bA;
 		var end = options.g;
-		var innerParsers = options.by;
+		var innerParsers = options.bx;
 		return $elm$parser$Parser$oneOf(
 			_List_fromArray(
 				[
@@ -7814,11 +7814,11 @@ var $elm$parser$Parser$Advanced$succeed = function (a) {
 var $elm$parser$Parser$succeed = $elm$parser$Parser$Advanced$succeed;
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimitedNestable = F3(
 	function (nestLevel, options, revAList) {
-		var defaultMap = options.bp;
-		var isNotRelevant = options.bB;
+		var defaultMap = options.bo;
+		var isNotRelevant = options.bA;
 		var start = options.i;
 		var end = options.g;
-		var innerParsers = options.by;
+		var innerParsers = options.bx;
 		return $elm$parser$Parser$oneOf(
 			_List_fromArray(
 				[
@@ -7891,7 +7891,7 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimit
 	function (options, revAList) {
 		var start = options.i;
 		var end = options.g;
-		var isNotRelevant = options.bB;
+		var isNotRelevant = options.bA;
 		var _v0 = _Utils_Tuple2(
 			$elm$core$String$uncons(options.i),
 			$elm$core$String$uncons(options.g));
@@ -7907,13 +7907,13 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimit
 				var startChar = _v3.a;
 				var _v4 = _v0.b.a;
 				var endChar = _v4.a;
-				return options.bA ? A3(
+				return options.bz ? A3(
 					$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimitedNestable,
 					1,
 					_Utils_update(
 						options,
 						{
-							bB: function (c) {
+							bA: function (c) {
 								return isNotRelevant(c) && ((!_Utils_eq(c, startChar)) && (!_Utils_eq(c, endChar)));
 							}
 						}),
@@ -7922,7 +7922,7 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimit
 					_Utils_update(
 						options,
 						{
-							bB: function (c) {
+							bA: function (c) {
 								return isNotRelevant(c) && (!_Utils_eq(c, endChar));
 							}
 						}),
@@ -7932,8 +7932,8 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimit
 	});
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimited = function (options) {
 	var start = options.i;
-	var isNotRelevant = options.bB;
-	var defaultMap = options.bp;
+	var isNotRelevant = options.bA;
+	var defaultMap = options.bo;
 	return A2(
 		$elm$parser$Parser$andThen,
 		function (n) {
@@ -7960,14 +7960,14 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$lineBreakLi
 	$elm$parser$Parser$symbol('\n'));
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$multilineComment = $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$delimited(
 	{
-		bp: function (b) {
+		bo: function (b) {
 			return _Utils_Tuple2($pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Type$Comment, b);
 		},
 		g: '-}',
-		by: _List_fromArray(
+		bx: _List_fromArray(
 			[$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$lineBreakList]),
-		bA: true,
-		bB: function (c) {
+		bz: true,
+		bA: function (c) {
 			return !$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$isLineBreak(c);
 		},
 		i: '{-'
@@ -8215,16 +8215,16 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$isEscap
 	return c === '\\';
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$stringDelimiter = {
-	bp: function (b) {
+	bo: function (b) {
 		return _Utils_Tuple2(
 			$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Type$C(0),
 			b);
 	},
 	g: '\"',
-	by: _List_fromArray(
+	bx: _List_fromArray(
 		[$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$lineBreakList, $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Elm$elmEscapable]),
-	bA: false,
-	bB: function (c) {
+	bz: false,
+	bA: function (c) {
 		return !($pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$isLineBreak(c) || $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Language$Helpers$isEscapable(c));
 	},
 	i: '\"'
@@ -8426,7 +8426,7 @@ var $elm$parser$Parser$Advanced$keyword = function (_v0) {
 	var expecting = _v0.b;
 	var progress = !$elm$core$String$isEmpty(kwd);
 	return function (s) {
-		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, kwd, s.d, s.cK, s.bn, s.a5);
+		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, kwd, s.d, s.cJ, s.bn, s.a5);
 		var newOffset = _v1.a;
 		var newRow = _v1.b;
 		var newCol = _v1.c;
@@ -8443,7 +8443,7 @@ var $elm$parser$Parser$Advanced$keyword = function (_v0) {
 			$elm$parser$Parser$Advanced$Good,
 			progress,
 			0,
-			{bn: newCol, f: s.f, h: s.h, d: newOffset, cK: newRow, a5: s.a5});
+			{bn: newCol, f: s.f, h: s.h, d: newOffset, cJ: newRow, a5: s.a5});
 	};
 };
 var $elm$parser$Parser$keyword = function (kwd) {
@@ -8930,7 +8930,6 @@ var $author$project$Days$Day1$countIncreases = function (ints) {
 				ints,
 				A2($elm$core$List$drop, 1, ints))));
 };
-var $author$project$Days$Day1$data = '\n159\n170\n171\n170\n168\n167\n166\n164\n163\n154\n155\n158\n146\n153\n167\n166\n182\n188\n189\n201\n205\n212\n220\n228\n229\n230\n214\n221\n224\n226\n227\n237\n233\n236\n242\n214\n226\n233\n237\n233\n244\n246\n255\n256\n246\n247\n252\n265\n266\n267\n269\n270\n264\n269\n285\n298\n307\n308\n313\n318\n319\n312\n306\n314\n340\n341\n349\n364\n363\n362\n350\n352\n356\n358\n359\n350\n382\n384\n385\n373\n364\n366\n370\n373\n400\n402\n442\n459\n434\n435\n454\n470\n474\n479\n484\n485\n487\n497\n538\n541\n544\n512\n520\n530\n529\n532\n538\n556\n557\n560\n557\n525\n533\n525\n528\n533\n540\n546\n539\n536\n539\n545\n542\n567\n595\n604\n616\n608\n609\n612\n613\n621\n622\n624\n625\n633\n632\n634\n627\n631\n632\n640\n646\n648\n649\n646\n647\n655\n657\n658\n654\n655\n656\n655\n659\n658\n662\n664\n665\n667\n668\n667\n670\n675\n686\n687\n691\n694\n687\n701\n690\n693\n703\n702\n703\n702\n709\n710\n719\n743\n754\n752\n753\n769\n775\n772\n771\n768\n765\n766\n767\n769\n783\n777\n782\n793\n809\n808\n815\n817\n792\n798\n800\n802\n780\n781\n776\n778\n779\n771\n762\n760\n761\n770\n768\n773\n776\n784\n793\n807\n823\n825\n831\n832\n834\n844\n845\n852\n844\n835\n837\n838\n834\n839\n840\n848\n842\n873\n883\n904\n903\n905\n911\n929\n928\n957\n960\n961\n960\n965\n964\n950\n952\n943\n937\n941\n936\n937\n938\n945\n967\n954\n953\n950\n951\n960\n961\n962\n964\n970\n971\n972\n946\n952\n956\n953\n966\n967\n964\n982\n997\n998\n995\n994\n1003\n992\n994\n988\n1005\n1009\n1015\n1016\n1017\n1021\n1019\n1036\n1037\n1038\n1031\n1034\n1035\n1024\n1027\n1049\n1045\n1052\n1012\n1009\n1020\n1031\n1033\n1036\n1032\n1022\n1023\n1024\n1016\n1017\n1021\n1034\n1031\n1011\n1013\n1015\n1016\n1030\n1043\n1044\n1048\n1053\n1054\n1077\n1078\n1080\n1083\n1084\n1083\n1112\n1124\n1125\n1126\n1118\n1117\n1116\n1122\n1125\n1130\n1136\n1140\n1137\n1128\n1157\n1158\n1144\n1146\n1144\n1127\n1145\n1147\n1146\n1125\n1133\n1134\n1133\n1156\n1143\n1160\n1156\n1158\n1160\n1159\n1185\n1201\n1184\n1196\n1198\n1193\n1195\n1204\n1205\n1224\n1235\n1230\n1231\n1229\n1214\n1221\n1225\n1227\n1228\n1223\n1226\n1227\n1239\n1261\n1264\n1265\n1279\n1278\n1271\n1288\n1290\n1288\n1293\n1297\n1300\n1307\n1327\n1332\n1330\n1327\n1304\n1324\n1327\n1328\n1330\n1344\n1330\n1328\n1330\n1331\n1328\n1317\n1320\n1310\n1311\n1322\n1326\n1314\n1313\n1317\n1306\n1312\n1322\n1315\n1318\n1310\n1313\n1314\n1319\n1306\n1302\n1305\n1303\n1305\n1303\n1306\n1303\n1271\n1277\n1283\n1299\n1310\n1328\n1313\n1328\n1332\n1338\n1353\n1346\n1355\n1356\n1353\n1370\n1365\n1367\n1370\n1377\n1374\n1376\n1378\n1386\n1384\n1386\n1387\n1403\n1404\n1405\n1411\n1420\n1421\n1423\n1413\n1411\n1404\n1402\n1413\n1432\n1431\n1446\n1436\n1435\n1432\n1444\n1459\n1482\n1481\n1482\n1481\n1505\n1507\n1511\n1517\n1530\n1531\n1522\n1532\n1538\n1540\n1544\n1546\n1548\n1554\n1555\n1558\n1527\n1529\n1530\n1523\n1508\n1510\n1512\n1509\n1514\n1526\n1527\n1531\n1539\n1570\n1584\n1608\n1637\n1643\n1651\n1660\n1671\n1672\n1674\n1679\n1687\n1685\n1678\n1681\n1692\n1698\n1728\n1734\n1725\n1724\n1751\n1756\n1765\n1775\n1778\n1791\n1793\n1788\n1819\n1824\n1830\n1831\n1830\n1852\n1854\n1844\n1848\n1879\n1898\n1914\n1922\n1927\n1930\n1929\n1943\n1947\n1948\n1965\n1934\n1937\n1939\n1947\n1948\n1944\n1949\n1956\n1954\n1984\n2004\n2008\n2019\n2021\n2022\n2031\n2036\n2054\n2057\n2060\n2061\n2063\n2062\n2063\n2064\n2054\n2058\n2055\n2052\n2057\n2060\n2061\n2060\n2064\n2061\n2063\n2064\n2060\n2061\n2044\n2036\n2040\n2041\n2033\n2020\n2003\n2018\n2017\n2020\n2021\n2013\n2015\n2024\n2041\n2052\n2050\n2075\n2082\n2083\n2084\n2083\n2085\n2091\n2094\n2104\n2107\n2108\n2101\n2103\n2114\n2103\n2107\n2108\n2110\n2104\n2110\n2114\n2123\n2137\n2149\n2155\n2152\n2149\n2150\n2141\n2159\n2162\n2168\n2181\n2182\n2195\n2196\n2202\n2206\n2211\n2221\n2220\n2231\n2238\n2242\n2221\n2211\n2186\n2191\n2168\n2169\n2177\n2178\n2181\n2188\n2214\n2228\n2227\n2228\n2263\n2269\n2268\n2269\n2278\n2279\n2255\n2256\n2257\n2260\n2267\n2260\n2250\n2251\n2250\n2254\n2252\n2248\n2245\n2248\n2250\n2251\n2255\n2257\n2270\n2282\n2286\n2287\n2288\n2313\n2314\n2343\n2338\n2369\n2367\n2369\n2411\n2408\n2389\n2390\n2392\n2378\n2379\n2380\n2382\n2342\n2345\n2343\n2339\n2340\n2341\n2370\n2378\n2395\n2398\n2394\n2382\n2384\n2377\n2384\n2385\n2386\n2387\n2401\n2408\n2409\n2386\n2390\n2405\n2414\n2416\n2420\n2431\n2430\n2446\n2458\n2459\n2467\n2475\n2477\n2481\n2482\n2484\n2485\n2490\n2498\n2502\n2503\n2492\n2487\n2485\n2487\n2474\n2475\n2469\n2472\n2486\n2502\n2504\n2505\n2506\n2504\n2502\n2504\n2503\n2518\n2520\n2535\n2520\n2518\n2521\n2531\n2540\n2545\n2548\n2550\n2551\n2556\n2554\n2558\n2559\n2574\n2571\n2573\n2574\n2582\n2583\n2596\n2602\n2603\n2610\n2618\n2616\n2617\n2629\n2628\n2626\n2641\n2638\n2637\n2643\n2645\n2646\n2652\n2666\n2668\n2671\n2673\n2672\n2675\n2678\n2671\n2670\n2682\n2684\n2667\n2668\n2670\n2667\n2671\n2666\n2664\n2663\n2666\n2663\n2673\n2674\n2675\n2681\n2671\n2675\n2677\n2670\n2669\n2674\n2673\n2682\n2689\n2671\n2647\n2651\n2650\n2669\n2695\n2704\n2706\n2702\n2701\n2700\n2703\n2708\n2711\n2717\n2719\n2720\n2715\n2712\n2680\n2683\n2684\n2685\n2702\n2703\n2686\n2694\n2691\n2695\n2698\n2710\n2716\n2729\n2732\n2742\n2759\n2760\n2742\n2751\n2750\n2780\n2782\n2779\n2778\n2779\n2767\n2770\n2795\n2804\n2806\n2807\n2808\n2809\n2823\n2824\n2825\n2828\n2819\n2823\n2824\n2833\n2807\n2784\n2781\n2793\n2795\n2774\n2737\n2736\n2737\n2742\n2745\n2746\n2749\n2750\n2769\n2774\n2775\n2793\n2796\n2810\n2814\n2808\n2802\n2803\n2806\n2807\n2799\n2798\n2792\n2795\n2798\n2824\n2844\n2831\n2851\n2848\n2852\n2849\n2875\n2871\n2880\n2878\n2882\n2889\n2878\n2883\n2886\n2885\n2886\n2887\n2893\n2894\n2901\n2905\n2907\n2888\n2890\n2895\n2896\n2897\n2874\n2881\n2873\n2874\n2878\n2881\n2893\n2892\n2889\n2890\n2893\n2888\n2883\n2884\n2873\n2871\n2875\n2866\n2839\n2841\n2848\n2845\n2857\n2880\n2881\n2882\n2883\n2888\n2899\n2902\n2905\n2899\n2927\n2953\n2952\n2956\n2963\n2964\n2962\n2968\n2967\n2964\n2966\n2967\n2961\n2960\n2979\n2987\n3007\n3030\n3035\n3042\n3065\n3053\n3054\n3055\n3056\n3059\n3060\n3058\n3069\n3074\n3073\n3065\n3071\n3074\n3087\n3088\n3079\n3086\n3121\n3151\n3147\n3145\n3149\n3150\n3149\n3151\n3152\n3157\n3146\n3153\n3154\n3148\n3146\n3151\n3152\n3157\n3158\n3162\n3167\n3153\n3163\n3169\n3179\n3177\n3181\n3183\n3188\n3187\n3191\n3207\n3214\n3223\n3224\n3225\n3231\n3239\n3241\n3246\n3252\n3253\n3255\n3254\n3251\n3250\n3252\n3251\n3209\n3228\n3233\n3232\n3231\n3239\n3236\n3233\n3236\n3241\n3248\n3247\n3250\n3252\n3284\n3298\n3300\n3301\n3286\n3284\n3290\n3289\n3290\n3291\n3286\n3288\n3295\n3296\n3284\n3283\n3285\n3289\n3251\n3249\n3250\n3251\n3262\n3269\n3270\n3269\n3255\n3258\n3253\n3266\n3270\n3251\n3245\n3247\n3249\n3243\n3244\n3250\n3258\n3287\n3288\n3312\n3320\n3352\n3351\n3369\n3360\n3362\n3364\n3374\n3383\n3364\n3381\n3390\n3391\n3394\n3397\n3407\n3412\n3424\n3432\n3448\n3446\n3447\n3456\n3457\n3467\n3468\n3469\n3476\n3477\n3479\n3514\n3523\n3517\n3518\n3519\n3525\n3528\n3529\n3531\n3532\n3540\n3541\n3544\n3540\n3541\n3542\n3556\n3562\n3553\n3555\n3556\n3558\n3560\n3564\n3551\n3561\n3562\n3561\n3562\n3523\n3516\n3505\n3508\n3511\n3492\n3494\n3512\n3494\n3493\n3487\n3488\n3504\n3522\n3528\n3537\n3550\n3567\n3569\n3582\n3583\n3593\n3613\n3641\n3636\n3647\n3651\n3668\n3679\n3676\n3685\n3665\n3667\n3669\n3674\n3673\n3675\n3689\n3700\n3692\n3698\n3691\n3699\n3685\n3686\n3687\n3696\n3697\n3699\n3700\n3701\n3695\n3696\n3698\n3696\n3699\n3688\n3690\n3699\n3688\n3692\n3693\n3698\n3685\n3680\n3684\n3685\n3686\n3693\n3698\n3705\n3702\n3684\n3686\n3680\n3681\n3683\n3670\n3671\n3676\n3681\n3690\n3681\n3694\n3695\n3708\n3710\n3691\n3687\n3693\n3682\n3678\n3666\n3671\n3675\n3674\n3675\n3672\n3674\n3675\n3674\n3673\n3644\n3646\n3638\n3639\n3637\n3638\n3646\n3652\n3687\n3688\n3693\n3669\n3676\n3683\n3684\n3699\n3690\n3674\n3678\n3677\n3683\n3680\n3703\n3699\n3706\n3707\n3699\n3695\n3705\n3704\n3705\n3719\n3739\n3742\n3743\n3728\n3729\n3730\n3743\n3742\n3752\n3753\n3754\n3760\n3771\n3773\n3782\n3784\n3794\n3814\n3823\n3837\n3840\n3855\n3848\n3861\n3864\n3841\n3844\n3846\n3852\n3853\n3865\n3868\n3877\n3879\n3907\n3932\n3933\n3902\n3914\n3920\n3922\n3908\n3922\n3927\n3926\n3928\n3908\n3912\n3881\n3907\n3890\n3891\n3885\n3900\n3902\n3904\n3901\n3907\n3912\n3914\n3925\n3937\n3938\n3946\n3948\n3947\n3962\n3969\n3974\n3977\n3978\n3985\n3982\n3980\n4004\n4014\n4009\n4010\n4009\n4010\n4029\n4026\n4031\n4032\n4034\n4013\n4016\n4017\n4019\n4020\n4028\n4031\n4032\n4033\n4040\n4041\n4046\n4059\n4065\n4077\n4078\n4079\n4094\n4086\n4089\n4090\n4092\n4091\n4070\n4110\n4111\n4099\n4108\n4112\n4092\n4097\n4099\n4100\n4140\n4141\n4138\n4143\n4142\n4132\n4134\n4143\n4157\n4161\n4185\n4180\n4192\n4193\n4199\n4201\n4203\n4187\n4190\n4187\n4188\n4190\n4200\n4201\n4193\n4192\n4193\n4191\n4194\n4197\n4193\n4200\n4201\n4210\n4216\n4234\n4239\n4225\n4226\n4228\n4232\n4226\n4227\n4235\n4238\n4239\n4244\n4256\n4255\n4254\n4229\n4227\n4233\n4254\n4255\n4251\n4252\n4251\n4247\n4250\n4247\n4249\n4250\n4235\n4236\n4232\n4245\n4247\n4243\n4244\n4246\n4252\n4266\n4271\n4273\n4277\n4279\n4280\n4278\n4279\n4269\n4299\n4300\n4301\n4305\n4290\n4294\n4303\n4304\n4307\n4325\n4326\n4327\n4312\n4313\n4316\n4315\n4319\n4332\n4333\n4356\n4354\n4358\n4366\n4369\n4370\n4381\n4382\n4381\n4402\n4403\n4410\n4409\n4421\n4424\n4448\n4450\n4447\n4475\n4472\n4486\n4464\n4463\n4466\n4465\n4468\n4477\n4478\n4490\n4527\n4528\n4532\n4533\n4525\n4527\n4534\n4556\n4558\n4559\n4555\n4562\n4565\n4566\n4565\n4596\n4604\n4621\n4648\n4649\n4650\n4655\n4656\n4661\n4668\n4682\n4675\n4693\n4686\n4680\n4681\n4685\n4686\n4693\n4694\n4698\n4694\n4706\n4716\n4717\n4718\n4720\n4724\n4730\n4731\n4738\n4740\n4738\n4741\n4740\n4743\n4750\n4751\n4752\n4759\n4796\n4807\n4800\n4815\n4817\n4825\n4853\n4831\n4836\n4839\n4847\n4844\n4851\n4855\n4860\n4858\n4859\n4865\n4874\n4875\n4902\n4910\n4909\n4908\n4922\n4924\n4921\n4922\n4911\n4910\n4907\n4911\n4912\n4936\n4918\n4921\n4915\n4927\n4929\n4931\n4932\n4939\n4944\n4945\n4946\n4949\n4947\n4954\n4964\n4965\n4977\n4978\n4982\n4975\n4978\n4982\n4981\n4985\n4993\n4994\n5000\n5017\n5015\n5039\n5037\n5035\n5047\n5064\n5066\n5072\n5071\n5076\n5078\n5082\n5100\n5102\n5107\n5106\n5104\n5105\n5106\n5105\n5117\n5109\n5110\n5116\n5117\n5118\n5100\n5102\n5103\n5110\n5111\n5126\n5135\n5136\n5134\n5135\n5175\n5177\n5176\n5177\n5203\n5202\n5223\n5226\n5223\n5230\n5256\n5260\n5265\n5267\n5268\n5274\n5273\n5275\n5278\n5284\n5270\n5271\n5272\n5279\n5290\n5298\n5302\n5318\n5321\n5324\n5336\n5335\n5343\n5347\n5352\n5358\n5367\n5368\n5371\n5368\n5373\n5374\n5364\n5367\n5364\n5356\n5360\n5352\n5361\n5356\n5373\n5374\n5375\n5386\n5396\n5398\n5394\n5396\n5398\n5397\n5412\n5413\n5405\n5386\n5389\n5388\n5387\n5403\n5406\n5420\n5429\n5430\n5441\n5449\n5458\n5467\n5466\n5467\n5479\n5478\n5479\n5485\n5525\n5524\n5525\n5524\n5492\n5493\n5497\n5502\n5503\n5504\n5505\n5506\n5515\n5512\n5511\n5513\n5519\n5520\n5521\n5538\n5556\n5567\n5568\n5569\n5587\n5578\n5579\n5581\n5577\n5581\n5591\n5592\n5570\n5572\n5578\n5572\n5575\n5577\n5578\n5586\n5585\n5577\n5578\n5575\n5581\n5569\n5572\n5585\n5576\n5579\n5568\n5569\n5572\n5571\n5572\n5574\n5567\n5572\n5575\n5580\n5583\n5586\n5600\n5602\n5601\n5606\n5609\n5611\n5614\n5623\n5620\n5632\n5640\n5641\n5636\n5620\n5626\n5628\n5636\n5645\n5646\n5623\n5622\n5654\n5673\n5679\n5688\n5695\n5690\n5692\n5709\n5710\n5712\n5722\n5721\n5735\n5746\n5758\n5786\n5766\n5769\n5780\n5781\n5793\n5811\n5812\n5809\n5823\n5825\n5804\n5794\n5795\n5787\n5788\n5819\n5826\n5830\n5832\n5809\n5803\n5804\n5805\n5824\n5825\n5831\n5841\n5842\n5843\n5832\n5838\n5839\n5841\n5840\n5837\n5838\n5832\n5834\n5848\n5852\n5863\n5858\n5859\n5862\n5861\n5863\n5864\n5868\n5875\n5861\n5860\n5837\n5838\n5840\n5841\n5842\n5862\n5877\n5878\n5877\n5878\n5881\n';
 var $author$project$Days$Day1$parseInts = A2(
 	$elm$core$Basics$composeR,
 	$elm$core$String$lines,
@@ -8938,11 +8937,12 @@ var $author$project$Days$Day1$parseInts = A2(
 		$elm$core$Basics$composeR,
 		$elm$core$List$map($elm$core$String$toInt),
 		$elm$core$List$filterMap($elm$core$Basics$identity)));
+var $author$project$Days$Day1$sampleData = '\n199\n200\n208\n210\n200\n207\n240\n269\n260\n263\n';
 var $author$project$Days$Day1$part1 = $author$project$Days$Day1$countIncreases(
-	$author$project$Days$Day1$parseInts($author$project$Days$Day1$data));
+	$author$project$Days$Day1$parseInts($author$project$Days$Day1$sampleData));
 var $elm$core$List$map3 = _List_map3;
 var $author$project$Days$Day1$part2 = function () {
-	var ints = $author$project$Days$Day1$parseInts($author$project$Days$Day1$data);
+	var ints = $author$project$Days$Day1$parseInts($author$project$Days$Day1$sampleData);
 	var windows = A4(
 		$elm$core$List$map3,
 		F3(
@@ -8963,8 +8963,7 @@ var $author$project$Days$Day1$answer = A2(
 			'Part2: ' + $elm$core$String$fromInt($author$project$Days$Day1$part2)
 		]));
 var $author$project$Days$Day1$pitch = '\n--- Day 1: Sonar Sweep ---\n\nYou\'re minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!\n\nBefore you know it, you\'re inside a submarine the Elves keep ready for situations like this. It\'s covered in Christmas lights (because of course it is), and it even has an experimental antenna that should be able to track the keys if you can boost its signal strength high enough; there\'s a little meter that indicates the antenna\'s signal strength by displaying 0-50 stars.\n\nYour instincts tell you that in order to save Christmas, you\'ll need to get all fifty stars by December 25th.\n\nCollect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!\n\nAs the submarine drops below the surface of the ocean, it automatically performs a sonar sweep of the nearby sea floor. On a small screen, the sonar sweep report (your puzzle input) appears: each line is a measurement of the sea floor depth as the sweep looks further and further away from the submarine.\n\nFor example, suppose you had the following report:\n\n    199\n    200\n    208\n    210\n    200\n    207\n    240\n    269\n    260\n    263\n\nThis report indicates that, scanning outward from the submarine, the sonar sweep found depths of `199`, `200`, `208`, `210`, and so on.\n\nThe first order of business is to figure out how quickly the depth increases, just so you know what you\'re dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.\n\nTo do this, count the number of times a depth measurement increases from the previous measurement. (There is no measurement before the first measurement.) In the example above, the changes are as follows:\n\n    199 (N/A - no previous measurement)\n    200 (increased)\n    208 (increased)\n    210 (increased)\n    200 (decreased)\n    207 (increased)\n    240 (increased)\n    269 (increased)\n    260 (decreased)\n    263 (increased)\n\nIn this example, there are `7` measurements that are larger than the previous measurement.\n\nHow many measurements are larger than the previous measurement?\n\n--- Part Two ---\n\nConsidering every single measurement isn\'t as useful as you expected: there\'s just too much noise in the data.\n\nInstead, consider sums of a three-measurement sliding window. Again considering the above example:\n\n    199  A\n    200  A B\n    208  A B C\n    210    B C D\n    200  E   C D\n    207  E F   D\n    240  E F G\n    269    F G H\n    260      G H\n    263        H\n\nStart by comparing the first and second three-measurement windows. The measurements in the first window are marked `A (199, 200, 208)`; their sum is `199 + 200 + 208 = 607`. The second window is marked `B (200, 208, 210)`; its sum is `618`. The sum of measurements in the second window is larger than the sum of the first, so this first comparison increased.\n\nYour goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare A with B, then compare B with C, then C with D, and so on. Stop when there aren\'t enough measurements left to create a new three-measurement sum.\n\nIn the above example, the sum of each three-measurement window is as follows:\n\n    A: 607 (N/A - no previous sum)\n    B: 618 (increased)\n    C: 618 (no change)\n    D: 617 (decreased)\n    E: 647 (increased)\n    F: 716 (increased)\n    G: 769 (increased)\n    H: 792 (increased)\n\nIn this example, there are `5` sums that are larger than the previous sum.\n\nConsider sums of a three-measurement sliding window. How many sums are larger than the previous sum?\n';
-var $author$project$Days$Day1$day = {b4: $author$project$Days$Day1$answer, cA: $author$project$Days$Day1$pitch};
-var $author$project$Days$Day2$data = '\nforward 9\nforward 9\nforward 3\ndown 2\nforward 8\ndown 8\nforward 1\ndown 6\ndown 9\ndown 9\nforward 1\nup 5\nup 4\nup 8\ndown 6\ndown 7\nforward 4\nforward 6\nforward 2\nforward 2\nforward 4\ndown 2\ndown 6\nforward 6\nforward 9\nup 4\nup 6\ndown 2\nforward 7\nup 7\ndown 8\ndown 4\ndown 6\nforward 1\ndown 2\nup 1\nforward 8\ndown 9\nforward 6\nup 9\ndown 8\nforward 5\nforward 8\ndown 8\nup 3\nup 9\ndown 2\ndown 2\nforward 5\nup 7\nforward 5\ndown 6\nforward 4\ndown 2\nup 2\nup 7\nup 1\ndown 4\ndown 8\nforward 6\ndown 2\nforward 7\ndown 1\nforward 7\nforward 1\nup 1\ndown 4\ndown 3\ndown 4\ndown 4\nup 8\ndown 1\nup 7\nforward 8\ndown 5\nup 1\ndown 4\ndown 3\nforward 4\nup 7\nforward 1\ndown 4\ndown 2\ndown 4\nup 8\nup 6\ndown 1\nup 3\ndown 5\nforward 4\ndown 3\nforward 9\ndown 9\nforward 2\ndown 4\nup 3\ndown 4\nforward 1\nforward 7\nforward 9\nforward 7\nforward 3\nforward 6\ndown 4\nforward 7\ndown 5\ndown 1\nforward 7\nup 1\ndown 8\ndown 7\ndown 7\ndown 7\ndown 3\nforward 4\nforward 6\nforward 6\nforward 1\ndown 7\ndown 6\ndown 8\nup 5\ndown 7\nup 6\nforward 9\ndown 7\ndown 1\ndown 9\nforward 8\nup 5\ndown 6\nforward 3\nup 2\ndown 1\nforward 2\ndown 3\nup 6\nforward 8\nforward 1\nforward 3\ndown 9\nforward 1\ndown 3\nup 7\nforward 8\nup 8\ndown 7\ndown 2\nforward 3\nup 7\nforward 6\ndown 7\ndown 6\nup 5\nforward 9\ndown 7\nup 5\nforward 6\nup 5\nup 6\nforward 6\ndown 8\ndown 1\nforward 7\nforward 6\ndown 5\ndown 6\nforward 9\ndown 6\nup 5\nforward 9\nforward 4\ndown 1\nforward 5\ndown 4\nforward 5\nforward 1\ndown 1\nforward 4\ndown 5\nforward 4\nup 8\ndown 1\nforward 6\ndown 5\nforward 8\nforward 8\nforward 5\ndown 7\ndown 4\nforward 4\nup 1\nup 8\ndown 6\nup 5\nforward 6\nforward 5\nforward 9\ndown 3\ndown 5\nforward 3\ndown 6\nforward 6\nup 7\nup 6\ndown 6\ndown 1\nforward 8\nforward 9\nup 5\nforward 8\nforward 9\nforward 9\ndown 2\ndown 8\nforward 8\ndown 2\nup 8\ndown 2\ndown 2\nup 1\ndown 5\ndown 6\ndown 1\ndown 8\ndown 9\nforward 3\nforward 2\ndown 6\nup 8\nforward 9\nforward 7\nforward 1\ndown 8\nup 8\nforward 8\ndown 5\ndown 3\nup 3\nforward 6\nforward 5\ndown 4\nforward 4\ndown 4\nforward 5\nforward 9\nforward 2\nforward 9\ndown 1\ndown 3\ndown 6\nforward 6\ndown 7\nforward 3\nforward 4\nforward 1\ndown 6\nforward 1\nforward 4\nforward 2\nforward 2\nforward 1\nforward 2\ndown 1\nup 2\nforward 1\ndown 3\nforward 8\ndown 3\ndown 9\nforward 5\ndown 3\ndown 3\nforward 2\nforward 9\ndown 9\nforward 4\ndown 2\nforward 5\nup 8\ndown 4\nforward 5\ndown 1\nforward 9\ndown 1\nforward 7\nforward 2\ndown 2\ndown 6\nup 3\nforward 7\nup 4\nforward 7\nforward 6\ndown 8\nforward 2\ndown 3\nforward 9\nforward 4\nforward 8\ndown 6\nforward 8\ndown 9\ndown 2\ndown 3\nforward 1\ndown 5\ndown 3\nforward 2\nforward 7\ndown 4\ndown 3\nforward 9\ndown 2\nforward 2\nforward 1\nup 6\nup 4\ndown 5\nforward 5\nup 8\ndown 7\nforward 6\ndown 5\nforward 3\nforward 3\nforward 7\nup 9\nup 6\ndown 5\nup 7\nforward 2\nforward 5\ndown 9\ndown 6\nforward 7\ndown 9\nup 2\nup 5\nforward 1\nforward 8\nforward 9\nup 8\nforward 9\nforward 5\nup 9\ndown 4\ndown 7\nforward 2\nforward 1\ndown 4\nup 8\ndown 5\ndown 7\ndown 9\ndown 3\ndown 9\nup 8\nup 7\nup 8\ndown 8\ndown 2\ndown 6\ndown 6\nup 5\nup 9\nforward 1\ndown 8\nup 4\nup 3\nforward 7\nup 7\ndown 3\nup 1\nforward 3\ndown 7\nforward 8\nforward 2\ndown 6\ndown 2\nup 7\nup 5\nforward 7\nforward 1\nforward 6\nup 6\nforward 5\ndown 2\nup 4\nforward 2\ndown 9\nforward 6\nforward 3\nforward 3\nforward 4\nforward 2\ndown 6\nforward 9\nforward 7\ndown 4\nup 1\nforward 4\ndown 6\ndown 6\nup 1\nup 1\nforward 3\ndown 5\nup 5\ndown 3\ndown 6\nup 8\ndown 2\nup 6\nup 1\nforward 8\nup 6\ndown 8\nforward 9\nforward 4\nforward 9\ndown 7\ndown 9\ndown 6\ndown 1\nforward 9\nforward 9\ndown 6\ndown 5\nup 6\ndown 9\nup 4\nup 5\nforward 8\ndown 4\ndown 5\nforward 8\nforward 7\ndown 2\nforward 2\nforward 6\nforward 7\ndown 1\ndown 7\ndown 1\ndown 6\nforward 2\nup 2\ndown 4\ndown 8\nforward 1\ndown 1\ndown 3\ndown 3\nup 9\ndown 9\nforward 3\nup 4\nforward 1\ndown 9\ndown 8\ndown 9\nforward 5\nforward 4\nup 3\ndown 8\nforward 2\ndown 3\nup 5\nforward 4\ndown 7\ndown 8\ndown 9\nforward 8\ndown 8\nforward 4\ndown 6\ndown 3\nforward 5\ndown 3\ndown 9\ndown 4\nup 8\nforward 4\nup 6\ndown 3\nforward 6\ndown 9\ndown 7\nforward 7\nforward 3\nforward 2\nforward 4\ndown 4\ndown 5\nup 9\ndown 2\ndown 6\ndown 9\nforward 7\nforward 3\nup 3\nforward 3\ndown 4\ndown 7\nforward 2\ndown 2\nforward 3\ndown 8\ndown 7\ndown 7\nforward 2\nforward 2\nup 6\nforward 8\nforward 9\nup 3\nforward 8\nforward 5\nforward 7\nup 3\nforward 3\nforward 6\ndown 5\ndown 5\ndown 4\nforward 1\nforward 8\nforward 4\nforward 3\ndown 1\nforward 8\ndown 4\nup 5\nforward 4\ndown 2\nforward 7\ndown 2\nforward 9\ndown 1\nforward 6\nforward 8\nforward 6\nforward 7\nforward 1\nforward 6\ndown 5\nup 3\nforward 7\ndown 6\nforward 2\ndown 2\nforward 8\nforward 9\nup 7\nforward 1\nforward 1\nup 1\nforward 1\ndown 2\nforward 6\ndown 9\nup 1\nup 2\nforward 6\nforward 1\nforward 7\ndown 1\nup 8\nforward 7\nup 6\nup 4\ndown 1\nforward 2\ndown 4\ndown 1\ndown 7\ndown 4\nup 3\nforward 8\nforward 3\nforward 5\ndown 7\ndown 8\nforward 5\nforward 2\ndown 5\ndown 2\nforward 2\nup 9\ndown 3\ndown 5\nup 7\ndown 4\ndown 2\ndown 7\nforward 6\ndown 2\nforward 1\nup 4\nforward 2\nforward 2\ndown 5\ndown 1\ndown 1\nforward 7\nforward 6\ndown 7\ndown 5\nup 1\nup 3\nforward 3\nforward 9\nforward 4\ndown 1\ndown 5\nforward 3\nforward 7\ndown 8\nforward 8\nforward 2\nforward 7\nup 7\ndown 7\ndown 4\ndown 2\nup 6\nup 1\nforward 8\nup 8\nup 6\ndown 8\nforward 1\ndown 5\nforward 3\ndown 3\ndown 3\nforward 1\nup 3\nup 3\nforward 8\nforward 8\ndown 8\nforward 6\nforward 2\ndown 7\nforward 8\ndown 7\nup 5\nforward 7\ndown 1\nforward 9\nup 6\ndown 2\nup 2\nup 5\nforward 6\nforward 9\nforward 3\ndown 8\nforward 8\ndown 2\nup 5\ndown 9\nforward 5\ndown 6\ndown 3\ndown 9\nup 8\nup 3\ndown 2\nforward 7\nforward 4\nforward 4\nforward 8\nup 6\nup 4\nforward 9\ndown 6\ndown 8\nup 3\nup 5\nforward 8\nforward 7\nforward 4\ndown 8\nforward 1\nforward 5\ndown 9\nforward 8\nup 6\ndown 6\ndown 8\ndown 2\nforward 4\nforward 9\nforward 2\nforward 7\ndown 3\nforward 3\nup 6\ndown 4\nforward 2\nup 4\ndown 4\nforward 4\nforward 3\nforward 1\nup 6\nforward 1\ndown 1\nforward 7\nup 4\nforward 3\ndown 4\nup 6\nup 2\nup 8\ndown 1\ndown 6\ndown 6\ndown 1\ndown 7\nforward 8\ndown 9\nforward 5\nup 2\nup 7\nup 5\ndown 6\nup 1\nup 6\nforward 4\ndown 7\nforward 5\nforward 1\ndown 6\nforward 2\ndown 2\nforward 9\ndown 9\nup 6\nforward 1\nup 7\ndown 7\nforward 1\ndown 6\nup 1\nforward 2\nforward 1\ndown 4\nforward 9\nforward 7\nforward 5\ndown 1\nforward 2\ndown 2\ndown 2\ndown 5\nforward 1\nup 8\nforward 9\ndown 7\nforward 9\ndown 2\nup 5\ndown 9\ndown 8\ndown 5\nforward 8\nforward 4\ndown 4\ndown 6\nforward 1\ndown 5\nup 6\ndown 3\ndown 3\nforward 9\ndown 9\nforward 6\ndown 5\nup 6\ndown 5\nup 7\nforward 9\ndown 2\ndown 4\ndown 8\nforward 4\nup 7\nforward 9\nforward 7\nup 5\ndown 7\ndown 5\ndown 1\nforward 5\nforward 4\ndown 2\nup 3\nforward 1\nup 4\nup 9\ndown 4\nforward 3\ndown 4\ndown 9\nforward 4\nup 2\nup 3\nforward 7\nup 6\ndown 8\ndown 8\nforward 6\nforward 2\nforward 3\nforward 9\nforward 7\ndown 6\ndown 7\ndown 4\ndown 2\nforward 8\ndown 6\nforward 6\nforward 6\nforward 9\ndown 8\ndown 1\nup 5\ndown 1\nforward 9\ndown 1\nup 8\nforward 8\ndown 3\nforward 1\ndown 9\nforward 6\nforward 4\nforward 8\ndown 2\nup 8\ndown 2\nup 8\ndown 9\ndown 4\nup 7\nforward 7\nforward 5\ndown 5\ndown 4\nup 8\nforward 1\ndown 7\nforward 1\nup 9\nforward 9\nforward 7\nforward 9\ndown 9\nforward 4\ndown 7\nforward 6\nforward 6\nup 3\nforward 2\ndown 5\nup 8\ndown 1\nup 8\ndown 4\ndown 1\nup 6\nforward 4\nforward 3\nforward 6\ndown 3\nforward 4\nforward 4\nforward 4\ndown 8\nforward 3\nup 8\nup 8\ndown 8\nforward 6\nforward 8\nup 5\nforward 6\ndown 8\ndown 7\nup 4\nforward 6\nforward 9\ndown 9\nforward 4\nup 2\nforward 1\nup 3\ndown 9\ndown 8\nforward 8\nforward 8\nforward 7\ndown 6\ndown 1\nup 6\nup 6\nforward 9\nforward 7\nforward 7\ndown 3\ndown 6\ndown 9\ndown 4\nforward 7\nforward 3\nforward 3\ndown 7\nup 5\ndown 3\nforward 6\nforward 3\nforward 5\nup 3\ndown 7\nforward 2\nup 7\nforward 9\ndown 3\ndown 9\nforward 8\nforward 5\nup 7\nup 2\nup 8\nforward 6\ndown 8\nforward 2\nforward 4\nup 2\nforward 2\nforward 8\nforward 4\ndown 8\nforward 5\ndown 4\ndown 7\nforward 3\ndown 3\nup 1\ndown 9\nforward 9\ndown 2\ndown 1\nforward 1\ndown 6\ndown 3\nforward 5\ndown 3\ndown 8\nup 7\ndown 1\nup 9\ndown 4\nforward 9\ndown 4\nforward 3\nforward 6\ndown 3\nforward 3\ndown 2\ndown 7\ndown 1\nup 4\ndown 9\ndown 1\ndown 3\ndown 4\ndown 8\ndown 7\nforward 4\ndown 4\ndown 9\nforward 2\nforward 7\nforward 2\ndown 6\nup 8\nforward 6\ndown 2\nforward 6\nup 8\nforward 6\ndown 9\nforward 2\nforward 6\n';
+var $author$project$Days$Day1$day = {b3: $author$project$Days$Day1$answer, cz: $author$project$Days$Day1$pitch};
 var $author$project$Days$Day2$executeCommand1 = F2(
 	function (command, pos) {
 		switch (command.$) {
@@ -8972,17 +8971,17 @@ var $author$project$Days$Day2$executeCommand1 = F2(
 				var _int = command.a;
 				return _Utils_update(
 					pos,
-					{C: pos.C - _int});
+					{D: pos.D - _int});
 			case 1:
 				var _int = command.a;
 				return _Utils_update(
 					pos,
-					{C: pos.C + _int});
+					{D: pos.D + _int});
 			default:
 				var _int = command.a;
 				return _Utils_update(
 					pos,
-					{M: pos.M + _int});
+					{N: pos.N + _int});
 		}
 	});
 var $author$project$Days$Day2$Down = function (a) {
@@ -9049,17 +9048,18 @@ var $author$project$Days$Day2$parseCommands = A2(
 var $author$project$Days$Day2$process = F2(
 	function (exec, data_) {
 		return function (_v0) {
-			var x = _v0.M;
-			var y = _v0.C;
+			var x = _v0.N;
+			var y = _v0.D;
 			return x * y;
 		}(
 			A3(
 				$elm$core$List$foldl,
 				exec,
-				{Y: 0, M: 0, C: 0},
+				{Y: 0, N: 0, D: 0},
 				$author$project$Days$Day2$parseCommands(data_)));
 	});
-var $author$project$Days$Day2$part1 = A2($author$project$Days$Day2$process, $author$project$Days$Day2$executeCommand1, $author$project$Days$Day2$data);
+var $author$project$Days$Day2$sampleData = '\nforward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2\n';
+var $author$project$Days$Day2$part1 = A2($author$project$Days$Day2$process, $author$project$Days$Day2$executeCommand1, $author$project$Days$Day2$sampleData);
 var $author$project$Days$Day2$executeCommand2 = F2(
 	function (command, pos) {
 		var aim = pos.Y;
@@ -9078,10 +9078,10 @@ var $author$project$Days$Day2$executeCommand2 = F2(
 				var _int = command.a;
 				return _Utils_update(
 					pos,
-					{M: pos.M + _int, C: pos.C + (aim * _int)});
+					{N: pos.N + _int, D: pos.D + (aim * _int)});
 		}
 	});
-var $author$project$Days$Day2$part2 = A2($author$project$Days$Day2$process, $author$project$Days$Day2$executeCommand2, $author$project$Days$Day2$data);
+var $author$project$Days$Day2$part2 = A2($author$project$Days$Day2$process, $author$project$Days$Day2$executeCommand2, $author$project$Days$Day2$sampleData);
 var $author$project$Days$Day2$answer = A2(
 	$elm$core$String$join,
 	'\n',
@@ -9091,7 +9091,7 @@ var $author$project$Days$Day2$answer = A2(
 			'Part2: ' + $elm$core$String$fromInt($author$project$Days$Day2$part2)
 		]));
 var $author$project$Days$Day2$pitch = '\n--- Day 2: Dive! ---\n\nNow, you need to figure out how to pilot this thing.\n\nIt seems like the submarine can take a series of commands like forward 1, down 2, or up 3:\n\n- `forward X` increases the horizontal position by `X` units.\n- `down X` increases the depth by `X` units.\n- `up X` decreases the depth by `X` units.\n\nNote that since you\'re on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.\n\nThe submarine seems to already have a planned course (your puzzle input). You should probably figure out where it\'s going. For example:\n\n    forward 5\n    down 5\n    forward 8\n    up 3\n    down 8\n    forward 2\n\nYour horizontal position and depth both start at 0. The steps above would then modify them as follows:\n\n- `forward 5` adds `5` to your horizontal position, a total of `5`.\n- `down 5` adds `5` to your depth, resulting in a value of `5`.\n- `forward 8` adds `8` to your horizontal position, a total of `13`.\n- `up 3` decreases your depth by `3`, resulting in a value of `2`.\n- `down 8` adds `8` to your depth, resulting in a value of `10`.\n- `forward 2` adds `2` to your horizontal position, a total of `15`.\n\nAfter following these instructions, you would have a horizontal position of `15` and a depth of `10`. (Multiplying these together produces `150`.)\n\nCalculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n\n--- Part Two ---\n\nBased on your calculations, the planned course doesn\'t seem to make any sense. You find the submarine manual and discover that the process is actually slightly more complicated.\n\nIn addition to horizontal position and depth, you\'ll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:\n\n- `down X` increases your aim by `X` units.\n- `up X` decreases your aim by `X` units.\n- `forward X` does two things:\n    - It increases your horizontal position by `X` units.\n    - It increases your depth by your aim multiplied by `X`.\n\nAgain note that since you\'re on a submarine, down and up do the opposite of what you might expect: "down" means aiming in the positive direction.\n\nNow, the above example does something different:\n\n- `forward 5` adds `5` to your horizontal position, a total of `5`. Because your aim is `0,` your depth does not change.\n- `down 5` adds `5` to your aim, resulting in a value of `5`.\n- `forward 8` adds `8` to your horizontal position, a total of `13`. Because your aim is `5,` your depth increases by `8*5=40`.\n- `up 3` decreases your aim by `3`, resulting in a value of `2`.\n- `down 8` adds `8` to your aim, resulting in a value of `10`.\n- `forward 2` adds `2` to your horizontal position, a total of `15`. Because your aim is `10`, your depth increases by `2*10=20` to a total of `60`.\n\nAfter following these new instructions, you would have a horizontal position of `15` and a depth of `60`. (Multiplying these produces `900`.)\n\nUsing this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?\n';
-var $author$project$Days$Day2$day = {b4: $author$project$Days$Day2$answer, cA: $author$project$Days$Day2$pitch};
+var $author$project$Days$Day2$day = {b3: $author$project$Days$Day2$answer, cz: $author$project$Days$Day2$pitch};
 var $elm$core$Tuple$pair = F2(
 	function (a, b) {
 		return _Utils_Tuple2(a, b);
@@ -9119,21 +9119,20 @@ var $author$project$Days$Day3$countBits = A2(
 		function (x, acc) {
 			return (x === '1') ? _Utils_update(
 				acc,
-				{T: acc.T + 1}) : ((x === '0') ? _Utils_update(
+				{U: acc.U + 1}) : ((x === '0') ? _Utils_update(
 				acc,
-				{S: acc.S + 1}) : acc);
+				{T: acc.T + 1}) : acc);
 		}),
-	{S: 0, T: 0});
-var $author$project$Days$Day3$data = '\n000011010001\n000001110100\n111100101010\n111001100111\n001010100100\n101010010001\n000001100011\n010010110101\n011001011100\n001110111000\n111101011111\n001111001011\n100110010010\n000001011001\n110001000111\n010011111110\n111011000111\n001000110111\n010011101110\n111010111000\n001101100000\n111101010111\n111000010111\n101111001011\n100000000011\n110000111100\n101110110001\n010000100011\n001100111111\n011011011100\n000001110011\n001110111011\n011110011101\n110011010010\n010111001010\n110010000100\n101111001101\n011111001101\n111110010000\n001011010011\n111111001101\n011110110000\n100001011001\n011010010010\n101001111010\n001100001010\n110000000010\n010000011001\n010010010110\n110101111111\n011001101110\n001100000111\n101111001010\n110000100000\n000111101110\n101101111011\n100110101011\n011010011000\n101000101010\n000001010100\n110101011101\n010101010100\n011010000111\n011001001001\n011101010001\n111111011110\n100010100110\n101001111110\n110010100101\n111110110011\n101101111101\n001010110000\n001111001010\n011001111010\n000111010010\n010100000001\n101000111110\n110111000011\n110111011101\n110111001000\n111111001000\n001000010110\n110000010010\n001011010001\n011000110000\n101001101001\n000101101001\n010100111100\n100001111110\n010011001100\n100010010111\n000010000000\n010110101111\n010000100010\n110111010111\n110100011010\n000111101100\n011110101000\n010000010111\n011010111101\n110111111000\n110001010101\n101011110010\n110011111001\n010111101010\n000000010000\n010010011000\n100100001110\n001101011101\n101101010100\n000011001101\n101000000001\n101000000111\n110001010011\n100001011010\n000100111101\n100011000101\n110001001000\n000110011111\n010100111001\n111111111011\n000010010100\n101001011000\n011000011010\n010011111111\n101100001101\n110101010111\n111010011001\n100010111011\n100010000000\n111001111010\n010111011110\n010010000101\n101100110110\n111101001000\n000010111011\n111010010100\n101011011110\n110110010111\n101100010011\n000110101001\n100010101111\n101001010011\n111010100101\n000011011010\n110010111001\n010100101110\n101001001101\n101110011111\n110101100010\n110100111001\n111110100111\n101101000010\n111111111000\n100001100001\n011100100010\n011100101011\n111101111111\n010011000100\n010001110111\n100101001100\n111100100110\n110001111110\n001100100110\n010011011001\n001001010011\n111000100100\n011011010111\n101011010010\n101100001111\n011111000111\n100001101000\n011101101101\n011000001010\n100101111011\n111000100001\n011101111000\n011011001011\n011010011001\n101111100011\n010001110000\n000101110010\n010100001111\n100110010001\n110011111100\n011100100100\n010011111001\n001010011011\n000111111100\n101000000010\n110101010000\n101110011101\n001110001110\n001110100111\n010111010101\n100100001111\n001111010110\n100010111010\n001010000100\n010001001100\n011111010011\n010000100110\n110011000111\n111010000100\n101101001011\n010110111001\n000110100101\n000010011000\n000111011100\n011010101100\n101100110000\n101001011001\n110011010100\n000101011000\n110010110111\n101001101101\n010100011101\n101100011010\n010111000111\n010110101001\n111000011010\n011011100101\n011111110101\n110110000000\n111111010010\n011001000000\n000100010000\n111011100110\n011100111100\n001010000110\n011110000011\n011001011101\n111001111101\n011010101111\n100011001000\n111111110100\n100101011101\n101110111111\n110100100011\n010100100111\n111011011000\n011111011001\n101111010001\n011111110010\n010000011100\n111101111110\n001010011000\n011010010011\n011011100111\n100001000110\n111111010100\n101100100001\n100101010101\n111110011110\n101001001110\n111011100001\n110111011011\n011100101100\n011000111011\n110100110101\n110000001011\n110101100001\n110011000000\n010010011011\n000110000001\n110001001111\n101010100111\n001011001100\n111100011111\n111101000101\n010110110001\n001000111110\n001110111111\n000100001001\n100101010110\n111110101101\n101111111001\n011011000101\n111011101010\n001000100001\n001111110101\n111110100000\n111011000110\n111101111010\n000100000101\n011000010110\n000000011011\n110011010011\n000101100000\n111100111111\n111110111000\n000101100011\n010000110110\n100101101011\n010101000100\n110110100011\n110001010001\n100010011100\n111101100000\n011110001100\n011101010011\n101111000111\n101000001010\n001010110010\n110000101000\n101101111111\n101000111100\n011011010010\n111101010001\n000100010010\n100010011000\n111110101000\n011101001010\n100100110001\n101010000000\n110100111101\n001101000110\n110101010010\n010101110110\n100011010011\n011011101011\n010110111011\n111001000000\n001100000101\n001101111110\n111000100110\n001010001001\n001000111100\n011110110110\n011111010110\n101010000011\n011111010100\n010100010111\n010100110001\n110100100111\n110001110100\n100101010100\n001111111010\n100111110111\n011010001000\n011101111001\n101110111010\n110011000100\n000010111010\n000011011001\n101010010011\n001110001011\n000100000100\n001001001000\n111101011010\n111110101110\n101110000100\n110101110000\n001110010110\n001001100100\n010011001111\n010011101010\n001111001000\n110001000011\n001100001111\n101100100011\n001100110011\n110111000110\n100010101000\n011110100111\n010111010001\n111100000101\n011110110010\n111010000111\n010101011110\n011101111010\n001100010100\n111000000001\n011001110111\n010000101110\n001010111111\n111100110110\n111000010010\n101011000111\n111000011101\n100111010001\n001110101000\n100111001010\n100110111000\n110001011110\n000001000100\n001100110110\n110110100001\n011101000001\n111001010111\n111000001010\n101100010100\n000110111111\n001100000001\n110011100011\n101111100110\n011010101001\n110001001100\n011111010111\n110100100010\n011100001110\n111000000010\n001010110011\n001100100011\n001010000111\n100000111010\n011011001101\n111001000110\n110011110111\n010001001000\n111010110011\n001100111011\n010000110001\n000110000111\n111100110101\n010111010110\n011100100001\n101011010000\n101010101000\n111011110110\n101100010001\n111110000010\n101010110111\n001001100000\n001110010011\n000110111110\n001001111001\n010101110000\n111001100110\n100100100101\n010001011101\n010000011110\n100001001001\n001001010100\n111100000000\n110011001110\n010101001100\n101000011111\n000010001111\n001111010001\n101010001111\n111101000011\n101000011001\n001111111100\n010110101101\n010011110110\n110000111110\n010000100100\n010011000111\n100101011110\n110100100101\n100100001000\n110110011101\n011011110100\n010001011111\n111000100000\n011100101001\n110010100100\n000001001011\n101011110001\n011011110000\n101011110101\n011011010000\n001110110001\n100010100111\n111001100100\n010011100110\n111111111100\n101110001010\n001001111111\n010100110011\n100101000000\n011101110001\n010110000111\n110100000111\n010100101100\n001000000011\n001100011110\n101100011100\n001001110000\n100110100010\n100011010111\n011101111100\n010110010000\n001111101011\n101100001110\n000010110110\n010110100110\n101110100111\n001111010011\n101110101010\n110011110001\n010001001110\n111010100110\n000001111001\n000100100001\n000000111100\n011100101111\n000001101110\n101000110101\n010011011110\n100000111101\n010010001100\n010101101010\n000001000001\n111111000100\n111111100110\n101011101000\n111100000011\n010110001111\n010011101101\n100101111010\n000001001111\n010000001111\n010111000000\n100110101110\n110101101110\n000000000110\n010001110001\n000111100001\n110101101111\n000110010111\n011010100011\n111110001101\n100000101001\n001010100110\n100001001111\n011010100000\n101010111000\n001101110111\n111001101011\n000111111001\n100010001000\n001010110110\n011001011111\n000111000101\n001111100110\n100110101001\n101111000110\n001101011111\n001111011110\n110110110100\n011001111111\n100001010101\n101101100010\n111101011110\n111110000000\n001011111100\n100100010111\n111000110001\n001110101010\n100100001100\n110100011111\n010101000111\n110111010000\n011111100011\n101110111001\n101011001000\n000011010011\n101011001110\n100101110111\n001011100011\n000110100100\n110110101010\n000011110111\n110010100010\n000111010101\n011011010110\n001001011110\n100101110100\n000110110000\n011001100100\n010010000110\n001110101110\n010000001000\n110000100010\n000010011011\n101000111011\n011001100111\n000000010100\n110101111110\n110100101101\n111111111101\n110100011110\n000001111000\n100110100111\n101010111011\n001000011101\n010001000010\n100100100010\n000111110000\n100001000010\n000110001100\n000001111010\n000101001010\n000101100100\n011000001101\n010000111000\n101111111000\n001110011101\n001010110101\n001011101000\n010110011100\n000010111101\n011001010110\n000011000000\n001000010101\n001101001000\n111100010000\n111111001111\n001011011000\n100000101000\n010101110101\n010010011010\n011001000001\n011000000000\n010101011101\n100101001000\n110101110101\n101101011001\n000101011100\n011001010100\n100010010100\n010101001011\n000001001001\n011011001100\n100001110100\n000101101110\n011011000000\n000010010011\n111111001001\n100110010111\n001011000000\n101111100101\n110100111000\n101110010000\n010000101001\n110100101110\n011000100100\n100100100001\n010101100010\n111011010101\n111001110000\n010011110010\n000011001000\n010011010011\n110110110010\n100101001111\n101011100011\n011111110111\n011000100010\n111001000111\n110001000110\n011100101000\n011100000101\n001010111010\n001101010011\n000101111101\n001101111111\n101111010111\n000011100011\n111001110101\n100101011100\n001011101011\n110001001110\n001001110001\n101011010011\n100110011101\n101001010100\n111001100000\n001011011100\n010001101101\n100100100100\n100110111100\n000101010000\n010011100000\n111101110010\n111001010100\n101100001000\n110100010110\n000010011111\n100100111001\n101011101010\n110101111010\n111011110011\n101110011011\n010101010101\n101111111111\n110011110010\n001010001100\n001001110100\n101110110010\n001010101101\n001111111101\n110110011111\n111000011001\n000010000011\n010001111100\n001001100001\n101011010111\n100111000010\n011101110011\n001110000010\n100000111111\n101101010101\n001010000011\n110101011110\n011011100110\n100101001001\n001101000001\n000001100111\n101100110111\n100000001100\n011100001111\n111000010101\n000110101110\n000101011010\n101110110100\n000001101011\n010001111001\n000000011101\n110100010101\n000101010111\n011011011110\n010010110011\n111101011011\n111100101001\n010010110100\n101001000110\n111100110011\n011100000100\n001000100111\n100001001010\n101101110101\n011010110101\n110110010011\n100110110110\n111110001111\n010111101000\n011100011110\n010110000100\n111001001011\n011010110111\n100110000111\n101110111000\n011000101001\n101010001010\n001101011010\n001010100001\n101111101011\n101111101000\n110010011101\n001010001010\n111000011100\n101011110100\n110000010001\n101010101010\n110111010110\n010100011110\n110101110100\n000101011001\n000110000000\n101110111100\n000110001011\n100010011101\n110001011011\n011010111000\n100111111000\n101011100111\n100001101011\n111110111010\n000011010010\n011010100101\n001110110101\n111110011111\n101010110001\n000011110001\n101001001011\n001100001011\n101111011101\n000110110001\n001001111110\n011001111001\n100001111101\n011110001111\n011011010100\n111101000111\n011000011110\n100011011000\n100001110011\n101010100010\n100110000110\n111010010101\n110000101101\n110111001001\n111001111100\n001000001110\n110001101001\n100111010000\n110110011001\n110100010011\n001100011001\n100111110001\n100000011111\n001000101010\n010010010100\n001010010111\n111111110110\n001011110011\n001010110111\n100100111011\n111100100011\n111111110111\n101110100000\n100001111010\n000100011100\n001011100010\n011001110110\n111010111001\n000101011101\n000011110110\n100000001010\n010110110100\n101100110010\n011010110011\n100010111001\n100101111101\n101110111011\n100001101110\n001101001111\n000011101100\n000011011101\n001001010101\n100111101011\n000111010110\n100000101100\n001011011101\n111001010110\n110000011100\n100011010100\n100110110001\n101001000000\n111111101110\n101110100100\n000101011110\n010010101100\n110011001011\n001100011111\n000000110000\n010101111101\n000111101111\n101110001100\n110101001011\n110010110010\n001110010000\n001100110100\n000001010101\n110001111100\n001101101001\n100010100101\n001010110001\n100000100010\n110010111011\n110101110011\n011111010101\n111001111110\n010000101000\n101001101100\n111010101110\n011010101000\n110011101001\n110110000101\n111011101101\n101110100110\n010010001011\n110000110110\n100001100101\n111000111101\n011000010100\n101111110110\n001100011101\n001100010000\n101110000111\n011110010000\n111101001011\n110101100100\n011100101010\n101001100111\n110110011010\n011110011010\n011101100111\n011001010001\n111111100010\n111011110001\n110111110011\n101111000100\n001000111111\n010011100011\n100110100001\n101000001110\n100010000111\n011010000010\n010100111101\n110001010000\n110011100101\n001101010000\n100011111000\n010001000001\n011011110110\n100101001011\n000011011100\n010000111001\n011111011101\n011011111001\n110010011110\n100010110100\n111010001111\n101110011100\n001111010101\n000100011001\n010111011111\n110010000010\n000010011010\n001101011100\n010000100101\n110011100001\n110100000101\n100010101110\n011010010101\n111101010010\n000111100000\n111010110101\n000100111100\n101100101011\n000100110011\n000111110111\n000101010100\n101101110011\n101011011001\n001001010111\n010011011100\n101100110011\n010101101011\n000011110100\n111111111001\n010011100101\n001001000000\n101101010000\n001111110001\n001100101000\n000000001001\n001111011101\n111110110001\n110110011000\n100000011100\n110101111000\n100010110001\n110101111100\n000001010010\n110010000001\n100101111001\n110010001101\n111011010010\n000110110011\n110000100111\n010110011010\n101111101110\n010101111010\n000011101111\n000001110010\n100100011011\n011100011011\n101010110110\n010001011010\n111110011010\n111110011000\n010110101000\n100110110000\n010100000011\n100001100011\n011101000100\n010111110001\n110111110100\n101001001001\n001001101001\n111000010100\n100010000110\n110010010100\n001001111000\n010001111101\n100111000111\n011110101111\n101110010100\n010010101000\n111011111101\n111010010110\n101000100011\n010000011000\n001011000100\n111001010010\n';
+	{T: 0, U: 0});
 var $author$project$Days$Day3$leastCommon = function (_v0) {
-	var n0 = _v0.S;
-	var n1 = _v0.T;
+	var n0 = _v0.T;
+	var n1 = _v0.U;
 	return (_Utils_cmp(n1, n0) < 0) ? '1' : '0';
 };
 var $elm$core$Basics$ge = _Utils_ge;
 var $author$project$Days$Day3$mostCommon = function (_v0) {
-	var n0 = _v0.S;
-	var n1 = _v0.T;
+	var n0 = _v0.T;
+	var n1 = _v0.U;
 	return (_Utils_cmp(n1, n0) > -1) ? '1' : '0';
 };
 var $elm$core$List$repeatHelp = F3(
@@ -9174,6 +9173,7 @@ var $author$project$Days$Day3$rotate = function (matrix) {
 			_List_Nil),
 		matrix);
 };
+var $author$project$Days$Day3$sampleData = '\n00100\n11110\n10110\n10111\n10101\n01111\n00111\n11100\n10000\n11001\n00010\n01010\n';
 var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
 	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
@@ -9190,7 +9190,7 @@ var $author$project$Days$Day3$part1 = function () {
 		$elm$core$List$map,
 		$author$project$Days$Day3$countBits,
 		$author$project$Days$Day3$rotate(
-			$author$project$Days$Day3$toBitRows($author$project$Days$Day3$data)));
+			$author$project$Days$Day3$toBitRows($author$project$Days$Day3$sampleData)));
 	var _v0 = _Utils_Tuple2(
 		$author$project$Days$Day3$binCharsToInt(
 			A2($elm$core$List$map, $author$project$Days$Day3$mostCommon, bitCounts)),
@@ -9263,7 +9263,7 @@ var $author$project$Days$Day3$selectCandidate = F3(
 		}
 	});
 var $author$project$Days$Day3$part2 = function () {
-	var bitRows = $author$project$Days$Day3$toBitRows($author$project$Days$Day3$data);
+	var bitRows = $author$project$Days$Day3$toBitRows($author$project$Days$Day3$sampleData);
 	var _v0 = _Utils_Tuple2(
 		$author$project$Days$Day3$binCharsToInt(
 			A3($author$project$Days$Day3$selectCandidate, 0, $author$project$Days$Day3$mostCommon, bitRows)),
@@ -9282,7 +9282,7 @@ var $author$project$Days$Day3$answer = A2(
 			'Part2: ' + $elm$core$String$fromInt($author$project$Days$Day3$part2)
 		]));
 var $author$project$Days$Day3$pitch = '\n--- Day 3: Binary Diagnostic ---\n\nThe submarine has been making some odd creaking noises, so you ask it to produce a diagnostic report just in case.\n\nThe diagnostic report (your puzzle input) consists of a list of binary numbers which, when decoded properly, can tell you many useful things about the conditions of the submarine. The first parameter to check is the power consumption.\n\nYou need to use the binary numbers in the diagnostic report to generate two new binary numbers (called the gamma rate and the epsilon rate). The power consumption can then be found by multiplying the gamma rate by the epsilon rate.\n\nEach bit in the gamma rate can be determined by finding the most common bit in the corresponding position of all numbers in the diagnostic report. For example, given the following diagnostic report:\n\n    00100\n    11110\n    10110\n    10111\n    10101\n    01111\n    00111\n    11100\n    10000\n    11001\n    00010\n    01010\n\nConsidering only the first bit of each number, there are five `0` bits and seven `1` bits. Since the most common bit is `1`, the first bit of the gamma rate is `1`.\n\nThe most common second bit of the numbers in the diagnostic report is `0`, so the second bit of the gamma rate is `0`.\n\nThe most common value of the third, fourth, and fifth bits are `1`, `1`, and `0`, respectively, and so the final three bits of the gamma rate are `110`.\n\nSo, the gamma rate is the binary number `10110`, or `22` in decimal.\n\nThe epsilon rate is calculated in a similar way; rather than use the most common bit, the least common bit from each position is used. So, the epsilon rate is `01001`, or `9` in decimal. Multiplying the gamma rate (`22`) by the epsilon rate (`9`) produces the power consumption, `198`.\n\nUse the binary numbers in your diagnostic report to calculate the gamma rate and epsilon rate, then multiply them together. What is the power consumption of the submarine? (Be sure to represent your answer in decimal, not binary.)\n\n--- Part Two ---\n\nNext, you should verify the life support rating, which can be determined by multiplying the oxygen generator rating by the CO2 scrubber rating.\n\nBoth the oxygen generator rating and the CO2 scrubber rating are values that can be found in your diagnostic report - finding them is the tricky part. Both values are located using a similar process that involves filtering out values until only one remains. Before searching for either rating value, start with the full list of binary numbers from your diagnostic report and consider just the first bit of those numbers. Then:\n\n- Keep only numbers selected by the bit criteria for the type of rating value for which you are searching. Discard numbers which do not match the bit criteria.\n- If you only have one number left, stop; this is the rating value for which you are searching.\n- Otherwise, repeat the process, considering the next bit to the right.\n\nThe bit criteria depends on which type of rating value you want to find:\n\n- To find oxygen generator rating, determine the most common value (`0` or `1`) in the current bit position, and keep only numbers with that bit in that position. If `0` and `1` are equally common, keep values with a `1` in the position being considered.\n- To find CO2 scrubber rating, determine the least common value (`0` or `1`) in the current bit position, and keep only numbers with that bit in that position. If `0` and `1` are equally common, keep values with a `0` in the position being considered.\n\nFor example, to determine the oxygen generator rating value using the same example diagnostic report from above:\n\n- Start with all 12 numbers and consider only the first bit of each number. There are more `1` bits (`7`) than `0` bits (`5`), so keep only the 7 numbers with a `1` in the first position: `11110`, `10110`, `10111`, `10101`, `11100`, `10000`, and `11001`.\n- Then, consider the second bit of the 7 remaining numbers: there are more `0` bits (`4`) than `1` bits (`3`), so keep only the `4` numbers with a `0` in the second position: `10110`, `10111`, `10101`, and `10000`.\n- In the third position, three of the four numbers have a `1`, so keep those three: `10110`, `10111`, and `10101`.\n- In the fourth position, two of the three numbers have a `1`, so keep those two: `10110` and `10111`.\n- In the fifth position, there are an equal number of `0` bits and `1` bits (one each). So, to find the oxygen generator rating, keep the number with a `1` in that position: `10111`.\n- As there is only one number left, stop; the oxygen generator rating is `10111`, or `23` in decimal.\n\nThen, to determine the CO2 scrubber rating value from the same example above:\n\n- Start again with all 12 numbers and consider only the first bit of each number. There are fewer `0` bits (5) than `1` bits (7), so keep only the 5 numbers with a `0` in the first position: `00100`, `01111`, `00111`, `00010`, and `01010`.\n- Then, consider the second bit of the 5 remaining numbers: there are fewer `1` bits (2) than `0` bits (3), so keep only the 2 numbers with a `1` in the second position: `01111` and `01010`.\n- In the third position, there are an equal number of `0` bits and `1` bits (one each). So, to find the CO2 scrubber rating, keep the number with a `0` in that position: `01010`.\n- As there is only one number left, stop; the CO2 scrubber rating is `01010`, or `10` in decimal.\n\nFinally, to find the life support rating, multiply the oxygen generator rating (`23`) by the CO2 scrubber rating (`10`) to get `230`.\n\nUse the binary numbers in your diagnostic report to calculate the oxygen generator rating and CO2 scrubber rating, then multiply them together. What is the life support rating of the submarine? (Be sure to represent your answer in decimal, not binary.)\n';
-var $author$project$Days$Day3$day = {b4: $author$project$Days$Day3$answer, cA: $author$project$Days$Day3$pitch};
+var $author$project$Days$Day3$day = {b3: $author$project$Days$Day3$answer, cz: $author$project$Days$Day3$pitch};
 var $elm$core$List$any = F2(
 	function (isOkay, list) {
 		any:
@@ -9330,7 +9330,7 @@ var $elm$core$List$sum = function (numbers) {
 	return A3($elm$core$List$foldl, $elm$core$Basics$add, 0, numbers);
 };
 var $author$project$Days$Day4$countUnchecked = function (_v0) {
-	var cells = _v0.H;
+	var cells = _v0.I;
 	return $elm$core$List$sum(
 		$elm$core$List$concat(
 			A2(
@@ -9372,8 +9372,8 @@ var $author$project$Days$Day4$checkWinningGrid = F3(
 	function (num, grid, wins) {
 		var checkLine = $elm$core$List$any(
 			$elm$core$List$all($elm$core$Tuple$second));
-		var winning = checkLine(grid.H) || checkLine(
-			$author$project$Days$Day4$rotate(grid.H));
+		var winning = checkLine(grid.I) || checkLine(
+			$author$project$Days$Day4$rotate(grid.I));
 		return (winning && (!A2(
 			$elm$core$List$member,
 			grid.aC,
@@ -9403,7 +9403,7 @@ var $author$project$Days$Day4$fillGrid = F2(
 		return _Utils_update(
 			grid,
 			{
-				H: A2($elm$core$List$map, updateCell, grid.H)
+				I: A2($elm$core$List$map, updateCell, grid.I)
 			});
 	});
 var $author$project$Days$Day4$fillGridsWithNumber = F2(
@@ -9445,7 +9445,7 @@ var $author$project$Days$Day4$parseInts = F2(
 var $author$project$Days$Day4$parseGrid = F2(
 	function (gridId, string) {
 		return {
-			H: A2(
+			I: A2(
 				$elm$core$List$map,
 				A2(
 					$elm$core$Basics$composeR,
@@ -9530,33 +9530,39 @@ var $author$project$Days$Day4$answer = A2(
 		}()
 		]));
 var $author$project$Days$Day4$pitch = '\n--- Day 4: Giant Squid ---\n\nYou\'re already almost 1.5km (almost a mile) below the surface of the ocean, already so deep that you can\'t see any sunlight. What you can see, however, is a giant squid that has attached itself to the outside of your submarine.\n\nMaybe it wants to play bingo?\n\nBingo is played on a set of boards each consisting of a 5x5 grid of numbers. Numbers are chosen at random, and the chosen number is marked on all boards on which it appears. (Numbers may not appear on all boards.) If all numbers in any row or any column of a board are marked, that board wins. (Diagonals don\'t count.)\n\nThe submarine has a bingo subsystem to help passengers (currently, you and the giant squid) pass the time. It automatically generates a random order in which to draw numbers and a random set of boards (your puzzle input). For example:\n\n    7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1\n\n    22 13 17 11  0\n     8  2 23  4 24\n    21  9 14 16  7\n    6 10  3 18  5\n     1 12 20 15 19\n\n     3 15  0  2 22\n     9 18 13 17  5\n    19  8  7 25 23\n    20 11 10 24  4\n    14 21 16 12  6\n\n    14 21 17 24  4\n    10 16 15  9 19\n    18  8 23 26 20\n    22 11 13  6  5\n     2  0 12  3  7\n\nAfter the first five numbers are drawn (`7`, `4`, `9`, `5`, and `11`), there are no winners, but the boards are marked as follows (shown here adjacent to each other to save space):\n\n    22 13  17 [11]  0          3  15   0  2  22        14  21  17 24  [4]\n     8  2  23  [4] 24         [9] 18  13  17 [5]       10  16  15 [9] 19\n    21 [9] 14  16  [7]        19   8  [7] 25 23        18   8  23 26  20\n     6 10  3   18  [5]        20 [11] 10  24 [4]       22 [11] 13  6  [5]\n     1 12  20  15  19         14  21  16  12  6         2   0  12  3  [7]\n\nAfter the next six numbers are drawn (`17`, `23`, `2`, `0`, `14`, and `21`), there are still no winners:\n\n     22  13  [17] [11]  0       3   15  [0] [2] 22     [14] [21] [17] 24  [4]\n      8  [2] [23]  [4] 24      [9]  18  13 [17]  5      10   16   15  [9] 19\n    [21] [9] [14]  16  [7]     19    8  [7] 25 [23]     18    8  [23] 26  20\n      6  10    3   18  [5]     20  [11] 10  24  [4]     22  [11]  13   6  [5]\n      1  12   20   15  19     [14] [21] 16  12   6      [2]  [0]  12   3  [7]\n\nFinally, 24 is drawn:\n\n     22  13  [17] [11]  0       3   15  [0] [2] 22     [14] [21] [17] [24] [4]\n      8  [2] [23]  [4] 24      [9]  18  13 [17]  5      10   16   15   [9] 19\n    [21] [9] [14]  16  [7]     19    8  [7] 25 [23]     18    8  [23]  26  20\n      6  10    3   18  [5]     20  [11] 10 [24] [4]     22  [11]  13    6  [5]\n      1  12   20   15  19     [14] [21] 16  12   6      [2]  [0]  12    3  [7]\n\nAt this point, the third board wins because it has at least one complete row or column of marked numbers (in this case, the entire top row is marked: `14 21 17 24 4`).\n\nThe score of the winning board can now be calculated. Start by finding the sum of all unmarked numbers on that board; in this case, the sum is `188`. Then, multiply that sum by the number that was just called when the board won, `24`, to get the final score, `188` * `24` = `4512`.\n\nTo guarantee victory against the giant squid, figure out which board will win first. What will your final score be if you choose that board?\n';
-var $author$project$Days$Day4$day = {b4: $author$project$Days$Day4$answer, cA: $author$project$Days$Day4$pitch};
+var $author$project$Days$Day4$day = {b3: $author$project$Days$Day4$answer, cz: $author$project$Days$Day4$pitch};
+var $author$project$Days$Day5$moreThanOne = function (n) {
+	return n >= 2;
+};
 var $author$project$Days$Day5$countOverlaps = A2(
 	$elm$core$Basics$composeR,
 	$elm$core$List$map(
 		A2(
 			$elm$core$Basics$composeR,
-			$elm$core$List$map(
-				function ($) {
-					return $.V;
-				}),
+			$elm$core$List$filter($author$project$Days$Day5$moreThanOne),
+			$elm$core$List$length)),
+	$elm$core$List$sum);
+var $author$project$Days$Day5$drawMap = function (map) {
+	return A2(
+		$elm$core$String$join,
+		'\n',
+		A2(
+			$elm$core$List$map,
 			A2(
 				$elm$core$Basics$composeR,
-				$elm$core$List$filter(
-					function (s) {
-						return s >= 2;
-					}),
-				$elm$core$List$length))),
-	$elm$core$List$sum);
+				$elm$core$List$map($elm$core$String$fromInt),
+				$elm$core$String$join('')),
+			map));
+};
 var $author$project$Days$Day5$excludeDiagonals = $elm$core$List$filter(
 	function (_v0) {
 		var from = _v0.ad;
 		var to = _v0.at;
-		return _Utils_eq(from.M, to.M) || _Utils_eq(from.C, to.C);
+		return _Utils_eq(from.N, to.N) || _Utils_eq(from.D, to.D);
 	});
 var $author$project$Days$Day5$Point = F2(
 	function (x, y) {
-		return {M: x, C: y};
+		return {N: x, D: y};
 	});
 var $author$project$Days$Day5$toVec = function (raw) {
 	if ((((((((raw.b && raw.a.b) && raw.a.b.b) && (!raw.a.b.b.b)) && raw.b.b) && raw.b.a.b) && raw.b.a.b.b) && (!raw.b.a.b.b.b)) && (!raw.b.b.b)) {
@@ -9596,6 +9602,9 @@ var $author$project$Days$Day5$parseVecs = function (string) {
 				$elm$core$String$trim(string))));
 };
 var $author$project$Days$Day5$sampleData = '\n0,9 -> 5,9\n8,0 -> 0,8\n9,4 -> 3,4\n2,2 -> 2,1\n7,0 -> 7,4\n6,4 -> 2,0\n0,9 -> 2,9\n3,4 -> 1,4\n0,0 -> 8,8\n5,5 -> 8,2\n';
+var $author$project$Days$Day5$inc = function (n) {
+	return n + 1;
+};
 var $elm$core$List$maximum = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -9607,60 +9616,50 @@ var $elm$core$List$maximum = function (list) {
 	}
 };
 var $author$project$Days$Day5$initMap = function (vecs) {
-	var findMax = function (getter) {
+	var size = function (getter) {
 		return A2(
 			$elm$core$Maybe$withDefault,
 			0,
-			$elm$core$List$maximum(
-				$elm$core$List$concat(
-					_List_fromArray(
-						[
-							A2(
-							$elm$core$List$map,
-							A2(
-								$elm$core$Basics$composeR,
-								function ($) {
-									return $.ad;
-								},
-								getter),
-							vecs),
-							A2(
-							$elm$core$List$map,
-							A2(
-								$elm$core$Basics$composeR,
-								function ($) {
-									return $.at;
-								},
-								getter),
-							vecs)
-						]))));
+			A2(
+				$elm$core$Maybe$map,
+				$author$project$Days$Day5$inc,
+				$elm$core$List$maximum(
+					$elm$core$List$concat(
+						_List_fromArray(
+							[
+								A2(
+								$elm$core$List$map,
+								A2(
+									$elm$core$Basics$composeR,
+									function ($) {
+										return $.ad;
+									},
+									getter),
+								vecs),
+								A2(
+								$elm$core$List$map,
+								A2(
+									$elm$core$Basics$composeR,
+									function ($) {
+										return $.at;
+									},
+									getter),
+								vecs)
+							])))));
 	};
-	var _v0 = _Utils_Tuple2(
-		findMax(
-			function ($) {
-				return $.M;
-			}),
-		findMax(
-			function ($) {
-				return $.C;
-			}));
-	var xMax = _v0.a;
-	var yMax = _v0.b;
 	return A2(
-		$elm$core$List$map,
-		function (y) {
-			return A2(
-				$elm$core$List$indexedMap,
-				F2(
-					function (x, _v1) {
-						return {
-							bo: A2($author$project$Days$Day5$Point, x, y),
-							V: 0
-						};
-					}),
-				A2($elm$core$List$range, 0, xMax));
-		},
-		A2($elm$core$List$range, 0, yMax));
+		$elm$core$List$repeat,
+		size(
+			function ($) {
+				return $.D;
+			}),
+		A2(
+			$elm$core$List$repeat,
+			size(
+				function ($) {
+					return $.N;
+				}),
+			0));
 };
 var $elm$core$Basics$min = F2(
 	function (x, y) {
@@ -9671,11 +9670,11 @@ var $author$project$Days$Day5$updateMap = F2(
 		return $elm$core$List$indexedMap(
 			F2(
 				function (y, row) {
-					return _Utils_eq(y, p.C) ? A2(
+					return _Utils_eq(y, p.D) ? A2(
 						$elm$core$List$indexedMap,
 						F2(
 							function (x, cell) {
-								return _Utils_eq(x, p.M) ? update(cell) : cell;
+								return _Utils_eq(x, p.N) ? update(cell) : cell;
 							}),
 						row) : row;
 				}));
@@ -9684,36 +9683,31 @@ var $author$project$Days$Day5$processVec = F2(
 	function (_v0, map) {
 		var from = _v0.ad;
 		var to = _v0.at;
-		var incCellState = function (cell) {
-			return _Utils_update(
-				cell,
-				{V: cell.V + 1});
-		};
-		return _Utils_eq(from.M, to.M) ? A3(
+		return _Utils_eq(from.N, to.N) ? A3(
 			$elm$core$List$foldl,
 			function (y_) {
 				return A2(
 					$author$project$Days$Day5$updateMap,
-					{M: from.M, C: y_},
-					incCellState);
+					{N: from.N, D: y_},
+					$author$project$Days$Day5$inc);
 			},
 			map,
 			A2(
 				$elm$core$List$range,
-				A2($elm$core$Basics$min, from.C, to.C),
-				A2($elm$core$Basics$max, from.C, to.C))) : (_Utils_eq(from.C, to.C) ? A3(
+				A2($elm$core$Basics$min, from.D, to.D),
+				A2($elm$core$Basics$max, from.D, to.D))) : (_Utils_eq(from.D, to.D) ? A3(
 			$elm$core$List$foldl,
 			function (x_) {
 				return A2(
 					$author$project$Days$Day5$updateMap,
-					{M: x_, C: from.C},
-					incCellState);
+					{N: x_, D: from.D},
+					$author$project$Days$Day5$inc);
 			},
 			map,
 			A2(
 				$elm$core$List$range,
-				A2($elm$core$Basics$min, from.M, to.M),
-				A2($elm$core$Basics$max, from.M, to.M))) : map);
+				A2($elm$core$Basics$min, from.N, to.N),
+				A2($elm$core$Basics$max, from.N, to.N))) : map);
 	});
 var $author$project$Days$Day5$toMap = function (vecs) {
 	return A3(
@@ -9722,18 +9716,22 @@ var $author$project$Days$Day5$toMap = function (vecs) {
 		$author$project$Days$Day5$initMap(vecs),
 		vecs);
 };
-var $author$project$Days$Day5$part1 = $elm$core$String$fromInt(
-	$author$project$Days$Day5$countOverlaps(
-		$author$project$Days$Day5$toMap(
-			$author$project$Days$Day5$excludeDiagonals(
-				$author$project$Days$Day5$parseVecs($author$project$Days$Day5$sampleData)))));
+var $author$project$Days$Day5$part1 = function () {
+	var map = $author$project$Days$Day5$toMap(
+		$author$project$Days$Day5$excludeDiagonals(
+			$author$project$Days$Day5$parseVecs($author$project$Days$Day5$sampleData)));
+	var mapViz = $author$project$Days$Day5$drawMap(map);
+	var result = $elm$core$String$fromInt(
+		$author$project$Days$Day5$countOverlaps(map));
+	return _Utils_Tuple2(result, mapViz);
+}();
 var $author$project$Days$Day5$answer = A2(
 	$elm$core$String$join,
 	'\n',
 	_List_fromArray(
-		['Part1: ' + $author$project$Days$Day5$part1, 'Part2: TODO']));
+		['Part1: ' + $author$project$Days$Day5$part1.a, 'Map: ', $author$project$Days$Day5$part1.b, '', '---', '', 'Part2: TODO']));
 var $author$project$Days$Day5$pitch = '\n--- Day 5: Hydrothermal Venture ---\n\nYou come across a field of hydrothermal vents on the ocean floor! These vents constantly produce large, opaque clouds, so it would be best to avoid them if possible.\n\nThey tend to form in lines; the submarine helpfully produces a list of nearby lines of vents (your puzzle input) for you to review. For example:\n\n    0,9 -> 5,9\n    8,0 -> 0,8\n    9,4 -> 3,4\n    2,2 -> 2,1\n    7,0 -> 7,4\n    6,4 -> 2,0\n    0,9 -> 2,9\n    3,4 -> 1,4\n    0,0 -> 8,8\n    5,5 -> 8,2\n\nEach line of vents is given as a line segment in the format `x1,y1 -> x2,y2` where `x1,y1` are the coordinates of one end the line segment and `x2,y2` are the coordinates of the other end. These line segments include the points at both ends. In other words:\n\n- An entry like `1,1 -> 1,3` covers points `1,1`, `1,2`, and `1,3`.\n- An entry like `9,7 -> 7,7` covers points `9,7`, `8,7`, and `7,7`.\n\nFor now, only consider horizontal and vertical lines: lines where either `x1 = x2` or `y1 = y2`.\n\nSo, the horizontal and vertical lines from the above list would produce the following diagram:\n\n    .......1..\n    ..1....1..\n    ..1....1..\n    .......1..\n    .112111211\n    ..........\n    ..........\n    ..........\n    ..........\n    222111....\n\nIn this diagram, the top left corner is `0,0` and the bottom right corner is `9,9`. Each position is shown as the number of lines which cover that point or `.` if no line covers that point. The top-left pair of `1`s, for example, comes from `2,2 -> 2,1`; the very bottom row is formed by the overlapping lines `0,9 -> 5,9` and `0,9 -> 2,9`.\n\nTo avoid the most dangerous areas, you need to determine the number of points where at least two lines overlap. In the above example, this is anywhere in the diagram with a `2` or larger - a total of `5` points.\n\nConsider only horizontal and vertical lines. At how many points do at least two lines overlap?\n';
-var $author$project$Days$Day5$day = {b4: $author$project$Days$Day5$answer, cA: $author$project$Days$Day5$pitch};
+var $author$project$Days$Day5$day = {b3: $author$project$Days$Day5$answer, cz: $author$project$Days$Day5$pitch};
 var $author$project$Pages$Day$getDayData = function (day) {
 	switch (day) {
 		case 1:
@@ -9777,19 +9775,19 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$Rgba = F4(
 	});
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$DefaultColor = {$: 0};
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$backgroundColor = function (background) {
-	return {_: background, P: false, Q: false, af: false, j: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$DefaultColor};
+	return {_: background, Q: false, R: false, af: false, j: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$DefaultColor};
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$italic = function (style) {
 	return _Utils_update(
 		style,
-		{Q: true});
+		{R: true});
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$noEmphasis = F2(
 	function (text, background) {
-		return {_: background, P: false, Q: false, af: false, j: text};
+		return {_: background, Q: false, R: false, af: false, j: text};
 	});
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$textColor = function (text) {
-	return {_: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$DefaultColor, P: false, Q: false, af: false, j: text};
+	return {_: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$DefaultColor, Q: false, R: false, af: false, j: text};
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$OneDark$requiredStyles = {
 	X: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$backgroundColor(
@@ -9803,7 +9801,7 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$OneDark$requiredSt
 		$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$Hex('#282c34')),
 	ac: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$backgroundColor(
 		A4($pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$Rgba, 136, 64, 67, 0.4)),
-	O: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$backgroundColor(
+	P: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$backgroundColor(
 		A4($pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$Rgba, 229, 231, 235, 0.1)),
 	ak: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$textColor(
 		$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$Hex('#d19a66')),
@@ -9820,7 +9818,7 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$OneDark$requiredSt
 	aq: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$textColor(
 		$pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$Hex('#abb2bf'))
 };
-var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$OneDark$theme = {ca: _List_Nil, cI: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$OneDark$requiredStyles};
+var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$OneDark$theme = {b9: _List_Nil, cH: $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$OneDark$requiredStyles};
 var $elm$core$Tuple$mapFirst = F2(
 	function (func, _v0) {
 		var x = _v0.a;
@@ -10073,8 +10071,8 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$emptyIfFalse = F2(
 		return bool ? str : '';
 	});
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$styleToCss = function (_v0) {
-	var isBold = _v0.P;
-	var isItalic = _v0.Q;
+	var isBold = _v0.Q;
+	var isItalic = _v0.R;
 	var isUnderline = _v0.af;
 	var text = _v0.j;
 	var background = _v0._;
@@ -10098,14 +10096,14 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$toCss = function (
 		A2($elm$core$List$map, $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$toCssClass, classes));
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Theme$Type$toCss = function (_v0) {
-	var requiredStyles = _v0.cI;
-	var customStyles = _v0.ca;
+	var requiredStyles = _v0.cH;
+	var customStyles = _v0.b9;
 	return $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$Style$toCss(
 		_Utils_ap(
 			_List_fromArray(
 				[
 					_Utils_Tuple2('.elmsh', requiredStyles.ab),
-					_Utils_Tuple2('.elmsh-hl', requiredStyles.O),
+					_Utils_Tuple2('.elmsh-hl', requiredStyles.P),
 					_Utils_Tuple2('.elmsh-add', requiredStyles.X),
 					_Utils_Tuple2('.elmsh-del', requiredStyles.ac),
 					_Utils_Tuple2('.elmsh-comm', requiredStyles.aa),
@@ -10174,7 +10172,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$problemToString = function (probl
 	}
 };
 var $dillonkearns$elm_markdown$Markdown$Parser$deadEndToString = function (deadEnd) {
-	return 'Problem at row ' + ($elm$core$String$fromInt(deadEnd.cK) + ('\n' + $dillonkearns$elm_markdown$Markdown$Parser$problemToString(deadEnd.cC)));
+	return 'Problem at row ' + ($elm$core$String$fromInt(deadEnd.cJ) + ('\n' + $dillonkearns$elm_markdown$Markdown$Parser$problemToString(deadEnd.cB)));
 };
 var $dillonkearns$elm_markdown$Markdown$RawBlock$BlankLine = {$: 10};
 var $dillonkearns$elm_markdown$Markdown$Block$BlockQuote = function (a) {
@@ -10919,7 +10917,7 @@ var $dillonkearns$elm_markdown$HtmlParser$attributes = A2(
 	A2($elm$parser$Parser$Advanced$loop, $elm$core$Dict$empty, $dillonkearns$elm_markdown$HtmlParser$attributesStep));
 var $elm$parser$Parser$Advanced$chompUntilEndOr = function (str) {
 	return function (s) {
-		var _v0 = A5(_Parser_findSubString, str, s.d, s.cK, s.bn, s.a5);
+		var _v0 = A5(_Parser_findSubString, str, s.d, s.cJ, s.bn, s.a5);
 		var newOffset = _v0.a;
 		var newRow = _v0.b;
 		var newCol = _v0.c;
@@ -10928,7 +10926,7 @@ var $elm$parser$Parser$Advanced$chompUntilEndOr = function (str) {
 			$elm$parser$Parser$Advanced$Good,
 			_Utils_cmp(s.d, adjustedOffset) < 0,
 			0,
-			{bn: newCol, f: s.f, h: s.h, d: adjustedOffset, cK: newRow, a5: s.a5});
+			{bn: newCol, f: s.f, h: s.h, d: adjustedOffset, cJ: newRow, a5: s.a5});
 	};
 };
 var $dillonkearns$elm_markdown$HtmlParser$cdata = A2(
@@ -11274,7 +11272,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$innerParagraphParser = A2(
 var $dillonkearns$elm_markdown$Markdown$Parser$openBlockOrParagraphParser = A2($elm$parser$Parser$Advanced$ignorer, $dillonkearns$elm_markdown$Markdown$Parser$innerParagraphParser, $dillonkearns$elm_markdown$Helpers$lineEndOrEnd);
 var $dillonkearns$elm_markdown$Markdown$OrderedList$ListItem = F4(
 	function (order, intended, marker, body) {
-		return {bk: body, cp: intended, cs: marker, cz: order};
+		return {bk: body, co: intended, cr: marker, cy: order};
 	});
 var $elm$parser$Parser$Advanced$getCol = function (s) {
 	return A3($elm$parser$Parser$Advanced$Good, false, s.bn, s);
@@ -11458,7 +11456,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$orderedListBlock = function (prev
 	return A2(
 		$elm$parser$Parser$Advanced$map,
 		function (item) {
-			return A6($dillonkearns$elm_markdown$Markdown$RawBlock$OrderedListBlock, true, item.cp, item.cs, item.cz, _List_Nil, item.bk);
+			return A6($dillonkearns$elm_markdown$Markdown$RawBlock$OrderedListBlock, true, item.co, item.cr, item.cy, _List_Nil, item.bk);
 		},
 		$dillonkearns$elm_markdown$Markdown$OrderedList$parser(previousWasBody));
 };
@@ -11513,7 +11511,7 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$matchToInline = function (_
 				$dillonkearns$elm_markdown$Markdown$Inline$Link,
 				url,
 				maybeTitle,
-				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.o));
+				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.p));
 		case 5:
 			var _v4 = _v1.a;
 			var url = _v4.a;
@@ -11522,7 +11520,7 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$matchToInline = function (_
 				$dillonkearns$elm_markdown$Markdown$Inline$Image,
 				url,
 				maybeTitle,
-				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.o));
+				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.p));
 		case 6:
 			var model = _v1.a;
 			return $dillonkearns$elm_markdown$Markdown$Inline$HtmlInline(model);
@@ -11531,10 +11529,10 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$matchToInline = function (_
 			return A2(
 				$dillonkearns$elm_markdown$Markdown$Inline$Emphasis,
 				length,
-				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.o));
+				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.p));
 		default:
 			return $dillonkearns$elm_markdown$Markdown$Inline$Strikethrough(
-				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.o));
+				$dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines(match.p));
 	}
 };
 var $dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines = function (matches) {
@@ -11543,20 +11541,20 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$matchesToInlines = function
 var $dillonkearns$elm_markdown$Markdown$InlineParser$Match = $elm$core$Basics$identity;
 var $dillonkearns$elm_markdown$Markdown$InlineParser$prepareChildMatch = F2(
 	function (parentMatch, childMatch) {
-		return {g: childMatch.g - parentMatch.q, o: childMatch.o, i: childMatch.i - parentMatch.q, j: childMatch.j, t: childMatch.t - parentMatch.q, q: childMatch.q - parentMatch.q, k: childMatch.k};
+		return {g: childMatch.g - parentMatch.r, p: childMatch.p, i: childMatch.i - parentMatch.r, j: childMatch.j, u: childMatch.u - parentMatch.r, r: childMatch.r - parentMatch.r, k: childMatch.k};
 	});
 var $dillonkearns$elm_markdown$Markdown$InlineParser$addChild = F2(
 	function (parentMatch, childMatch) {
 		return {
 			g: parentMatch.g,
-			o: A2(
+			p: A2(
 				$elm$core$List$cons,
 				A2($dillonkearns$elm_markdown$Markdown$InlineParser$prepareChildMatch, parentMatch, childMatch),
-				parentMatch.o),
+				parentMatch.p),
 			i: parentMatch.i,
 			j: parentMatch.j,
-			t: parentMatch.t,
-			q: parentMatch.q,
+			u: parentMatch.u,
+			r: parentMatch.r,
 			k: parentMatch.k
 		};
 	});
@@ -11565,11 +11563,11 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$organizeChildren = function
 	var match = _v4;
 	return {
 		g: match.g,
-		o: $dillonkearns$elm_markdown$Markdown$InlineParser$organizeMatches(match.o),
+		p: $dillonkearns$elm_markdown$Markdown$InlineParser$organizeMatches(match.p),
 		i: match.i,
 		j: match.j,
-		t: match.t,
-		q: match.q,
+		u: match.u,
+		r: match.r,
 		k: match.k
 	};
 };
@@ -11641,13 +11639,13 @@ var $dillonkearns$elm_markdown$Markdown$Helpers$containsAmpersand = function (st
 };
 var $elm$regex$Regex$Match = F4(
 	function (match, index, number, submatches) {
-		return {c: index, ah: match, cv: number, a9: submatches};
+		return {c: index, ah: match, cu: number, a9: submatches};
 	});
 var $elm$regex$Regex$fromStringWith = _Regex_fromStringWith;
 var $elm$regex$Regex$fromString = function (string) {
 	return A2(
 		$elm$regex$Regex$fromStringWith,
-		{b6: false, cu: false},
+		{b5: false, ct: false},
 		string);
 };
 var $elm$regex$Regex$never = _Regex_never;
@@ -12025,11 +12023,11 @@ var $dillonkearns$elm_markdown$Markdown$Helpers$formatStr = function (str) {
 var $dillonkearns$elm_markdown$Markdown$InlineParser$normalMatch = function (text) {
 	return {
 		g: 0,
-		o: _List_Nil,
+		p: _List_Nil,
 		i: 0,
 		j: $dillonkearns$elm_markdown$Markdown$Helpers$formatStr(text),
-		t: 0,
-		q: 0,
+		u: 0,
+		r: 0,
 		k: $dillonkearns$elm_markdown$Markdown$InlineParser$NormalType
 	};
 };
@@ -12038,11 +12036,11 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$parseTextMatch = F3(
 		var matchModel = _v2;
 		var updtMatch = {
 			g: matchModel.g,
-			o: A3($dillonkearns$elm_markdown$Markdown$InlineParser$parseTextMatches, matchModel.j, _List_Nil, matchModel.o),
+			p: A3($dillonkearns$elm_markdown$Markdown$InlineParser$parseTextMatches, matchModel.j, _List_Nil, matchModel.p),
 			i: matchModel.i,
 			j: matchModel.j,
-			t: matchModel.t,
-			q: matchModel.q,
+			u: matchModel.u,
+			r: matchModel.r,
 			k: matchModel.k
 		};
 		if (!parsedMatches.b) {
@@ -12930,7 +12928,7 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$htmlToToken = F2(
 					$elm$parser$Parser$Advanced$succeed(
 						F3(
 							function (startOffset, htmlTag, endOffset) {
-								return {bw: htmlTag, aW: endOffset - startOffset};
+								return {bv: htmlTag, aW: endOffset - startOffset};
 							})),
 					$elm$parser$Parser$Advanced$getOffset),
 				$dillonkearns$elm_markdown$HtmlParser$html),
@@ -12940,7 +12938,7 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$htmlToToken = F2(
 			consumedCharacters,
 			A2($elm$core$String$dropLeft, match.i, rawText));
 		if (!parsed.$) {
-			var htmlTag = parsed.a.bw;
+			var htmlTag = parsed.a.bv;
 			var length = parsed.a.aW;
 			var htmlToken = A2($dillonkearns$elm_markdown$Markdown$InlineParser$HtmlToken, 1, htmlTag);
 			return $elm$core$Maybe$Just(
@@ -13045,7 +13043,7 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$isStrikethroughTokenPair = 
 var $dillonkearns$elm_markdown$Markdown$InlineParser$HardLineBreakType = {$: 1};
 var $dillonkearns$elm_markdown$Markdown$InlineParser$tokenToMatch = F2(
 	function (token, type_) {
-		return {g: token.c + token.aW, o: _List_Nil, i: token.c, j: '', t: 0, q: 0, k: type_};
+		return {g: token.c + token.aW, p: _List_Nil, i: token.c, j: '', u: 0, r: 0, k: type_};
 	});
 var $dillonkearns$elm_markdown$Markdown$InlineParser$lineBreakTTM = F5(
 	function (remaining, tokens, matches, refs, rawText) {
@@ -13838,7 +13836,7 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$tokenPairToMatch = F7(
 			A3($elm$core$String$slice, textStart, textEnd, rawText));
 		var start = openToken.c;
 		var end = closeToken.c + closeToken.aW;
-		var match = {g: end, o: _List_Nil, i: start, j: text, t: textEnd, q: textStart, k: type_};
+		var match = {g: end, p: _List_Nil, i: start, j: text, u: textEnd, r: textStart, k: type_};
 		var matches = A2(
 			$elm$core$List$map,
 			function (_v0) {
@@ -13846,7 +13844,7 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$tokenPairToMatch = F7(
 				return A2($dillonkearns$elm_markdown$Markdown$InlineParser$prepareChildMatch, match, matchModel);
 			},
 			A4($dillonkearns$elm_markdown$Markdown$InlineParser$tokensToMatches, innerTokens, _List_Nil, references, rawText));
-		return {g: end, o: matches, i: start, j: text, t: textEnd, q: textStart, k: type_};
+		return {g: end, p: matches, i: start, j: text, u: textEnd, r: textStart, k: type_};
 	});
 var $dillonkearns$elm_markdown$Markdown$InlineParser$tokensToMatches = F4(
 	function (tokens, matches, references, rawText) {
@@ -14079,7 +14077,7 @@ var $dillonkearns$elm_markdown$Markdown$TableParser$parseHeader = F2(
 				$elm$core$List$map2,
 				F2(
 					function (headerCell, alignment) {
-						return {ax: alignment, R: headerCell};
+						return {ax: alignment, S: headerCell};
 					}),
 				headers,
 				columnAlignments);
@@ -14103,7 +14101,7 @@ var $dillonkearns$elm_markdown$Markdown$TableParser$parseHeader = F2(
 	});
 var $dillonkearns$elm_markdown$Markdown$CodeBlock$CodeBlock = F2(
 	function (language, body) {
-		return {bk: body, cr: language};
+		return {bk: body, cq: language};
 	});
 var $dillonkearns$elm_markdown$Markdown$CodeBlock$infoString = function (fenceCharacter) {
 	var toInfoString = F2(
@@ -14426,7 +14424,7 @@ var $elm$parser$Parser$Advanced$chompUntil = function (_v0) {
 	var str = _v0.a;
 	var expecting = _v0.b;
 	return function (s) {
-		var _v1 = A5($elm$parser$Parser$Advanced$findSubString, str, s.d, s.cK, s.bn, s.a5);
+		var _v1 = A5($elm$parser$Parser$Advanced$findSubString, str, s.d, s.cJ, s.bn, s.a5);
 		var newOffset = _v1.a;
 		var newRow = _v1.b;
 		var newCol = _v1.c;
@@ -14437,7 +14435,7 @@ var $elm$parser$Parser$Advanced$chompUntil = function (_v0) {
 			$elm$parser$Parser$Advanced$Good,
 			_Utils_cmp(s.d, newOffset) < 0,
 			0,
-			{bn: newCol, f: s.f, h: s.h, d: newOffset, cK: newRow, a5: s.a5});
+			{bn: newCol, f: s.f, h: s.h, d: newOffset, cJ: newRow, a5: s.a5});
 	};
 };
 var $dillonkearns$elm_markdown$Parser$Token$greaterThan = A2(
@@ -14446,11 +14444,11 @@ var $dillonkearns$elm_markdown$Parser$Token$greaterThan = A2(
 	$elm$parser$Parser$Expecting('a `>`'));
 var $elm$parser$Parser$Advanced$Located = F3(
 	function (row, col, context) {
-		return {bn: col, f: context, cK: row};
+		return {bn: col, f: context, cJ: row};
 	});
 var $elm$parser$Parser$Advanced$changeContext = F2(
 	function (newContext, s) {
-		return {bn: s.bn, f: newContext, h: s.h, d: s.d, cK: s.cK, a5: s.a5};
+		return {bn: s.bn, f: newContext, h: s.h, d: s.d, cJ: s.cJ, a5: s.a5};
 	});
 var $elm$parser$Parser$Advanced$inContext = F2(
 	function (context, _v0) {
@@ -14461,7 +14459,7 @@ var $elm$parser$Parser$Advanced$inContext = F2(
 					$elm$parser$Parser$Advanced$changeContext,
 					A2(
 						$elm$core$List$cons,
-						A3($elm$parser$Parser$Advanced$Located, s0.cK, s0.bn, context),
+						A3($elm$parser$Parser$Advanced$Located, s0.cJ, s0.bn, context),
 						s0.f),
 					s0));
 			if (!_v1.$) {
@@ -14648,7 +14646,7 @@ var $dillonkearns$elm_markdown$Markdown$LinkReferenceDefinition$parser = A2(
 							function (label, destination, title) {
 								return _Utils_Tuple2(
 									label,
-									{cc: destination, bX: title});
+									{cb: destination, bW: title});
 							})),
 					$dillonkearns$elm_markdown$Whitespace$upToThreeSpaces),
 				A2(
@@ -14904,7 +14902,7 @@ var $dillonkearns$elm_markdown$Markdown$TableParser$delimiterToAlignment = funct
 var $dillonkearns$elm_markdown$Markdown$TableParser$delimiterRowParser = A2(
 	$elm$parser$Parser$Advanced$andThen,
 	function (delimiterRow) {
-		var trimmed = delimiterRow.a.b_;
+		var trimmed = delimiterRow.a.bZ;
 		var headers = delimiterRow.b;
 		return $elm$core$List$isEmpty(headers) ? $elm$parser$Parser$Advanced$problem(
 			$elm$parser$Parser$Expecting('Must have at least one column in delimiter row.')) : ((($elm$core$List$length(headers) === 1) && (!(A2($elm$core$String$startsWith, '|', trimmed) && A2($elm$core$String$endsWith, '|', trimmed)))) ? $elm$parser$Parser$Advanced$problem(
@@ -14917,8 +14915,8 @@ var $dillonkearns$elm_markdown$Markdown$TableParser$delimiterRowParser = A2(
 				return A2(
 					$dillonkearns$elm_markdown$Markdown$Table$TableDelimiterRow,
 					{
-						bL: delimiterText,
-						b_: $elm$core$String$trim(delimiterText)
+						bK: delimiterText,
+						bZ: $elm$core$String$trim(delimiterText)
 					},
 					A2(
 						$elm$core$List$map,
@@ -15291,7 +15289,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$unorderedListBlock = function (pr
 					var body = unparsedListItem.b;
 					return {
 						bk: body,
-						cs: listmarker,
+						cr: listmarker,
 						l: $elm$core$Maybe$Just(
 							function () {
 								if (completion === 1) {
@@ -15303,9 +15301,9 @@ var $dillonkearns$elm_markdown$Markdown$Parser$unorderedListBlock = function (pr
 					};
 				case 1:
 					var body = unparsedListItem.a;
-					return {bk: body, cs: listmarker, l: $elm$core$Maybe$Nothing};
+					return {bk: body, cr: listmarker, l: $elm$core$Maybe$Nothing};
 				default:
-					return {bk: '', cs: listmarker, l: $elm$core$Maybe$Nothing};
+					return {bk: '', cr: listmarker, l: $elm$core$Maybe$Nothing};
 			}
 		});
 	return A2(
@@ -15621,7 +15619,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$completeOrMergeBlocks = F2(
 										$dillonkearns$elm_markdown$Markdown$RawBlock$CodeBlock(
 											{
 												bk: A2($dillonkearns$elm_markdown$Markdown$Parser$joinStringsPreserveAll, block2.bk, block1.bk),
-												cr: $elm$core$Maybe$Nothing
+												cq: $elm$core$Maybe$Nothing
 											}),
 										rest)
 								});
@@ -15726,7 +15724,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$completeOrMergeBlocks = F2(
 								var intended2 = newRawBlock.b;
 								var closeListItems1 = newRawBlock.c;
 								var openListItem1 = newRawBlock.d;
-								if (_Utils_eq(openListItem2.cs, openListItem1.cs)) {
+								if (_Utils_eq(openListItem2.cr, openListItem1.cr)) {
 									var _v52 = A2(
 										$elm$parser$Parser$Advanced$run,
 										$dillonkearns$elm_markdown$Markdown$Parser$cyclic$rawBlockParser(),
@@ -16053,7 +16051,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$completeOrMergeBlocks = F2(
 											b: A2(
 												$elm$core$List$cons,
 												$dillonkearns$elm_markdown$Markdown$RawBlock$OpenBlockOrParagraph(
-													A3($dillonkearns$elm_markdown$Markdown$Parser$joinRawStringsWith, '\n', rawHeaders, text.bL)),
+													A3($dillonkearns$elm_markdown$Markdown$Parser$joinRawStringsWith, '\n', rawHeaders, text.bK)),
 												rest)
 										});
 								}
@@ -16235,8 +16233,8 @@ var $dillonkearns$elm_markdown$Markdown$Parser$inlineParseHelper = F2(
 				$elm$core$List$map,
 				$elm$core$Tuple$mapSecond(
 					function (_v37) {
-						var destination = _v37.cc;
-						var title = _v37.bX;
+						var destination = _v37.cb;
+						var title = _v37.bW;
 						return _Utils_Tuple2(destination, title);
 					}),
 				referencesDict));
@@ -16452,13 +16450,13 @@ var $dillonkearns$elm_markdown$Markdown$Parser$parseHeaderInlines = F2(
 		return A2(
 			$elm$core$List$map,
 			function (_v24) {
-				var label = _v24.R;
+				var label = _v24.S;
 				var alignment = _v24.ax;
 				return A3(
 					$dillonkearns$elm_markdown$Markdown$Parser$parseRawInline,
 					linkReferences,
 					function (parsedHeaderLabel) {
-						return {ax: alignment, R: parsedHeaderLabel};
+						return {ax: alignment, S: parsedHeaderLabel};
 					},
 					label);
 			},
@@ -16581,7 +16579,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$parseInlines = F2(
 				var codeBlockBody = rawBlock.a;
 				return $dillonkearns$elm_markdown$Markdown$Parser$ParsedBlock(
 					$dillonkearns$elm_markdown$Markdown$Block$CodeBlock(
-						{bk: codeBlockBody, cr: $elm$core$Maybe$Nothing}));
+						{bk: codeBlockBody, cq: $elm$core$Maybe$Nothing}));
 			case 8:
 				var _v22 = rawBlock.a;
 				var header = _v22.a;
@@ -16596,7 +16594,7 @@ var $dillonkearns$elm_markdown$Markdown$Parser$parseInlines = F2(
 				var text = _v23.a;
 				return $dillonkearns$elm_markdown$Markdown$Parser$ParsedBlock(
 					$dillonkearns$elm_markdown$Markdown$Block$Paragraph(
-						A2($dillonkearns$elm_markdown$Markdown$Parser$inlineParseHelper, linkReferences, text.bL)));
+						A2($dillonkearns$elm_markdown$Markdown$Parser$inlineParseHelper, linkReferences, text.bK)));
 			default:
 				var raw = rawBlock.b;
 				return $dillonkearns$elm_markdown$Markdown$Parser$ParsedBlock(
@@ -17447,7 +17445,7 @@ var $dillonkearns$elm_markdown$Markdown$Block$extractInlineBlockText = function 
 							A2(
 								$elm$core$List$map,
 								function ($) {
-									return $.R;
+									return $.S;
 								},
 								header)),
 							$elm$core$List$concat(
@@ -17570,8 +17568,8 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$renderHelperSingle = function (
 							return renderer.aS(
 								{
 									bm: children,
-									bD: level,
-									cF: $dillonkearns$elm_markdown$Markdown$Block$extractInlineText(content)
+									bC: level,
+									cE: $dillonkearns$elm_markdown$Markdown$Block$extractInlineText(content)
 								});
 						},
 						A2($dillonkearns$elm_markdown$Markdown$Renderer$renderStyled, renderer, content)));
@@ -17711,7 +17709,7 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$renderHelperSingle = function (
 					A2(
 						$elm$core$List$map,
 						function (_v11) {
-							var label = _v11.R;
+							var label = _v11.S;
 							var alignment = _v11.ax;
 							return A2(
 								$elm$core$Result$map,
@@ -17795,7 +17793,7 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$renderHtmlNode = F4(
 			tag,
 			attributes,
 			children,
-			renderer.cm,
+			renderer.cl,
 			A2($dillonkearns$elm_markdown$Markdown$Renderer$renderHelper, renderer, children));
 	});
 var $dillonkearns$elm_markdown$Markdown$Renderer$renderSingleInline = F2(
@@ -17832,7 +17830,7 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$renderSingleInline = F2(
 							{
 								aK: $dillonkearns$elm_markdown$Markdown$Block$extractInlineText(children),
 								a5: src,
-								bX: title
+								bW: title
 							})));
 			case 7:
 				var string = inline.a;
@@ -17855,7 +17853,7 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$renderSingleInline = F2(
 							return $elm$core$Result$Ok(
 								A2(
 									renderer.aX,
-									{cc: destination, bX: title},
+									{cb: destination, bW: title},
 									children));
 						},
 						A2($dillonkearns$elm_markdown$Markdown$Renderer$renderStyled, renderer, inlines)));
@@ -18031,7 +18029,7 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$defaultHtmlRenderer = {
 	aL: $elm$html$Html$blockquote(_List_Nil),
 	aM: function (_v0) {
 		var body = _v0.bk;
-		var language = _v0.cr;
+		var language = _v0.cq;
 		var classes = function () {
 			var _v1 = A2($elm$core$Maybe$map, $elm$core$String$words, language);
 			if ((!_v1.$) && _v1.a.b) {
@@ -18073,7 +18071,7 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$defaultHtmlRenderer = {
 	},
 	aR: A2($elm$html$Html$br, _List_Nil, _List_Nil),
 	aS: function (_v3) {
-		var level = _v3.bD;
+		var level = _v3.bC;
 		var children = _v3.bm;
 		switch (level) {
 			case 0:
@@ -18090,9 +18088,9 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$defaultHtmlRenderer = {
 				return A2($elm$html$Html$h6, _List_Nil, children);
 		}
 	},
-	cm: $dillonkearns$elm_markdown$Markdown$Html$oneOf(_List_Nil),
+	cl: $dillonkearns$elm_markdown$Markdown$Html$oneOf(_List_Nil),
 	aT: function (imageInfo) {
-		var _v5 = imageInfo.bX;
+		var _v5 = imageInfo.bW;
 		if (!_v5.$) {
 			var title = _v5.a;
 			return A2(
@@ -18117,14 +18115,14 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$defaultHtmlRenderer = {
 	},
 	aX: F2(
 		function (link, content) {
-			var _v6 = link.bX;
+			var _v6 = link.bW;
 			if (!_v6.$) {
 				var title = _v6.a;
 				return A2(
 					$elm$html$Html$a,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$href(link.cc),
+							$elm$html$Html$Attributes$href(link.cb),
 							$elm$html$Html$Attributes$title(title)
 						]),
 					content);
@@ -18133,7 +18131,7 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$defaultHtmlRenderer = {
 					$elm$html$Html$a,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$href(link.cc)
+							$elm$html$Html$Attributes$href(link.cb)
 						]),
 					content);
 			}
@@ -18275,7 +18273,7 @@ var $dillonkearns$elm_markdown$Markdown$Html$tag = F2(
 var $author$project$Lib$Markdown$renderer = _Utils_update(
 	$dillonkearns$elm_markdown$Markdown$Renderer$defaultHtmlRenderer,
 	{
-		cm: $dillonkearns$elm_markdown$Markdown$Html$oneOf(
+		cl: $dillonkearns$elm_markdown$Markdown$Html$oneOf(
 			_List_fromArray(
 				[
 					A2(
@@ -18368,8 +18366,8 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$View$requiredStyleToStri
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$View$fragmentView = function (_v0) {
 	var text = _v0.j;
-	var requiredStyle = _v0.cH;
-	var additionalClass = _v0.b2;
+	var requiredStyle = _v0.cG;
+	var additionalClass = _v0.b1;
 	return ((!requiredStyle) && $elm$core$String$isEmpty(additionalClass)) ? $elm$html$Html$text(text) : A2(
 		$elm$html$Html$span,
 		_List_fromArray(
@@ -18390,8 +18388,8 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$View$fragmentView = func
 };
 var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$View$lineView = F3(
 	function (start, index, _v0) {
-		var fragments = _v0.cj;
-		var highlight = _v0.O;
+		var fragments = _v0.ci;
+		var highlight = _v0.P;
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
@@ -18434,8 +18432,8 @@ var $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$View$toInlineHtml = func
 			A2(
 				$elm$core$List$map,
 				function (_v0) {
-					var highlight = _v0.O;
-					var fragments = _v0.cj;
+					var highlight = _v0.P;
+					var fragments = _v0.ci;
 					return _Utils_eq(highlight, $elm$core$Maybe$Nothing) ? A2($elm$core$List$map, $pablohirafuji$elm_syntax_highlight$SyntaxHighlight$View$fragmentView, fragments) : _List_fromArray(
 						[
 							A2(
@@ -18545,7 +18543,7 @@ var $author$project$Pages$Day$view = function (_v0) {
 									_List_fromArray(
 										[
 											$elm$html$Html$text(
-											$author$project$Pages$Day$extractTitle(dayData.cA))
+											$author$project$Pages$Day$extractTitle(dayData.cz))
 										])),
 									A2(
 									$elm$html$Html$p,
@@ -18568,7 +18566,7 @@ var $author$project$Pages$Day$view = function (_v0) {
 									A2(
 									$elm$html$Html$div,
 									_List_Nil,
-									$author$project$Lib$Markdown$simple(dayData.cA))
+									$author$project$Lib$Markdown$simple(dayData.cz))
 								])),
 							A2(
 							$elm$html$Html$div,
@@ -18605,7 +18603,7 @@ var $author$project$Pages$Day$view = function (_v0) {
 												]),
 											_List_fromArray(
 												[
-													$elm$html$Html$text(dayData.b4)
+													$elm$html$Html$text(dayData.b3)
 												]))
 										])),
 									A2(
@@ -18685,7 +18683,7 @@ var $author$project$Pages$Day$view = function (_v0) {
 								]))
 						]))
 				]),
-			bX: $author$project$Pages$Day$extractTitle(dayData.cA)
+			bW: $author$project$Pages$Day$extractTitle(dayData.cz)
 		};
 	} else {
 		var error = _v1.a;
@@ -18708,38 +18706,38 @@ var $author$project$Pages$Day$view = function (_v0) {
 							$elm$html$Html$text(error)
 						]))
 				]),
-			bX: 'Day #' + ($elm$core$String$fromInt(day) + ': error')
+			bW: 'Day #' + ($elm$core$String$fromInt(day) + ': error')
 		};
 	}
 };
 var $author$project$Pages$Day$page = function (_v0) {
 	return $orus_io$elm_spa$Spa$Page$element(
 		{
-			co: $author$project$Pages$Day$init,
-			cO: function (_v1) {
+			cn: $author$project$Pages$Day$init,
+			cN: function (_v1) {
 				return $elm$core$Platform$Sub$none;
 			},
-			cS: $author$project$Pages$Day$update,
-			cU: $author$project$Pages$Day$view
+			cR: $author$project$Pages$Day$update,
+			cT: $author$project$Pages$Day$view
 		});
 };
 var $orus_io$elm_spa$Spa$Page$static = function (pageView) {
 	return {
-		co: function (_v0) {
+		cn: function (_v0) {
 			return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
 		},
-		cO: $elm$core$Basics$always($elm$core$Platform$Sub$none),
-		cS: F2(
+		cN: $elm$core$Basics$always($elm$core$Platform$Sub$none),
+		cR: F2(
 			function (_v1, _v2) {
 				return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
 			}),
-		cU: $elm$core$Basics$always(pageView)
+		cT: $elm$core$Basics$always(pageView)
 	};
 };
 var $author$project$Pages$Home$view = function (_v0) {
 	return {
 		bk: $author$project$Lib$Markdown$simple('This is [my](https://nicolas.perriault.net/) attempt at the 2021\n        [Advent of Code](https://adventofcode.com/) in [Elm](https://elm-lang.org/).\n        '),
-		bX: 'Home'
+		bW: 'Home'
 	};
 };
 var $author$project$Pages$Home$page = function (shared) {
@@ -18819,7 +18817,7 @@ var $author$project$Main$dayMenu = function (currentDay) {
 };
 var $author$project$Main$toDocument = F2(
 	function (_v0, view) {
-		var currentDay = _v0.b9;
+		var currentDay = _v0.b8;
 		return {
 			bk: _List_fromArray(
 				[
@@ -18879,7 +18877,7 @@ var $author$project$Main$toDocument = F2(
 								]))
 						]))
 				]),
-			bX: view.bX + ' | Elm Advent of Code 2021'
+			bW: view.bW + ' | Elm Advent of Code 2021'
 		};
 	});
 var $author$project$Route$NotFound = function (a) {
@@ -18887,7 +18885,7 @@ var $author$project$Route$NotFound = function (a) {
 };
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
-		return {I: frag, J: params, G: unvisited, bh: value, L: visited};
+		return {J: frag, K: params, H: unvisited, bh: value, M: visited};
 	});
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -18897,7 +18895,7 @@ var $elm$url$Url$Parser$getFirstMatch = function (states) {
 		} else {
 			var state = states.a;
 			var rest = states.b;
-			var _v1 = state.G;
+			var _v1 = state.H;
 			if (!_v1.b) {
 				return $elm$core$Maybe$Just(state.bh);
 			} else {
@@ -18998,19 +18996,19 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.bG),
-					$elm$url$Url$Parser$prepareQuery(url.bK),
-					url.ci,
+					$elm$url$Url$Parser$preparePath(url.bF),
+					$elm$url$Url$Parser$prepareQuery(url.bJ),
+					url.ch,
 					$elm$core$Basics$identity)));
 	});
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
 var $elm$url$Url$Parser$custom = F2(
 	function (tipe, stringToSomething) {
 		return function (_v0) {
-			var visited = _v0.L;
-			var unvisited = _v0.G;
-			var params = _v0.J;
-			var frag = _v0.I;
+			var visited = _v0.M;
+			var unvisited = _v0.H;
+			var params = _v0.K;
+			var frag = _v0.J;
 			var value = _v0.bh;
 			if (!unvisited.b) {
 				return _List_Nil;
@@ -19039,10 +19037,10 @@ var $elm$url$Url$Parser$custom = F2(
 var $elm$url$Url$Parser$int = A2($elm$url$Url$Parser$custom, 'NUMBER', $elm$core$String$toInt);
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
-		var visited = _v0.L;
-		var unvisited = _v0.G;
-		var params = _v0.J;
-		var frag = _v0.I;
+		var visited = _v0.M;
+		var unvisited = _v0.H;
+		var params = _v0.K;
+		var frag = _v0.J;
 		var value = _v0.bh;
 		return A5(
 			$elm$url$Url$Parser$State,
@@ -19056,10 +19054,10 @@ var $elm$url$Url$Parser$map = F2(
 	function (subValue, _v0) {
 		var parseArg = _v0;
 		return function (_v1) {
-			var visited = _v1.L;
-			var unvisited = _v1.G;
-			var params = _v1.J;
-			var frag = _v1.I;
+			var visited = _v1.M;
+			var unvisited = _v1.H;
+			var params = _v1.K;
+			var frag = _v1.J;
 			var value = _v1.bh;
 			return A2(
 				$elm$core$List$map,
@@ -19081,10 +19079,10 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 };
 var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
-		var visited = _v0.L;
-		var unvisited = _v0.G;
-		var params = _v0.J;
-		var frag = _v0.I;
+		var visited = _v0.M;
+		var unvisited = _v0.H;
+		var params = _v0.K;
+		var frag = _v0.J;
 		var value = _v0.bh;
 		if (!unvisited.b) {
 			return _List_Nil;
@@ -19132,9 +19130,9 @@ var $author$project$Route$route = $elm$url$Url$Parser$oneOf(
 				$elm$url$Url$Parser$int))
 		]));
 var $author$project$Route$toRoute = function (url) {
-	var protocol = (url.cE === 1) ? 'https' : 'http';
+	var protocol = (url.cD === 1) ? 'https' : 'http';
 	var port_ = function () {
-		var _v0 = url.cB;
+		var _v0 = url.cA;
 		if (!_v0.$) {
 			var p = _v0.a;
 			return ':' + $elm$core$String$fromInt(p);
@@ -19142,7 +19140,7 @@ var $author$project$Route$toRoute = function (url) {
 			return '';
 		}
 	}();
-	var path = A2($elm$core$Maybe$withDefault, '/', url.ci);
+	var path = A2($elm$core$Maybe$withDefault, '/', url.ch);
 	return A2(
 		$elm$core$Maybe$withDefault,
 		$author$project$Route$NotFound(url),
@@ -19152,7 +19150,7 @@ var $author$project$Route$toRoute = function (url) {
 			A2(
 				$elm$core$Maybe$withDefault,
 				url,
-				$elm$url$Url$fromString(protocol + ('://' + (url.cl + (port_ + path)))))));
+				$elm$url$Url$fromString(protocol + ('://' + (url.ck + (port_ + path)))))));
 };
 var $author$project$Shared$update = F2(
 	function (msg, shared) {
@@ -19162,7 +19160,7 @@ var $author$project$Shared$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						shared,
-						{b9: currentDay}),
+						{b8: currentDay}),
 					$elm$core$Platform$Cmd$none);
 			case 1:
 				var newIdentity = msg.a;
@@ -19191,7 +19189,7 @@ var $author$project$Shared$update = F2(
 var $author$project$Main$main = $elm$browser$Browser$application(
 	A2(
 		$orus_io$elm_spa$Spa$application,
-		{cQ: $author$project$Main$toDocument},
+		{cP: $author$project$Main$toDocument},
 		A4(
 			$orus_io$elm_spa$Spa$addPublicPage,
 			$author$project$Main$mappers,
@@ -19204,13 +19202,13 @@ var $author$project$Main$main = $elm$browser$Browser$application(
 				$author$project$Pages$Home$page,
 				$orus_io$elm_spa$Spa$init(
 					{
-						cb: $author$project$View$defaultView,
-						ch: $elm$core$Basics$always($elm$core$Maybe$Nothing),
-						co: $author$project$Shared$init,
-						cD: $elm$core$Basics$always(''),
-						cO: $author$project$Shared$subscriptions,
-						cR: $author$project$Route$toRoute,
-						cS: $author$project$Shared$update
+						ca: $author$project$View$defaultView,
+						cg: $elm$core$Basics$always($elm$core$Maybe$Nothing),
+						cn: $author$project$Shared$init,
+						cC: $elm$core$Basics$always(''),
+						cN: $author$project$Shared$subscriptions,
+						cQ: $author$project$Route$toRoute,
+						cR: $author$project$Shared$update
 					})))));
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
