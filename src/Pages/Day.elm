@@ -5,6 +5,7 @@ import Days.Day2 as Day2
 import Days.Day3 as Day3
 import Days.Day4 as Day4
 import Days.Day5 as Day5
+import Days.Day6 as Day6
 import Effect exposing (Effect)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -81,6 +82,9 @@ getDayData day =
 
         5 ->
             Ok Day5.day
+
+        6 ->
+            Ok Day6.day
 
         _ ->
             Err <| "No data could be found for day #" ++ String.fromInt day
