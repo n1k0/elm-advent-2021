@@ -1,18 +1,24 @@
 module Pages.Home exposing (..)
 
+import Effect
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Lib.Markdown as Markdown
-import Shared exposing (Shared)
+import Shared
 import Spa.Page
 import View exposing (View)
 
 
-page shared =
-    Spa.Page.static (view shared)
+page _ =
+    Spa.Page.element
+        { init = \_ -> () |> Effect.withShared (Shared.setCurrentDay Nothing)
+        , update = \_ _ -> ( (), Effect.none )
+        , view = view
+        , subscriptions = always Sub.none
+        }
 
 
-view : Shared -> View msg
+view : () -> View msg
 view _ =
     { title = "Home"
     , body =
