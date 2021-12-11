@@ -9815,7 +9815,7 @@ var $author$project$Days$Day7$answer = A2(
 	'\n',
 	_List_fromArray(
 		['Part1: ' + $author$project$Days$Day7$part1]));
-var $author$project$Days$Day7$pitch = '\nA giant whale has decided your submarine is its next meal, and it\'s much faster than you are. There\'s nowhere to run!\n\nSuddenly, a swarm of crabs (each in its own tiny submarine - it\'s too deep for them otherwise) zooms in to rescue you! They seem to be preparing to blast a hole in the ocean floor; sensors indicate a massive underground cave system just beyond where they\'re aiming!\n\nThe crab submarines all need to be aligned before they\'ll have enough power to blast a large enough hole for your submarine to get through. However, it doesn\'t look like they\'ll be aligned before the whale catches you! Maybe you can help?\n\nThere\'s one major catch - crab submarines can only move horizontally.\n\nYou quickly make a list of the horizontal position of each crab (your puzzle input). Crab submarines have limited fuel, so you need to find a way to make all of their horizontal positions match while requiring them to spend as little fuel as possible.\n\nFor example, consider the following horizontal positions:\n\n    16,1,2,0,4,2,7,1,2,14\n\nThis means there\'s a crab with horizontal position `16`, a crab with horizontal position `1`, and so on.\n\nEach change of `1` step in horizontal position of a single crab costs `1` fuel. You could choose any horizontal position to align them all on, but the one that costs the least fuel is horizontal position `2`:\n\n    Move from 16 to 2: 14 fuel\n    Move from 1 to 2: 1 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 0 to 2: 2 fuel\n    Move from 4 to 2: 2 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 7 to 2: 5 fuel\n    Move from 1 to 2: 1 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 14 to 2: 12 fuel\n\nThis costs a total of `37` fuel. This is the cheapest possible outcome; more expensive outcomes include aligning at position `1` (`41` fuel), position `3` (`39` fuel), or position `10` (`71` fuel).\n\nDetermine the horizontal position that the crabs can align to using the least fuel possible. How much fuel must they spend to align to that position?\n';
+var $author$project$Days$Day7$pitch = '\n--- Day 7: The Treachery of Whales ---\n\nA giant whale has decided your submarine is its next meal, and it\'s much faster than you are. There\'s nowhere to run!\n\nSuddenly, a swarm of crabs (each in its own tiny submarine - it\'s too deep for them otherwise) zooms in to rescue you! They seem to be preparing to blast a hole in the ocean floor; sensors indicate a massive underground cave system just beyond where they\'re aiming!\n\nThe crab submarines all need to be aligned before they\'ll have enough power to blast a large enough hole for your submarine to get through. However, it doesn\'t look like they\'ll be aligned before the whale catches you! Maybe you can help?\n\nThere\'s one major catch - crab submarines can only move horizontally.\n\nYou quickly make a list of the horizontal position of each crab (your puzzle input). Crab submarines have limited fuel, so you need to find a way to make all of their horizontal positions match while requiring them to spend as little fuel as possible.\n\nFor example, consider the following horizontal positions:\n\n    16,1,2,0,4,2,7,1,2,14\n\nThis means there\'s a crab with horizontal position `16`, a crab with horizontal position `1`, and so on.\n\nEach change of `1` step in horizontal position of a single crab costs `1` fuel. You could choose any horizontal position to align them all on, but the one that costs the least fuel is horizontal position `2`:\n\n    Move from 16 to 2: 14 fuel\n    Move from 1 to 2: 1 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 0 to 2: 2 fuel\n    Move from 4 to 2: 2 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 7 to 2: 5 fuel\n    Move from 1 to 2: 1 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 14 to 2: 12 fuel\n\nThis costs a total of `37` fuel. This is the cheapest possible outcome; more expensive outcomes include aligning at position `1` (`41` fuel), position `3` (`39` fuel), or position `10` (`71` fuel).\n\nDetermine the horizontal position that the crabs can align to using the least fuel possible. How much fuel must they spend to align to that position?\n';
 var $author$project$Days$Day7$day = {b3: $author$project$Days$Day7$answer, cz: $author$project$Days$Day7$pitch};
 var $author$project$Days$Day8$sampleData = '\nbe cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe\nedbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc\nfgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg\nfbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb\naecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea\nfgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb\ndbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe\nbdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef\negadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb\ngcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce\n';
 var $author$project$Days$Day8$part1 = $elm$core$String$fromInt(
@@ -9861,6 +9861,117 @@ var $author$project$Days$Day8$answer = A2(
 		['Part1: ' + $author$project$Days$Day8$part1]));
 var $author$project$Days$Day8$pitch = '\n--- Day 8: Seven Segment Search ---\n\nYou barely reach the safety of the cave when the whale smashes into the cave mouth, collapsing it. Sensors indicate another exit to this cave at a much greater depth, so you have no choice but to press on.\n\nAs your submarine slowly makes its way through the cave system, you notice that the four-digit seven-segment displays in your submarine are malfunctioning; they must have been damaged during the escape. You\'ll be in a lot of trouble without them, so you\'d better figure out what\'s wrong.\n\nEach digit of a seven-segment display is rendered by turning on or off any of seven segments named `a` through `g`:\n\n      0:      1:      2:      3:      4:\n     aaaa    ....    aaaa    aaaa    ....\n    b    c  .    c  .    c  .    c  b    c\n    b    c  .    c  .    c  .    c  b    c\n     ....    ....    dddd    dddd    dddd\n    e    f  .    f  e    .  .    f  .    f\n    e    f  .    f  e    .  .    f  .    f\n     gggg    ....    gggg    gggg    ....\n\n      5:      6:      7:      8:      9:\n     aaaa    aaaa    aaaa    aaaa    aaaa\n    b    .  b    .  .    c  b    c  b    c\n    b    .  b    .  .    c  b    c  b    c\n     dddd    dddd    ....    dddd    dddd\n    .    f  e    f  .    f  e    f  .    f\n    .    f  e    f  .    f  e    f  .    f\n     gggg    gggg    ....    gggg    gggg\nSo, to render a 1, only segments c and f would be turned on; the rest would be off. To render a 7, only segments a, c, and f would be turned on.\n\nThe problem is that the signals which control the segments have been mixed up on each display. The submarine is still trying to display numbers by producing output on signal wires `a` through `g`, but those wires are connected to segments randomly. Worse, the wire/segment connections are mixed up separately for each four-digit display! (All of the digits within a display use the same connections, though.)\n\nSo, you might know that only signal wires `b` and `g` are turned on, but that doesn\'t mean segments `b` and `g` are turned on: the only digit that uses two segments is `1`, so it must mean segments `c` and `f` are meant to be on. With just that information, you still can\'t tell which wire (`b`/`g`) goes to which segment (`c`/`f`). For that, you\'ll need to collect more information.\n\nFor each display, you watch the changing signals for a while, make a note of all ten unique signal patterns you see, and then write down a single four digit output value (your puzzle input). Using the signal patterns, you should be able to work out which pattern corresponds to which digit.\n\nFor example, here is what you might see in a single entry in your notes:\n\n    acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf\n\nEach entry consists of ten unique signal patterns, a `|` delimiter, and finally the four digit output value. Within an entry, the same wire/segment connections are used (but you don\'t know what the connections actually are). The unique signal patterns correspond to the ten different ways the submarine tries to render a digit using the current wire/segment connections. Because `7` is the only digit that uses three segments, `dab` in the above example means that to render a `7`, signal lines `d`, `a`, and `b` are on. Because `4` is the only digit that uses four segments, eafb means that to render a `4`, signal lines `e`, `a`, `f`, and `b` are on.\n\nUsing this information, you should be able to work out which combination of signal wires corresponds to each of the ten digits. Then, you can decode the four digit output value. Unfortunately, in the above example, all of the digits in the output value (`cdfeb fcadb cdfeb cdbaf`) use five segments and are more difficult to deduce.\n\nFor now, focus on the easy digits. Consider this larger example:\n\n    be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |\n    [fdgacbe] cefdb cefbgd [gcbe]\n    edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |\n    fcgedb [cgb] [dgebacf] [gc]\n    fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |\n    [cg] [cg] fdcagb [cbg]\n    fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |\n    efabcd cedba gadfec [cb]\n    aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga |\n    [gecf] [egdcabf] [bgf] bfgea\n    fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf |\n    [gebdcfa] [ecba] [ca] [fadegcb]\n    dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf |\n    [cefg] dcbef [fcge] [gbcadfe]\n    bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd |\n    [ed] bcgafe cdgba cbgef\n    egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg |\n    [gbdfcae] [bgc] [cg] [cgb]\n    gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |\n    [fgae] cfgab fg bagce\n\nBecause the digits `1`, `4`, `7`, and `8` each use a unique number of segments, you should be able to tell which combinations of signals correspond to those digits. Counting only digits in the output values (the part after | on each line), in the above example, there are `26` instances of digits that use a unique number of segments (highlighted above).\n\nIn the output values, how many times do digits `1`, `4`, `7`, or `8` appear?\n';
 var $author$project$Days$Day8$day = {b3: $author$project$Days$Day8$answer, cz: $author$project$Days$Day8$pitch};
+var $author$project$Days$Day9$computeRisk = A2(
+	$elm$core$Basics$composeR,
+	$elm$core$List$map(
+		function (n) {
+			return n + 1;
+		}),
+	$elm$core$List$sum);
+var $author$project$Days$Day9$getHeightAt = function (_v0) {
+	var x = _v0.a;
+	var y = _v0.b;
+	var retrieve = A2(
+		$elm$core$Basics$composeR,
+		$elm$core$List$filterMap($elm$core$Basics$identity),
+		$elm$core$List$head);
+	return A2(
+		$elm$core$Basics$composeR,
+		$elm$core$List$indexedMap(
+			function (cy) {
+				return A2(
+					$elm$core$Basics$composeR,
+					$elm$core$List$indexedMap(
+						F2(
+							function (cx, height) {
+								return (_Utils_eq(cx, x) && _Utils_eq(cy, y)) ? $elm$core$Maybe$Just(height) : $elm$core$Maybe$Nothing;
+							})),
+					retrieve);
+			}),
+		retrieve);
+};
+var $author$project$Days$Day9$getSurroundingHeights = F2(
+	function (_v0, map) {
+		var x = _v0.a;
+		var y = _v0.b;
+		return A2(
+			$elm$core$List$filterMap,
+			$elm$core$Basics$identity,
+			_List_fromArray(
+				[
+					A2(
+					$author$project$Days$Day9$getHeightAt,
+					_Utils_Tuple2(x, y - 1),
+					map),
+					A2(
+					$author$project$Days$Day9$getHeightAt,
+					_Utils_Tuple2(x, y + 1),
+					map),
+					A2(
+					$author$project$Days$Day9$getHeightAt,
+					_Utils_Tuple2(x - 1, y),
+					map),
+					A2(
+					$author$project$Days$Day9$getHeightAt,
+					_Utils_Tuple2(x + 1, y),
+					map)
+				]));
+	});
+var $author$project$Days$Day9$keepIfLowestPoint = F3(
+	function (_v0, map, height) {
+		var x = _v0.a;
+		var y = _v0.b;
+		return A2(
+			$elm$core$List$all,
+			function (h) {
+				return _Utils_cmp(h, height) > 0;
+			},
+			A2(
+				$author$project$Days$Day9$getSurroundingHeights,
+				_Utils_Tuple2(x, y),
+				map)) ? $elm$core$Maybe$Just(height) : $elm$core$Maybe$Nothing;
+	});
+var $author$project$Days$Day9$findLowestPoints = function (map) {
+	return $elm$core$List$concat(
+		A2(
+			$elm$core$List$indexedMap,
+			function (y) {
+				return A2(
+					$elm$core$Basics$composeR,
+					$elm$core$List$indexedMap(
+						function (x) {
+							return A2(
+								$author$project$Days$Day9$keepIfLowestPoint,
+								_Utils_Tuple2(x, y),
+								map);
+						}),
+					$elm$core$List$filterMap($elm$core$Basics$identity));
+			},
+			map));
+};
+var $author$project$Days$Day9$parseHeatMap = A2(
+	$elm$core$Basics$composeR,
+	$elm$core$String$trim,
+	A2(
+		$elm$core$Basics$composeR,
+		$elm$core$String$lines,
+		$elm$core$List$map(
+			A2(
+				$elm$core$Basics$composeR,
+				$elm$core$String$split(''),
+				$elm$core$List$filterMap($elm$core$String$toInt)))));
+var $author$project$Days$Day9$sampleData = '\n2199943210\n3987894921\n9856789892\n8767896789\n9899965678\n';
+var $author$project$Days$Day9$part1 = $elm$core$String$fromInt(
+	$author$project$Days$Day9$computeRisk(
+		$author$project$Days$Day9$findLowestPoints(
+			$author$project$Days$Day9$parseHeatMap($author$project$Days$Day9$sampleData))));
+var $author$project$Days$Day9$answer = A2(
+	$elm$core$String$join,
+	'\n',
+	_List_fromArray(
+		['Part1: ' + $author$project$Days$Day9$part1]));
+var $author$project$Days$Day9$pitch = '\n--- Day 9: Smoke Basin ---\n\nThese caves seem to be lava tubes. Parts are even still volcanically active; small hydrothermal vents release smoke into the caves that slowly settles like rain.\n\nIf you can model how the smoke flows through the caves, you might be able to avoid it and be that much safer. The submarine generates a heightmap of the floor of the nearby caves for you (your puzzle input).\n\nSmoke flows to the lowest point of the area it\'s in. For example, consider the following heightmap:\n\n    2199943210\n    3987894921\n    9856789892\n    8767896789\n    9899965678\n\nEach number corresponds to the height of a particular location, where `9` is the highest and `0` is the lowest a location can be.\n\nYour first goal is to find the low points - the locations that are lower than any of its adjacent locations. Most locations have four adjacent locations (up, down, left, and right); locations on the edge or corner of the map have three or two adjacent locations, respectively. (Diagonal locations do not count as adjacent.)\n\nIn the above example, there are four low points, all highlighted: two are in the first row (a `1` and a `0`), one is in the third row (a `5`), and one is in the bottom row (also a `5`). All other locations on the heightmap have some lower adjacent location, and so are not low points.\n\nThe risk level of a low point is `1` plus its height. In the above example, the risk levels of the low points are `2`, `1`, `6`, and `6`. The sum of the risk levels of all low points in the heightmap is therefore `15`.\n\nFind all of the low points on your heightmap. What is the sum of the risk levels of all low points on your heightmap?\n';
+var $author$project$Days$Day9$day = {b3: $author$project$Days$Day9$answer, cz: $author$project$Days$Day9$pitch};
 var $author$project$Pages$Day$getDayData = function (day) {
 	switch (day) {
 		case 1:
@@ -9879,6 +9990,8 @@ var $author$project$Pages$Day$getDayData = function (day) {
 			return $elm$core$Result$Ok($author$project$Days$Day7$day);
 		case 8:
 			return $elm$core$Result$Ok($author$project$Days$Day8$day);
+		case 9:
+			return $elm$core$Result$Ok($author$project$Days$Day9$day);
 		default:
 			return $elm$core$Result$Err(
 				'No data could be found for day #' + $elm$core$String$fromInt(day));
