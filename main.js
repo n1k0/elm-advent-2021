@@ -9733,55 +9733,33 @@ var $author$project$Days$Day5$answer = A2(
 var $author$project$Days$Day5$pitch = '\n--- Day 5: Hydrothermal Venture ---\n\nYou come across a field of hydrothermal vents on the ocean floor! These vents constantly produce large, opaque clouds, so it would be best to avoid them if possible.\n\nThey tend to form in lines; the submarine helpfully produces a list of nearby lines of vents (your puzzle input) for you to review. For example:\n\n    0,9 -> 5,9\n    8,0 -> 0,8\n    9,4 -> 3,4\n    2,2 -> 2,1\n    7,0 -> 7,4\n    6,4 -> 2,0\n    0,9 -> 2,9\n    3,4 -> 1,4\n    0,0 -> 8,8\n    5,5 -> 8,2\n\nEach line of vents is given as a line segment in the format `x1,y1 -> x2,y2` where `x1,y1` are the coordinates of one end the line segment and `x2,y2` are the coordinates of the other end. These line segments include the points at both ends. In other words:\n\n- An entry like `1,1 -> 1,3` covers points `1,1`, `1,2`, and `1,3`.\n- An entry like `9,7 -> 7,7` covers points `9,7`, `8,7`, and `7,7`.\n\nFor now, only consider horizontal and vertical lines: lines where either `x1 = x2` or `y1 = y2`.\n\nSo, the horizontal and vertical lines from the above list would produce the following diagram:\n\n    .......1..\n    ..1....1..\n    ..1....1..\n    .......1..\n    .112111211\n    ..........\n    ..........\n    ..........\n    ..........\n    222111....\n\nIn this diagram, the top left corner is `0,0` and the bottom right corner is `9,9`. Each position is shown as the number of lines which cover that point or `.` if no line covers that point. The top-left pair of `1`s, for example, comes from `2,2 -> 2,1`; the very bottom row is formed by the overlapping lines `0,9 -> 5,9` and `0,9 -> 2,9`.\n\nTo avoid the most dangerous areas, you need to determine the number of points where at least two lines overlap. In the above example, this is anywhere in the diagram with a `2` or larger - a total of `5` points.\n\nConsider only horizontal and vertical lines. At how many points do at least two lines overlap?\n';
 var $author$project$Days$Day5$day = {b3: $author$project$Days$Day5$answer, cz: $author$project$Days$Day5$pitch};
 var $author$project$Days$Day6$evolve = function (n) {
-	if (!n) {
-		return _List_fromArray(
-			[6, 8]);
-	} else {
-		var x = n;
-		return _List_fromArray(
-			[x - 1]);
-	}
+	return (!n) ? _List_fromArray(
+		[6, 8]) : _List_fromArray(
+		[n - 1]);
 };
-var $author$project$Days$Day6$processDays = F3(
-	function (counter, population, days) {
-		processDays:
-		while (true) {
-			var _new = $elm$core$List$concat(
-				A2($elm$core$List$map, $author$project$Days$Day6$evolve, population));
-			if (counter === 1) {
-				return A2($elm$core$List$cons, _new, days);
-			} else {
-				var $temp$counter = counter - 1,
-					$temp$population = _new,
-					$temp$days = A2($elm$core$List$cons, _new, days);
-				counter = $temp$counter;
-				population = $temp$population;
-				days = $temp$days;
-				continue processDays;
-			}
-		}
-	});
-var $author$project$Days$Day6$sampleData = '3,4,3,1,2';
-var $elm$core$List$singleton = function (value) {
-	return _List_fromArray(
-		[value]);
+var $author$project$Days$Day6$process = function (population) {
+	return $elm$core$List$concat(
+		A2($elm$core$List$map, $author$project$Days$Day6$evolve, population));
 };
-var $author$project$Days$Day6$part1 = A2(
-	$elm$core$Maybe$withDefault,
-	-1,
-	A2(
-		$elm$core$Maybe$map,
-		$elm$core$List$length,
-		$elm$core$List$head(
+var $author$project$Days$Day6$run = F2(
+	function (days, pop) {
+		return $elm$core$List$length(
 			A3(
 				$elm$core$List$foldl,
-				$author$project$Days$Day6$processDays(80),
-				_List_Nil,
-				$elm$core$List$singleton(
-					A2(
-						$elm$core$List$filterMap,
-						$elm$core$String$toInt,
-						A2($elm$core$String$split, '', $author$project$Days$Day6$sampleData)))))));
+				function (_v0) {
+					return $author$project$Days$Day6$process;
+				},
+				pop,
+				A2($elm$core$List$range, 1, days)));
+	});
+var $author$project$Days$Day6$sampleData = '3,4,3,1,2';
+var $author$project$Days$Day6$part1 = A2(
+	$author$project$Days$Day6$run,
+	80,
+	A2(
+		$elm$core$List$filterMap,
+		$elm$core$String$toInt,
+		A2($elm$core$String$split, '', $author$project$Days$Day6$sampleData)));
 var $author$project$Days$Day6$answer = A2(
 	$elm$core$String$join,
 	'\n',
@@ -9789,7 +9767,7 @@ var $author$project$Days$Day6$answer = A2(
 		[
 			'Part1: ' + $elm$core$String$fromInt($author$project$Days$Day6$part1)
 		]));
-var $author$project$Days$Day6$pitch = '\n--- Day 6: Lanternfish ---\n\nThe sea floor is getting steeper. Maybe the sleigh keys got carried this way?\n\nA massive school of glowing lanternfish swims past. They must spawn quickly to reach such large numbers - maybe exponentially quickly? You should model their growth rate to be sure.\n\nAlthough you know nothing about this specific species of lanternfish, you make some guesses about their attributes. Surely, each lanternfish creates a new lanternfish once every 7 days.\n\nHowever, this process isn\'t necessarily synchronized between every lanternfish - one lanternfish might have 2 days left until it creates another lanternfish, while another might have 4. So, you can model each fish as a single number that represents the number of days until it creates a new lanternfish.\n\nFurthermore, you reason, a new lanternfish would surely need slightly longer before it\'s capable of producing more lanternfish: two more days for its first cycle.\n\nSo, suppose you have a lanternfish with an internal timer value of 3:\n\n- After one day, its internal timer would become 2.\n- After another day, its internal timer would become 1.\n- After another day, its internal timer would become 0.\n- After another day, its internal timer would reset to 6, and it would create a new lanternfish with an internal timer of 8.\n- After another day, the first lanternfish would have an internal timer of 5, and the second lanternfish would have an internal timer of 7.\n\nA lanternfish that creates a new fish resets its timer to 6, not 7 (because 0 is included as a valid timer value). The new lanternfish starts with an internal timer of 8 and does not start counting down until the next day.\n\nRealizing what you\'re trying to do, the submarine automatically produces a list of the ages of several hundred nearby lanternfish (your puzzle input). For example, suppose you were given the following list:\n\n    3,4,3,1,2\n\nThis list means that the first fish has an internal timer of 3, the second fish has an internal timer of 4, and so on until the fifth fish, which has an internal timer of 2. Simulating these fish over several days would proceed as follows:\n\n    Initial state: 3,4,3,1,2\n    After  1 day:  2,3,2,0,1\n    After  2 days: 1,2,1,6,0,8\n    After  3 days: 0,1,0,5,6,7,8\n    After  4 days: 6,0,6,4,5,6,7,8,8\n    After  5 days: 5,6,5,3,4,5,6,7,7,8\n    After  6 days: 4,5,4,2,3,4,5,6,6,7\n    After  7 days: 3,4,3,1,2,3,4,5,5,6\n    After  8 days: 2,3,2,0,1,2,3,4,4,5\n    After  9 days: 1,2,1,6,0,1,2,3,3,4,8\n    After 10 days: 0,1,0,5,6,0,1,2,2,3,7,8\n    After 11 days: 6,0,6,4,5,6,0,1,1,2,6,7,8,8,8\n    After 12 days: 5,6,5,3,4,5,6,0,0,1,5,6,7,7,7,8,8\n    After 13 days: 4,5,4,2,3,4,5,6,6,0,4,5,6,6,6,7,7,8,8\n    After 14 days: 3,4,3,1,2,3,4,5,5,6,3,4,5,5,5,6,6,7,7,8\n    After 15 days: 2,3,2,0,1,2,3,4,4,5,2,3,4,4,4,5,5,6,6,7\n    After 16 days: 1,2,1,6,0,1,2,3,3,4,1,2,3,3,3,4,4,5,5,6,8\n    After 17 days: 0,1,0,5,6,0,1,2,2,3,0,1,2,2,2,3,3,4,4,5,7,8\n    After 18 days: 6,0,6,4,5,6,0,1,1,2,6,0,1,1,1,2,2,3,3,4,6,7,8,8,8,8\n\nEach day, a 0 becomes a 6 and adds a new 8 to the end of the list, while each other number decreases by 1 if it was present at the start of the day.\n\nIn this example, after 18 days, there are a total of 26 fish. After 80 days, there would be a total of 5934.\n\nFind a way to simulate lanternfish. How many lanternfish would there be after 80 days?\n';
+var $author$project$Days$Day6$pitch = '\n--- Day 6: Lanternfish ---\n\nThe sea floor is getting steeper. Maybe the sleigh keys got carried this way?\n\nA massive school of glowing lanternfish swims past. They must spawn quickly to reach such large numbers - maybe exponentially quickly? You should model their growth rate to be sure.\n\nAlthough you know nothing about this specific species of lanternfish, you make some guesses about their attributes. Surely, each lanternfish creates a new lanternfish once every `7` days.\n\nHowever, this process isn\'t necessarily synchronized between every lanternfish - one lanternfish might have `2` days left until it creates another lanternfish, while another might have `4`. So, you can model each fish as a single number that represents the number of days until it creates a new lanternfish.\n\nFurthermore, you reason, a new lanternfish would surely need slightly longer before it\'s capable of producing more lanternfish: two more days for its first cycle.\n\nSo, suppose you have a lanternfish with an internal timer value of `3`:\n\n- After one day, its internal timer would become `2`.\n- After another day, its internal timer would become `1`.\n- After another day, its internal timer would become `0`.\n- After another day, its internal timer would reset to `6`, and it would create a new lanternfish with an internal timer of `8`.\n- After another day, the first lanternfish would have an internal timer of 5, and the second lanternfish would have an internal timer of `7`.\n\nA lanternfish that creates a new fish resets its timer to `6`, not `7` (because `0` is included as a valid timer value). The new lanternfish starts with an internal timer of `8` and does not start counting down until the next day.\n\nRealizing what you\'re trying to do, the submarine automatically produces a list of the ages of several hundred nearby lanternfish (your puzzle input). For example, suppose you were given the following list:\n\n    3,4,3,1,2\n\nThis list means that the first fish has an internal timer of 3, the second fish has an internal timer of 4, and so on until the fifth fish, which has an internal timer of 2. Simulating these fish over several days would proceed as follows:\n\n    Initial state: 3,4,3,1,2\n    After  1 day:  2,3,2,0,1\n    After  2 days: 1,2,1,6,0,8\n    After  3 days: 0,1,0,5,6,7,8\n    After  4 days: 6,0,6,4,5,6,7,8,8\n    After  5 days: 5,6,5,3,4,5,6,7,7,8\n    After  6 days: 4,5,4,2,3,4,5,6,6,7\n    After  7 days: 3,4,3,1,2,3,4,5,5,6\n    After  8 days: 2,3,2,0,1,2,3,4,4,5\n    After  9 days: 1,2,1,6,0,1,2,3,3,4,8\n    After 10 days: 0,1,0,5,6,0,1,2,2,3,7,8\n    After 11 days: 6,0,6,4,5,6,0,1,1,2,6,7,8,8,8\n    After 12 days: 5,6,5,3,4,5,6,0,0,1,5,6,7,7,7,8,8\n    After 13 days: 4,5,4,2,3,4,5,6,6,0,4,5,6,6,6,7,7,8,8\n    After 14 days: 3,4,3,1,2,3,4,5,5,6,3,4,5,5,5,6,6,7,7,8\n    After 15 days: 2,3,2,0,1,2,3,4,4,5,2,3,4,4,4,5,5,6,6,7\n    After 16 days: 1,2,1,6,0,1,2,3,3,4,1,2,3,3,3,4,4,5,5,6,8\n    After 17 days: 0,1,0,5,6,0,1,2,2,3,0,1,2,2,2,3,3,4,4,5,7,8\n    After 18 days: 6,0,6,4,5,6,0,1,1,2,6,0,1,1,1,2,2,3,3,4,6,7,8,8,8,8\n\nEach day, a `0` becomes a `6` and adds a new `8` to the end of the list, while each other number decreases by `1` if it was present at the start of the day.\n\nIn this example, after `18` days, there are a total of `26` fish. After `80` days, there would be a total of `5934`.\n\nFind a way to simulate lanternfish. How many lanternfish would there be after 80 days?\n\n--- Part Two ---\n\nSuppose the lanternfish live forever and have unlimited food and space. Would they take over the entire ocean?\n\nAfter `256` days in the example above, there would be a total of `26984457539` lanternfish!\n\nHow many lanternfish would there be after `256` days?\n\n\n';
 var $author$project$Days$Day6$day = {b3: $author$project$Days$Day6$answer, cz: $author$project$Days$Day6$pitch};
 var $author$project$Pages$Day$getDayData = function (day) {
 	switch (day) {
@@ -17595,6 +17573,10 @@ var $dillonkearns$elm_markdown$Markdown$Renderer$renderHtml = F5(
 			},
 			$dillonkearns$elm_markdown$Markdown$Renderer$combineResults(renderedChildren));
 	});
+var $elm$core$List$singleton = function (value) {
+	return _List_fromArray(
+		[value]);
+};
 var $dillonkearns$elm_markdown$Markdown$Renderer$foldThing = F3(
 	function (renderer, topLevelInline, soFar) {
 		var _v12 = A2($dillonkearns$elm_markdown$Markdown$Renderer$renderSingleInline, renderer, topLevelInline);
