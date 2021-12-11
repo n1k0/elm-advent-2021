@@ -16,19 +16,28 @@ type alias Map =
 
 
 type alias Cell =
-    { coords : Point, state : Int }
+    Int
 
 
-part1 : String
+part1 : ( String, String )
 part1 =
     -- Note: data is the provided input string
-    sampleData
-        |> parseVecs
-        |> excludeDiagonals
-        |> toMap
-        -- |> drawMap
-        |> countOverlaps
-        |> String.fromInt
+    let
+        map =
+            sampleData
+                |> parseVecs
+                |> excludeDiagonals
+                |> toMap
+
+        mapViz =
+            drawMap map
+
+        result =
+            map
+                |> countOverlaps
+                |> String.fromInt
+    in
+    ( result, mapViz )
 
 
 parseVecs : String -> List Vec
@@ -59,24 +68,16 @@ toMap vecs =
 initMap : List Vec -> Map
 initMap vecs =
     let
-        findMax getter =
+        size getter =
             List.concat
                 [ List.map (.from >> getter) vecs
                 , List.map (.to >> getter) vecs
                 ]
                 |> List.maximum
+                |> Maybe.map inc
                 |> Maybe.withDefault 0
-
-        ( xMax, yMax ) =
-            ( findMax .x, findMax .y )
     in
-    List.range 0 yMax
-        |> List.map
-            (\y ->
-                List.range 0 xMax
-                    |> List.indexedMap
-                        (\x _ -> { coords = Point x y, state = 0 })
-            )
+    List.repeat (size .y) (List.repeat (size .x) 0)
 
 
 updateMap : Point -> (Cell -> Cell) -> Map -> Map
@@ -101,30 +102,21 @@ updateMap p update =
 
 countOverlaps : Map -> Int
 countOverlaps =
-    List.map
-        (List.map .state
-            >> List.filter (\s -> s >= 2)
-            >> List.length
-        )
-        >> List.sum
+    List.map (List.filter moreThanOne >> List.length) >> List.sum
 
 
 processVec : Vec -> Map -> Map
 processVec { from, to } map =
-    let
-        incCellState cell =
-            { cell | state = cell.state + 1 }
-    in
     if from.x == to.x then
         List.range (min from.y to.y) (max from.y to.y)
             |> List.foldl
-                (\y_ -> updateMap { x = from.x, y = y_ } incCellState)
+                (\y_ -> updateMap { x = from.x, y = y_ } inc)
                 map
 
     else if from.y == to.y then
         List.range (min from.x to.x) (max from.x to.x)
             |> List.foldl
-                (\x_ -> updateMap { x = x_, y = from.y } incCellState)
+                (\x_ -> updateMap { x = x_, y = from.y } inc)
                 map
 
     else
@@ -134,7 +126,7 @@ processVec { from, to } map =
 drawMap : Map -> String
 drawMap map =
     map
-        |> List.map (List.map (.state >> String.fromInt) >> String.join "")
+        |> List.map (List.map String.fromInt >> String.join "")
         |> String.join "\n"
 
 
@@ -148,6 +140,16 @@ toVec raw =
             Nothing
 
 
+inc : Int -> Int
+inc n =
+    n + 1
+
+
+moreThanOne : Int -> Bool
+moreThanOne n =
+    n >= 2
+
+
 
 -- Answer
 
@@ -155,7 +157,12 @@ toVec raw =
 answer : String
 answer =
     String.join "\n"
-        [ "Part1: " ++ part1
+        [ "Part1: " ++ Tuple.first part1
+        , "Map: "
+        , Tuple.second part1
+        , ""
+        , "---"
+        , ""
         , "Part2: TODO"
         ]
 
