@@ -9769,6 +9769,54 @@ var $author$project$Days$Day6$answer = A2(
 		]));
 var $author$project$Days$Day6$pitch = '\n--- Day 6: Lanternfish ---\n\nThe sea floor is getting steeper. Maybe the sleigh keys got carried this way?\n\nA massive school of glowing lanternfish swims past. They must spawn quickly to reach such large numbers - maybe exponentially quickly? You should model their growth rate to be sure.\n\nAlthough you know nothing about this specific species of lanternfish, you make some guesses about their attributes. Surely, each lanternfish creates a new lanternfish once every `7` days.\n\nHowever, this process isn\'t necessarily synchronized between every lanternfish - one lanternfish might have `2` days left until it creates another lanternfish, while another might have `4`. So, you can model each fish as a single number that represents the number of days until it creates a new lanternfish.\n\nFurthermore, you reason, a new lanternfish would surely need slightly longer before it\'s capable of producing more lanternfish: two more days for its first cycle.\n\nSo, suppose you have a lanternfish with an internal timer value of `3`:\n\n- After one day, its internal timer would become `2`.\n- After another day, its internal timer would become `1`.\n- After another day, its internal timer would become `0`.\n- After another day, its internal timer would reset to `6`, and it would create a new lanternfish with an internal timer of `8`.\n- After another day, the first lanternfish would have an internal timer of 5, and the second lanternfish would have an internal timer of `7`.\n\nA lanternfish that creates a new fish resets its timer to `6`, not `7` (because `0` is included as a valid timer value). The new lanternfish starts with an internal timer of `8` and does not start counting down until the next day.\n\nRealizing what you\'re trying to do, the submarine automatically produces a list of the ages of several hundred nearby lanternfish (your puzzle input). For example, suppose you were given the following list:\n\n    3,4,3,1,2\n\nThis list means that the first fish has an internal timer of 3, the second fish has an internal timer of 4, and so on until the fifth fish, which has an internal timer of 2. Simulating these fish over several days would proceed as follows:\n\n    Initial state: 3,4,3,1,2\n    After  1 day:  2,3,2,0,1\n    After  2 days: 1,2,1,6,0,8\n    After  3 days: 0,1,0,5,6,7,8\n    After  4 days: 6,0,6,4,5,6,7,8,8\n    After  5 days: 5,6,5,3,4,5,6,7,7,8\n    After  6 days: 4,5,4,2,3,4,5,6,6,7\n    After  7 days: 3,4,3,1,2,3,4,5,5,6\n    After  8 days: 2,3,2,0,1,2,3,4,4,5\n    After  9 days: 1,2,1,6,0,1,2,3,3,4,8\n    After 10 days: 0,1,0,5,6,0,1,2,2,3,7,8\n    After 11 days: 6,0,6,4,5,6,0,1,1,2,6,7,8,8,8\n    After 12 days: 5,6,5,3,4,5,6,0,0,1,5,6,7,7,7,8,8\n    After 13 days: 4,5,4,2,3,4,5,6,6,0,4,5,6,6,6,7,7,8,8\n    After 14 days: 3,4,3,1,2,3,4,5,5,6,3,4,5,5,5,6,6,7,7,8\n    After 15 days: 2,3,2,0,1,2,3,4,4,5,2,3,4,4,4,5,5,6,6,7\n    After 16 days: 1,2,1,6,0,1,2,3,3,4,1,2,3,3,3,4,4,5,5,6,8\n    After 17 days: 0,1,0,5,6,0,1,2,2,3,0,1,2,2,2,3,3,4,4,5,7,8\n    After 18 days: 6,0,6,4,5,6,0,1,1,2,6,0,1,1,1,2,2,3,3,4,6,7,8,8,8,8\n\nEach day, a `0` becomes a `6` and adds a new `8` to the end of the list, while each other number decreases by `1` if it was present at the start of the day.\n\nIn this example, after `18` days, there are a total of `26` fish. After `80` days, there would be a total of `5934`.\n\nFind a way to simulate lanternfish. How many lanternfish would there be after 80 days?\n\n--- Part Two ---\n\nSuppose the lanternfish live forever and have unlimited food and space. Would they take over the entire ocean?\n\nAfter `256` days in the example above, there would be a total of `26984457539` lanternfish!\n\nHow many lanternfish would there be after `256` days?\n\n\n';
 var $author$project$Days$Day6$day = {b3: $author$project$Days$Day6$answer, cz: $author$project$Days$Day6$pitch};
+var $elm$core$List$sortBy = _List_sortBy;
+var $elm$core$List$sort = function (xs) {
+	return A2($elm$core$List$sortBy, $elm$core$Basics$identity, xs);
+};
+var $author$project$Days$Day7$avgFuel = A2(
+	$elm$core$Basics$composeR,
+	$elm$core$List$sort,
+	function (crabs) {
+		return A2(
+			$elm$core$Maybe$withDefault,
+			0,
+			$elm$core$List$head(
+				A2(
+					$elm$core$List$drop,
+					($elm$core$List$length(crabs) / 2) | 0,
+					crabs)));
+	});
+var $author$project$Days$Day7$sampleData = '16,1,2,0,4,2,7,1,2,14';
+var $elm$core$Basics$abs = function (n) {
+	return (n < 0) ? (-n) : n;
+};
+var $author$project$Days$Day7$totalFuel = function (x) {
+	return A2(
+		$elm$core$Basics$composeR,
+		$elm$core$List$map(
+			function (crab) {
+				return $elm$core$Basics$abs(crab - x);
+			}),
+		$elm$core$List$sum);
+};
+var $author$project$Days$Day7$part1 = function () {
+	var crabs = A2(
+		$elm$core$List$filterMap,
+		$elm$core$String$toInt,
+		A2($elm$core$String$split, ',', $author$project$Days$Day7$sampleData));
+	return $elm$core$String$fromInt(
+		A2(
+			$author$project$Days$Day7$totalFuel,
+			$author$project$Days$Day7$avgFuel(crabs),
+			crabs));
+}();
+var $author$project$Days$Day7$answer = A2(
+	$elm$core$String$join,
+	'\n',
+	_List_fromArray(
+		['Part1: ' + $author$project$Days$Day7$part1]));
+var $author$project$Days$Day7$pitch = '\nA giant whale has decided your submarine is its next meal, and it\'s much faster than you are. There\'s nowhere to run!\n\nSuddenly, a swarm of crabs (each in its own tiny submarine - it\'s too deep for them otherwise) zooms in to rescue you! They seem to be preparing to blast a hole in the ocean floor; sensors indicate a massive underground cave system just beyond where they\'re aiming!\n\nThe crab submarines all need to be aligned before they\'ll have enough power to blast a large enough hole for your submarine to get through. However, it doesn\'t look like they\'ll be aligned before the whale catches you! Maybe you can help?\n\nThere\'s one major catch - crab submarines can only move horizontally.\n\nYou quickly make a list of the horizontal position of each crab (your puzzle input). Crab submarines have limited fuel, so you need to find a way to make all of their horizontal positions match while requiring them to spend as little fuel as possible.\n\nFor example, consider the following horizontal positions:\n\n    16,1,2,0,4,2,7,1,2,14\n\nThis means there\'s a crab with horizontal position `16`, a crab with horizontal position `1`, and so on.\n\nEach change of `1` step in horizontal position of a single crab costs `1` fuel. You could choose any horizontal position to align them all on, but the one that costs the least fuel is horizontal position `2`:\n\n    Move from 16 to 2: 14 fuel\n    Move from 1 to 2: 1 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 0 to 2: 2 fuel\n    Move from 4 to 2: 2 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 7 to 2: 5 fuel\n    Move from 1 to 2: 1 fuel\n    Move from 2 to 2: 0 fuel\n    Move from 14 to 2: 12 fuel\n\nThis costs a total of `37` fuel. This is the cheapest possible outcome; more expensive outcomes include aligning at position `1` (`41` fuel), position `3` (`39` fuel), or position `10` (`71` fuel).\n\nDetermine the horizontal position that the crabs can align to using the least fuel possible. How much fuel must they spend to align to that position?\n';
+var $author$project$Days$Day7$day = {b3: $author$project$Days$Day7$answer, cz: $author$project$Days$Day7$pitch};
 var $author$project$Pages$Day$getDayData = function (day) {
 	switch (day) {
 		case 1:
@@ -9783,6 +9831,8 @@ var $author$project$Pages$Day$getDayData = function (day) {
 			return $elm$core$Result$Ok($author$project$Days$Day5$day);
 		case 6:
 			return $elm$core$Result$Ok($author$project$Days$Day6$day);
+		case 7:
+			return $elm$core$Result$Ok($author$project$Days$Day7$day);
 		default:
 			return $elm$core$Result$Err(
 				'No data could be found for day #' + $elm$core$String$fromInt(day));
@@ -11597,7 +11647,6 @@ var $dillonkearns$elm_markdown$Markdown$InlineParser$addChild = F2(
 			k: parentMatch.k
 		};
 	});
-var $elm$core$List$sortBy = _List_sortBy;
 var $dillonkearns$elm_markdown$Markdown$InlineParser$organizeChildren = function (_v4) {
 	var match = _v4;
 	return {
