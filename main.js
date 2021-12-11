@@ -18721,28 +18721,28 @@ var $author$project$Pages$Day$page = function (_v0) {
 			cT: $author$project$Pages$Day$view
 		});
 };
-var $orus_io$elm_spa$Spa$Page$static = function (pageView) {
-	return {
-		cn: function (_v0) {
-			return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
-		},
-		cN: $elm$core$Basics$always($elm$core$Platform$Sub$none),
-		cR: F2(
-			function (_v1, _v2) {
-				return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
-			}),
-		cT: $elm$core$Basics$always(pageView)
-	};
-};
 var $author$project$Pages$Home$view = function (_v0) {
 	return {
 		bk: $author$project$Lib$Markdown$simple('This is [my](https://nicolas.perriault.net/) attempt at the 2021\n        [Advent of Code](https://adventofcode.com/) in [Elm](https://elm-lang.org/).\n        '),
 		bW: 'Home'
 	};
 };
-var $author$project$Pages$Home$page = function (shared) {
-	return $orus_io$elm_spa$Spa$Page$static(
-		$author$project$Pages$Home$view(shared));
+var $author$project$Pages$Home$page = function (_v0) {
+	return $orus_io$elm_spa$Spa$Page$element(
+		{
+			cn: function (_v1) {
+				return A2(
+					$orus_io$elm_spa$Effect$withShared,
+					$author$project$Shared$setCurrentDay($elm$core$Maybe$Nothing),
+					0);
+			},
+			cN: $elm$core$Basics$always($elm$core$Platform$Sub$none),
+			cR: F2(
+				function (_v2, _v3) {
+					return _Utils_Tuple2(0, $orus_io$elm_spa$Effect$none);
+				}),
+			cT: $author$project$Pages$Home$view
+		});
 };
 var $author$project$Shared$subscriptions = $elm$core$Basics$always($elm$core$Platform$Sub$none);
 var $author$project$Route$Day = function (a) {
