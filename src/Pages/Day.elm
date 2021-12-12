@@ -1,6 +1,7 @@
 module Pages.Day exposing (..)
 
 import Days.Day1 as Day1
+import Days.Day10 as Day10
 import Days.Day2 as Day2
 import Days.Day3 as Day3
 import Days.Day4 as Day4
@@ -97,6 +98,9 @@ getDayData day =
 
         9 ->
             Ok Day9.day
+
+        10 ->
+            Ok Day10.day
 
         _ ->
             Err <| "No data could be found for day #" ++ String.fromInt day
